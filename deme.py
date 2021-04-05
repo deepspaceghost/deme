@@ -17,7 +17,7 @@ async def when_ready():
     client is ready for further action.
     """
 
-    guild = discord.utils.get(client.guilds, name="Artinov")
+    guild = discord.utils.get(client.guilds, name="DISCORD_GUILD")
 
     print(
         f"{client.user} is connected to the following guild:\n"
