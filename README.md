@@ -1,2 +1,2 @@
-Deme is a Discord IM bot. Future funtionality is focused on widen Deme's ability to interact with the
-internet.
+Deme is a Discord IM bot, and exercise in natural language processing. Future development will be
+focused on widening Deme's ability to interact with other parts the internet.
