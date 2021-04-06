@@ -1,8 +1,10 @@
+import discord
 import os
 import random
 
 from discord.ext import commands
 from dotenv import load_dotenv
+from googlesearch import search
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -28,6 +30,90 @@ async def alderson(ctx):
 
     response = random.choice(mr_robot_quotes)
     await ctx.send(response)
+
+
+@bot.command(name="clean", help="Responds with a random cleaning tasks.")
+async def cleandex(ctx):
+    """
+    Handles the command to request to a suggestion for cleaning.
+    """
+
+    tasks = [
+        "Have you put clean dishes away today?",
+        "Have you swept today?",
+        "Have you taken out the trash today?",
+        "Have you washed a load of dishes today?",
+        "Have you wiped the kitchen sink out today?",
+        "Have you cleaned the floors this week?",
+        "Have you cleaned the mirror(s) this week?",
+        "Have you dusted your shelves this week?"
+        "Have you cleaned the vents this month?",
+        "Have you organized your dresser drawers this month?",
+        "Have you scrubbed the shower grout this month?",
+        "Have you vacuumed your car this month?"
+    ]
+
+    response = random.choice(tasks)
+    await ctx.send(response)
+    
+
+@bot.command(name="create-channel")
+@commands.has_role("admin")
+async def create_channel(ctx, channel_name="test-channel"):
+    """
+    Handles the command to create a new text channel, as long as the user is an administrator.
+    """
+
+    guild = ctx.guild
+    existing_channel = discord.utils.get(guild.channels, name=channel_name)
+    if not existing_channel:
+        print(f'Creating a new channel: {channel_name}')
+        await guild.create_text_channel(channel_name)
+
+
+@bot.command(name="game", help="Responds with a random game suggestion.")
+async def gamedex(ctx):
+    """
+    Handles the command to request to a game suggestion.
+    """
+
+    games = [
+        "Game: INSIDE, Class: S (16), Console: Any",
+        "Game: The Legend of Zelda: Breath of the Wild, Class: B (11.5), Console: Switch",
+        "Game: Red Dead Redemption 2, Class: B (10), Console: PS4"
+    ]
+
+    response = random.choice(games)
+    await ctx.send(response)
+
+
+@bot.listen("on_message")
+async def google(message):
+    """
+    Handles what happens when a user wants to conduct a google search.
+    """
+
+    if message.author == bot.user:
+        return
+
+    if message.content.startswith("deme google"):
+        searchContent = ""
+        text = str(message.content).split(" ")
+        for i in range(2, len(text)):
+            searchContent = searchContent + text[i]
+
+        for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
+            await message.channel.send(j)
+
+
+@bot.event
+async def on_command_error(ctx, error):
+    """
+    Handles what happens when a command is used by a user without permission.
+    """
+
+    if isinstance(error, commands.errors.CheckFailure):
+        await ctx.send("You do not have the correct role for this command.")
 
 
 @bot.event
