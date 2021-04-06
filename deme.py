@@ -96,7 +96,7 @@ async def google(message):
     if message.author == bot.user:
         return
 
-    if message.content.startswith("deme google"):
+    if message.content.startswith("hey deme google"):
         searchContent = ""
         text = str(message.content).split(" ")
         for i in range(2, len(text)):
