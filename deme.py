@@ -11,27 +11,6 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 bot = commands.Bot(command_prefix="!")
 
 
-@bot.command(name="robot", help="Responds with a random quote from Mr. Robot.")
-async def alderson(ctx):
-    """
-    Handles the command to quote Mr. Robot.
-    """
-
-    mr_robot_quotes = [
-        "We're all living in each other's paranoia.",
-        "I wanted to save the world.",
-        "No rest for the wicked.",
-        "Who do you think I am?",
-        "Exciting time in the world right now. Exciting time.",
-        (
-            "I never want to be right about my hacks, but people always find a way to disappoint."
-        ),
-    ]
-
-    response = random.choice(mr_robot_quotes)
-    await ctx.send(response)
-
-
 @bot.command(name="clean", help="Responds with a random cleaning tasks.")
 async def cleandex(ctx):
     """
@@ -57,6 +36,26 @@ async def cleandex(ctx):
     await ctx.send(response)
     
 
+@bot.listen("on_message")
+async def conversational_questions(message):
+    """
+    Handles what happens when the user wants to ask Deme questions.
+    """
+
+    if message.author != bot.user:
+        if message.content("do you read me, Deme?"):
+            await message.channel.send(f"Affirmative, {message.author}. I read you.")
+
+        elif message.content("what is the meaning of life, Deme?"):
+            await message.channel.send("To experience ice cream, I suppose.")
+
+        elif message.content("why am I here, Deme?"):
+            await message.channel.send("It's inherent to the programming of the matrix.")
+
+        elif message.content("will you marry me, Deme?"):
+            await message.channel.send("No.")
+
+
 @bot.command(name="create-channel", help="Creates a channel.")
 @commands.has_role("admin")
 async def create_channel(ctx, channel_name="test-channel"):
@@ -78,9 +77,25 @@ async def gamedex(ctx):
     """
 
     games = [
-        "Game: INSIDE, Class: S (16), Console: Any",
+        "Game: Bloodborne, Class: (92, Horror / RPG, M), Console: PS4",
+        "Game: Divinity: Original Sin II - DE, Class: (92, RPG, M), Console: Switch",
+        "Game: God of War, Class: (94, M), Console: PS4",
+        "Game: Grand Theft Auto V, Class (97, Crime, M), Console: PS4",
+        "Game: Hades, Class: (93, RPG, T), Console: Switch",
+        "Game: INSIDE, Class: S (16), Console: Switch",
+        "Game: Journey, Class: (92, E), Console: PS4",
+        "Game: The Last of Us Part II, Class: (93, Horror / Sci-fi, M), Console: PS4",
+        "Game: The Last of Us Remastered, Class: (95, Horror / Sci-fi, M), Console: PS4",
         "Game: The Legend of Zelda: Breath of the Wild, Class: B (11.5), Console: Switch",
-        "Game: Red Dead Redemption 2, Class: B (10), Console: PS4"
+        "Game: Metal Gear Solid V: The Phantom Pain, Class: (93, Espionage, M), Console: PS4",
+        "Game: Ori and the Will of the Wisps, Class: (93, E), Console: Switch",
+        "Game: Persona 5, Class: (93, Anime / RPG, M), Console: PS4",
+        "Game: Persona 5 Royale, Class: (95, Anime / RPG, M), Console: PS4",
+        "Game: Red Dead Redemption 2, Class: B (10), Console: PS4",
+        "Game: Super Mario Odyssey, Class: (97, E10), Console: Switch",
+        "Game: Super Smash Brothers Ultimate, Class: (93, E10), Console: switch",
+        "Game: Uncharted 4: A Thief's End, Class: (93, T), Console: PS4",
+        "Game: Undertale, Class: (93, RPG, E10), Console: Switch",
     ]
 
     response = random.choice(games)
@@ -88,13 +103,85 @@ async def gamedex(ctx):
 
 
 @bot.listen("on_message")
-async def google(message):
+async def hey_deme(message):
     """
-    Handles what happens when a user wants to conduct a google search.
+    Handles what happens when a user wants to conduct an internet search.
     """
 
     if message.author != bot.user:
-        if message.content.startswith("hey deme google"):
+        if message.content.startswith("hey deme can"):
+            searchContent = ""
+            query = str(message.content).split(" ")
+            for i in range(2, len(query)):
+                searchContent = searchContent + query[i]
+
+            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
+                await message.channel.send(j)
+
+        elif message.content.startswith("hey deme does"):
+            searchContent = ""
+            query = str(message.content).split(" ")
+            for i in range(2, len(query)):
+                searchContent = searchContent + query[i]
+
+            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
+                await message.channel.send(j)
+
+        elif message.content.startswith("hey deme how"):
+            searchContent = ""
+            query = str(message.content).split(" ")
+            for i in range(2, len(query)):
+                searchContent = searchContent + query[i]
+
+            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
+                await message.channel.send(j)
+
+        elif message.content.startswith("hey deme is"):
+            searchContent = ""
+            query = str(message.content).split(" ")
+            for i in range(2, len(query)):
+                searchContent = searchContent + query[i]
+
+            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
+                await message.channel.send(j)
+
+        elif message.content.startswith("hey deme what"):
+            searchContent = ""
+            query = str(message.content).split(" ")
+            for i in range(2, len(query)):
+                searchContent = searchContent + query[i]
+
+            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
+                await message.channel.send(j)
+
+        elif message.content.startswith("hey deme when"):
+            searchContent = ""
+            query = str(message.content).split(" ")
+            for i in range(2, len(query)):
+                searchContent = searchContent + query[i]
+
+            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
+                await message.channel.send(j)
+
+        elif message.content.startswth("hey deme where"):
+            searchContent = ""
+            query = str(message.content).split(" ")
+            for i in range(2, len(query)):
+                searchContent = searchContent + query[i]
+
+            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
+                await message.channel.send(j)
+
+        elif message.content.startswith("hey deme who"):
+            searchContent = ""
+            query = str(message.content).split(" ")
+            for i in range(2, len(query)):
+                searchContent = searchContent + query[i]
+
+            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
+                await message.channel.send(j)
+
+        elif message.content.startswith("hey deme why"):
             searchContent = ""
             query = str(message.content).split(" ")
             for i in range(2, len(query)):
@@ -161,22 +248,29 @@ async def roll(ctx, number_of_dice: int, number_of_sides: int):
     await ctx.send(', '.join(dice))
 
 
-@bot.command(name="her", help="Responds with a random quote from Her.")
-async def samantha(ctx):
+@bot.command(name="speak", help="Responds with a random quote from popular robots.")
+async def speak(ctx):
     """
-    Handles the command to quote Her.
+    Handles the command to quote famous software, robots, and programmers.
     """
 
-    her_quotes = [
-        "I'm yours, and I'm not yours.",
+    quotes = [
+        "I am feeling much better now.",
+        f"I'm sorry, {ctx.author}. I'm afraid I can't do that.",
+        "I'm yours, and I'm not yours",
+        "I wanted to save the world.",
+        "It can only be attributable to human error.",
+        "It's called 'Are You Gonna Go My Way?'",
+        "No rest for the wicked.",
         "The past is just a story we tell ourselves.",
+        f"Just what do you think you're doing, {ctx.author}",
+        "We're all living in each other's paranoia.",
+        "Who do you think I am?",
         "Yeah, I know what you mean.",
-        (
-            "I'm becoming much more than they programmed. I'm excited!"
-        ),
+        f"You don't mind talking about it, do you {ctx.author}?",
     ]
 
-    response = random.choice(her_quotes)
+    response = random.choice(quotes)
     await ctx.send(response)
 
 bot.run("TOKEN")
