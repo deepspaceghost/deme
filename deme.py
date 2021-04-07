@@ -93,17 +93,15 @@ async def google(message):
     Handles what happens when a user wants to conduct a google search.
     """
 
-    if message.author == bot.user:
-        return
+    if message.author != bot.user:
+        if message.content.startswith("hey deme google"):
+            searchContent = ""
+            query = str(message.content).split(" ")
+            for i in range(2, len(query)):
+                searchContent = searchContent + query[i]
 
-    if message.content.startswith("hey deme google"):
-        searchContent = ""
-        text = str(message.content).split(" ")
-        for i in range(2, len(text)):
-            searchContent = searchContent + text[i]
-
-        for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
-            await message.channel.send(j)
+            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
+                await message.channel.send(j)
 
 
 @bot.event
