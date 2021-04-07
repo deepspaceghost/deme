@@ -22,4 +22,4 @@ FAQs
 
 Q: Is Deme on discord.bots.gg?
 
-A: No, but will be within a week.
+A: No, but will be within a week (maybe).
