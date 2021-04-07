@@ -7,11 +7,11 @@ be focused on widening Deme's ability to interact with other parts the internet.
 REQUIREMENTS
 ------------
 
-Python 3.9.4+
-beautifulsoup4
-discord.py
-google
-python-dotenv
+Python 3.9.4+,
+beautifulsoup4,
+discord.py,
+google,
+and python-dotenv.
 
 pip install can handle these for you.
 
