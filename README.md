@@ -6,15 +6,11 @@ Deme is a Discord IM bot and primitive virtual assistant, and an exercise in nat
 REQUIREMENTS
 ------------
 
-Python 3.9.4+
-beautifulsoup4
-discord.py
-google
-python-dotenv
-
-pip install can handle these for you.
-
-Download the dependencies using pip: pip install -r requirements.txt
+discord.py==1.7.1
+Flask==1.1.2
+google==3.0.0
+python==3.9.4
+python-dotenv==0.17.0
 
 FAQs
 ----
