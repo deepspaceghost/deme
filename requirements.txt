@@ -1,5 +1,4 @@
-Python 3.9.4+
-beautifulsoup4
-discord.py
-google
-python-dotenv
+discord.py==1.7.1
+Flask==1.1.2
+google==3.0.0
+python-dotenv==0.17.0
