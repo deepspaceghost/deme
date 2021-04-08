@@ -16,9 +16,8 @@ python==3.9.4
 
 python-dotenv==0.17.0
 
-FAQs
-----
+MAINTAINERS
+-----------
 
-Q: Is Deme on discord.bots.gg?
-
-A: No, but will be within a week (maybe).
+Current maintainer(s):
+* deespaceghost - https://github.com/deepspaceghost
