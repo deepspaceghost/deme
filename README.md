@@ -7,9 +7,13 @@ REQUIREMENTS
 ------------
 
 discord.py==1.7.1
+
 Flask==1.1.2
+
 google==3.0.0
+
 python==3.9.4
+
 python-dotenv==0.17.0
 
 FAQs
