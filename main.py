@@ -43,16 +43,16 @@ async def conversational_questions(message):
     """
 
     if message.author != bot.user:
-        if message.content("do you read me, Deme?"):
+        if message.content == "do you read me, Deme?" or "do you read me deme?":
             await message.channel.send(f"Affirmative, {message.author}. I read you.")
 
-        elif message.content("what is the meaning of life, Deme?"):
+        elif message.content == "what is the meaning of life, Deme?":
             await message.channel.send("To experience ice cream, I suppose.")
 
-        elif message.content("why am I here, Deme?"):
+        elif message.content == "why am I here, Deme?":
             await message.channel.send("It's inherent to the programming of the matrix.")
 
-        elif message.content("will you marry me, Deme?"):
+        elif message.content == "will you marry me, Deme?":
             await message.channel.send("No.")
 
 
