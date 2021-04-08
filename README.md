@@ -14,7 +14,7 @@ REQUIREMENTS
 * python-dotenv==0.17.0
 
 
-MAINTAINERS
+MAINTAINER(s)
 -----------
 
 Current maintainer(s):
