@@ -8,7 +8,21 @@ from googlesearch import search
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
+GUILD = os.getenv("DISCORD_GUILD)
 bot = commands.Bot(command_prefix="!")
+
+
+@called_once_a_day.before_loop
+async def before():
+    await bot.wait_until_ready()
+    print("Finished waiting")
+
+
+@tasks.loop(hours=24)
+async def called_once_a_day():
+    message_channel = bot.get_channel(DISCORD_GUILD)
+    print(f"Got channel {message_channel}")
+    await message_channel.send("This is a looped test reminder.")
 
 
 @bot.command(name="clean", help="Responds with a random cleaning tasks.")
@@ -37,9 +51,9 @@ async def cleandex(ctx):
     
 
 @bot.listen("on_message")
-async def conversational_questions(message):
+async def conversation_tree(message):
     """
-    Handles what happens when the user wants to ask Deme questions.
+    Handles what happens when the user wants to have a conversation with Deme.
     """
 
     if message.author != bot.user:
@@ -273,4 +287,5 @@ async def speak(ctx):
     response = random.choice(quotes)
     await ctx.send(response)
 
+called_once_a_day.start()
 bot.run("TOKEN")
