@@ -32,4 +32,7 @@ def create_app(test_config=None):
 
         return "Congratulations, it's a web app!"
 
+    from . import db
+    db.init_app(app)
+
     return app
