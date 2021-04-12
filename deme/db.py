@@ -7,6 +7,7 @@ from flask.cli import with_appcontext
 
 def get_db():
     """
+    Called when the application has been created and is handling a request.
     """
 
     if "db" not in g:
@@ -21,6 +22,7 @@ def get_db():
 
 def close_db(e=None):
     """
+    Checks if a connection was created. If the connection exists, it is closed.
     """
 
     db = g.pop("db", None)
