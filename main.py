@@ -31,19 +31,6 @@ async def ascii(ctx, ascii_code: int):
         await ctx.send(chango)
 
 
-@called_once_a_day.before_loop
-async def before():
-    await bot.wait_until_ready()
-    print("Finished waiting")
-
-
-@tasks.loop(hours=24)
-async def called_once_a_day():
-    message_channel = bot.get_channel(DISCORD_GUILD)
-    print(f"Got channel {message_channel}")
-    await message_channel.send("This is a looped test reminder.")
-
-
 @bot.command(name="clean", help="Responds with a random cleaning tasks.")
 async def cleandex(ctx):
     """
@@ -306,5 +293,4 @@ async def speak(ctx):
     response = random.choice(quotes)
     await ctx.send(response)
 
-called_once_a_day.start()
 bot.run("TOKEN")
