@@ -12,6 +12,25 @@ GUILD = os.getenv("DISCORD_GUILD)
 bot = commands.Bot(command_prefix="!")
 
 
+@bot.command(name="ascii", help="Takes an ASCII code and returns the corresponding character.")
+async def ascii(ctx, ascii_code: int):
+    """
+    Handles the command to convert an ASCII code to an ASCII character.
+    """
+
+    await ctx.send("Checking number...")
+
+    if ascii_code > 1114111 or ascii_code < 0:
+        await ctx.send("What does Solaris want from us?")
+        await ctx.send("{0} is either not within range, or is not an integer.".format(ascii_code))
+        await ctx.send("To continue, try a number between 0 and 1,114,111.")
+
+    else:
+        await ctx.send("Converting integer...")
+        chango = chr(ascii_code)
+        await ctx.send(chango)
+
+
 @called_once_a_day.before_loop
 async def before():
     await bot.wait_until_ready()
