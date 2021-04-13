@@ -18,12 +18,11 @@ async def ascii(ctx, ascii_code: int):
     Handles the command to convert an ASCII code to an ASCII character.
     """
 
-    await ctx.send("Checking number...")
+    await ctx.send("Let's see...")
 
     if ascii_code > 1114111 or ascii_code < 0:
-        await ctx.send("What does Solaris want from us?")
         await ctx.send("{0} is either not within range, or is not an integer.".format(ascii_code))
-        await ctx.send("To continue, try a number between 0 and 1,114,111.")
+        await ctx.send("To continue, give me a number between 0 and 1,114,111.")
 
     else:
         await ctx.send("Converting integer...")
