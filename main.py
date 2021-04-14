@@ -378,7 +378,7 @@ async def self_care(ctx):
 when_propmted = input("Would you like to connect to Discord? [Y]es/[n]o: ")
 if when_propmted == "y":
     print("Okay. Deme is connecting to Discord.")
-    bot.run("ODI4MDg0NDcxMzg2NzM0NjIy.YGkbww.zTtM1puL-cucIgCTWeKR70ryqjU")
+    bot.run("TOKEN")
 
 elif when_propmted == "n":
     print("Okay. Deme was not connected to Discord.")
