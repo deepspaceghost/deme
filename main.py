@@ -20,8 +20,8 @@ async def ascii(ctx, ascii_code: int):
 
     await ctx.send("Let's see...")
 
-    if ascii_code > 1114111 or ascii_code < 0:
-        await ctx.send("{0} is either not within range, or is not an integer.".format(ascii_code))
+    if ValueError:
+        await ctx.send(f"{ascii_code} is either not within range, or is not an integer.")
         await ctx.send("To continue, give me a number between 0 and 1,114,111.")
 
     else:
@@ -62,16 +62,16 @@ async def conversation_tree(message):
     """
 
     if message.author != bot.user:
-        if message.content == "do you read me, Deme?" or "do you read me deme?":
+        if message.content == "Do you read me Deme?":
             await message.channel.send(f"Affirmative, {message.author}. I read you.")
 
-        elif message.content == "what is the meaning of life, Deme?":
+        elif message.content == "What is the meaning of life Deme?":
             await message.channel.send("To experience ice cream, I suppose.")
 
-        elif message.content == "why am I here, Deme?":
+        elif message.content == "Why am I here Deme?":
             await message.channel.send("It's inherent to the programming of the matrix.")
 
-        elif message.content == "will you marry me, Deme?":
+        elif message.content == "Will you marry me Deme?":
             await message.channel.send("No.")
 
 
@@ -121,6 +121,17 @@ async def gamedex(ctx):
     await ctx.send(response)
 
 
+@bot.command(name="hex", help="Takes a number and returns the corresponding hexadecimal digits.")
+async def hexadecimal(ctx, number: int):
+    """
+    Handles the command to convert an integer to a string object containing two hexadecimal digits.
+    """
+
+    await ctx.send("Converting integer...")
+    pocus = hex(number)
+    await ctx.send(pocus)
+
+                  
 @bot.listen("on_message")
 async def hey_deme(message):
     """
