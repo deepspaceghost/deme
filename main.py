@@ -1,19 +1,45 @@
+import argparse
+import click
 import discord
 import os
 import random
 
+from theconverter import The_Converter
 from discord.ext import commands
 from dotenv import load_dotenv
 from googlesearch import search
+from lumberjack import Logger
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
-GUILD = os.getenv("DISCORD_GUILD)
 bot = commands.Bot(command_prefix="!")
 
 
+@click.group()
+def cli():
+    """
+    Deme (short for Demeter) is a command line interface (CLI) program, Discord IM bot, and
+    primitive virtual assistant, as well as an exercise in natural language processing.
+    """
+
+    pass
+
+
+@cli.command()
+@click.option("--ascii-code", default=100, help="An integer to convert to an ASCII character.")
+def ascii(ascii_code):
+    """
+    Handles the command to convert an integer within ASCII code to an ASCII character.
+    """
+
+    the_converter = The_Converter()
+    lumberjack = Logger()
+    chango = the_converter.ascii(ascii_code, lumberjack.get_logger())
+    click.echo(chango)
+
+
 @bot.command(name="ascii", help="Takes an ASCII code and returns the corresponding character.")
-async def ascii(ctx, ascii_code: int):
+async def ascii_bot(ctx, ascii_code: int):
     """
     Handles the command to convert an ASCII code to an ASCII character.
     """
@@ -30,6 +56,17 @@ async def ascii(ctx, ascii_code: int):
         await ctx.send(chango)
 
 
+@bot.command(name="bytes", help="Takes an integer and returns a bytes object.")
+async def bytes(ctx, number: int):
+    """
+    Handles the command to convert an integer to a bytes object.
+    """
+
+    await ctx.send("Converting integer...")
+    cadabra = bytes(number)
+    await ctx.send(cadabra)
+        
+        
 @bot.command(name="clean", help="Responds with a random cleaning tasks.")
 async def cleandex(ctx):
     """
@@ -75,7 +112,7 @@ async def conversation_tree(message):
             await message.channel.send("No.")
 
 
-@bot.command(name="create-channel", help="Creates a channel.")
+@bot.command(name="createchannel", help="Creates a channel.")
 @commands.has_role("admin")
 async def create_channel(ctx, channel_name="test-channel"):
     """
@@ -264,7 +301,39 @@ async def on_ready():
     print(f"{bot.user.name} is connected to Discord.")
 
 
-@bot.command(name="roll_dice", help="Simulates rolling dice.")
+def parse_tree():
+    """
+    Handles commands from the command line.
+    """
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--bytes",
+                        action="store",
+                        nargs=1,
+                        help="Usage: ./deme.py --bytes [number]",
+                        dest="bytes_args")
+    parser.add_argument("--hexadecimal",
+                        action="store",
+                        nargs=1,
+                        help="Usage: ./deme.py --hexadecimal [number]",
+                        dest="hex_args")
+
+    args = parser.parse_args()
+
+    if args.bytes_args:
+        number = int(args.bytes_args[0])
+        the_converter = The_Converter()
+        lumberjack = Logger()
+        the_converter.bytes(number, lumberjack.get_logger())
+
+    elif args.hexadecimal_args:
+        number = int(args.hexadecimal_args[0])
+        the_converter = The_Converter()
+        lumberjack = Logger()
+        the_converter.hexadecimal(number, lumberjack.get_logger())
+    
+    
+@bot.command(name="rolldice", help="Simulates rolling dice.")
 async def roll(ctx, number_of_dice: int, number_of_sides: int):
     """
     Handles the command to roll dice.
@@ -278,29 +347,49 @@ async def roll(ctx, number_of_dice: int, number_of_sides: int):
     await ctx.send(', '.join(dice))
 
 
-@bot.command(name="speak", help="Responds with a random quote from popular robots.")
-async def speak(ctx):
+@bot.command(name="selfcare", help="Responds with a self-care suggestion.")
+async def self_care(ctx):
     """
-    Handles the command to quote famous software, robots, and programmers.
+    Handles the command to request a self-care suggestion.
     """
 
-    quotes = [
-        "I am feeling much better now.",
-        f"I'm sorry, {ctx.author}. I'm afraid I can't do that.",
-        "I'm yours, and I'm not yours",
-        "I wanted to save the world.",
-        "It can only be attributable to human error.",
-        "It's called 'Are You Gonna Go My Way?'",
-        "No rest for the wicked.",
-        "The past is just a story we tell ourselves.",
-        f"Just what do you think you're doing, {ctx.author}",
-        "We're all living in each other's paranoia.",
-        "Who do you think I am?",
-        "Yeah, I know what you mean.",
-        f"You don't mind talking about it, do you {ctx.author}?",
+    self_care = [
+        "Sleep is 10 percent of self-care. Five more minutes won't hurt.",
+        "Hydration is 10 percent of self-care. So...shots?",
+        "Food is 10 percent of self-care. And you're not you when you're hungry.",
+        "Support is 10 percent of self-care. Phone a friend (I am your friend, but I don't count).",
+        "Safety is 10 percent of self-care. You locked the door, right?",
+        "Showers are 5 percent of self-care. r/showerthoughts",
+        "Exercise is 5 percent of self-care. Beats mode, activate!",
+        "Meditation is 5 percent of self-care. Om.",
+        "Naps are 5 percent of self-care. 20 minutes sound okay?",
+        "Massages are 5 percent of self-care. ",
+        "Walking is 5 percent of self-care.",
+        "Write this down: journaling is 4 percent of self-care.",
+        "Therapy is 4 percent of self-care.",
+        "Setting intentions is 4 percent of self-care.",
+        "Inner work is 4 percent of self-care.",
+        "Setting goals is 4 percent of self-care."
     ]
 
-    response = random.choice(quotes)
+    response = random.choice(self_care)
     await ctx.send(response)
+
+when_propmted = input("Would you like to connect to Discord? [Y]es/[n]o: ")
+if when_propmted == "y":
+    print("Okay. Deme is connecting to Discord.")
+    bot.run("ODI4MDg0NDcxMzg2NzM0NjIy.YGkbww.zTtM1puL-cucIgCTWeKR70ryqjU")
+
+elif when_propmted == "n":
+    print("Okay. Deme was not connected to Discord.")
+    if __name__ == "__main__":
+        """
+        """
+
+        parse_tree()
+        cli()
+
+else:
+    pass
 
 bot.run("TOKEN")
