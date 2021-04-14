@@ -7,6 +7,7 @@ Deme is a Discord IM bot and primitive virtual assistant, and an exercise in nat
 REQUIREMENTS
 ------------
 
+* click==7.1.2
 * discord.py==1.7.1
 * Flask==1.1.2
 * google==3.0.0
