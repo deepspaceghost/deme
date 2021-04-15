@@ -399,13 +399,9 @@ if when_propmted == "y":
 elif when_propmted == "n":
     print("Okay. Deme was not connected to Discord.")
     if __name__ == "__main__":
-        """
-        """
 
         parse_tree()
         cli()
 
 else:
     pass
-
-bot.run("TOKEN")
