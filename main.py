@@ -112,6 +112,22 @@ async def conversation_tree(message):
             await message.channel.send("No.")
 
 
+@bot.command(name="countdown", help="Takes an integer and begins counting down.")
+async def countdown(ctx, number: int):
+    """
+    Handles the command to begin a countdown.
+    """
+
+    count = int(number)
+
+    while count > 0:
+        await ctx.send(count)
+        count = count - 1
+
+    if count == 0:
+        await ctx.send("Go!")
+            
+            
 @bot.command(name="createchannel", help="Creates a channel.")
 @commands.has_role("admin")
 async def create_channel(ctx, channel_name="test-channel"):
