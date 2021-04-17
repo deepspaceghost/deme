@@ -14,7 +14,7 @@ help_command = commands.DefaultHelpCommand(no_caregory="Commands")
 bot = commands.Bot(command_prefix="!", help_command=help_command)
 
 
-@bot.command(name="ascii", help="Takes an ASCII code and returns the corresponding character.")
+@bot.command(name="ascii", help="Takes an ASCII code. Returns the corresponding character.")
 async def ascii(ctx, ascii_code: int):
     """
     Handles the command to convert an ASCII code to an ASCII character.
@@ -133,6 +133,21 @@ async def create_file(ctx, file_name: str, content: str):
         await ctx.send(f"{file_name} has been created.")
         
         
+@bot.command(name="exercise", help="Reminders for daily exercise.")
+async def exercise(ctx):
+    """
+    Handles the command to request a daily exercise reminder.
+    """
+
+    exercises = [
+        "Ab workout, 15 minutes",
+        "Full body workout, 20 minutes."
+    ]
+
+    response = random.choice(exercises)
+    await ctx.send(response)
+        
+        
 @bot.command(name="game", help="Responds with a random game suggestion.")
 async def gamedex(ctx):
     """
@@ -183,79 +198,7 @@ async def hey_deme(message):
     """
 
     if message.author != bot.user:
-        if message.content.startswith("hey deme can"):
-            searchContent = ""
-            query = str(message.content).split(" ")
-            for i in range(2, len(query)):
-                searchContent = searchContent + query[i]
-
-            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
-                await message.channel.send(j)
-
-        elif message.content.startswith("hey deme does"):
-            searchContent = ""
-            query = str(message.content).split(" ")
-            for i in range(2, len(query)):
-                searchContent = searchContent + query[i]
-
-            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
-                await message.channel.send(j)
-
-        elif message.content.startswith("hey deme how"):
-            searchContent = ""
-            query = str(message.content).split(" ")
-            for i in range(2, len(query)):
-                searchContent = searchContent + query[i]
-
-            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
-                await message.channel.send(j)
-
-        elif message.content.startswith("hey deme is"):
-            searchContent = ""
-            query = str(message.content).split(" ")
-            for i in range(2, len(query)):
-                searchContent = searchContent + query[i]
-
-            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
-                await message.channel.send(j)
-
-        elif message.content.startswith("hey deme what"):
-            searchContent = ""
-            query = str(message.content).split(" ")
-            for i in range(2, len(query)):
-                searchContent = searchContent + query[i]
-
-            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
-                await message.channel.send(j)
-
-        elif message.content.startswith("hey deme when"):
-            searchContent = ""
-            query = str(message.content).split(" ")
-            for i in range(2, len(query)):
-                searchContent = searchContent + query[i]
-
-            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
-                await message.channel.send(j)
-
-        elif message.content.startswth("hey deme where"):
-            searchContent = ""
-            query = str(message.content).split(" ")
-            for i in range(2, len(query)):
-                searchContent = searchContent + query[i]
-
-            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
-                await message.channel.send(j)
-
-        elif message.content.startswith("hey deme who"):
-            searchContent = ""
-            query = str(message.content).split(" ")
-            for i in range(2, len(query)):
-                searchContent = searchContent + query[i]
-
-            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
-                await message.channel.send(j)
-
-        elif message.content.startswith("hey deme why"):
+        if message.content.startswith("hey deme"):
             searchContent = ""
             query = str(message.content).split(" ")
             for i in range(2, len(query)):
@@ -306,6 +249,41 @@ async def on_ready():
     """
 
     print(f"{bot.user.name} is connected to Discord.")
+    
+    
+@bot.command(name="rockpaperscissors", help="Play rock, paper, scissors, with Deme.")
+async def rock_paper_scissors(ctx, user_action: str):
+    """
+    Handles the command to play rock, paper, scissors.
+    """
+
+    possible_actions = [
+        "rock",
+        "paper",
+        "scissors"
+    ]
+
+    computer_action = random.choice(possible_actions)
+    if user_action == computer_action:
+        await ctx.send(f"We both selected {user_action}. It's a tie!")
+
+    elif user_action == "rock":
+        if computer_action == "scissors":
+            await ctx.send("Rock smashes scissors! You win!")
+        else:
+            await ctx.send("Paper covers rock! You lose.")
+
+    elif user_action == "paper":
+        if computer_action == "rock":
+            await ctx.send("Paper covers rock! You win!")
+        else:
+            await ctx.send("Scissors cuts paper! You lose.")
+
+    elif user_action == "scissors":
+        if computer_action == "paper":
+            await ctx.send("Scissors cuts paper! You win!")
+        else:
+            await ctx.send("Rock smashes scissors! You lose.")
     
     
 @bot.command(name="rolldice", help="Simulates rolling dice.")
