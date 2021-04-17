@@ -1,45 +1,21 @@
-import argparse
-import click
 import discord
 import os
 import random
 
-from theconverter import The_Converter
 from discord.ext import commands
 from dotenv import load_dotenv
 from googlesearch import search
-from lumberjack import Logger
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
-bot = commands.Bot(command_prefix="!")
+GUILD = os.getenv("DISCORD_GUILD")
 
-
-@click.group()
-def cli():
-    """
-    Deme (short for Demeter) is a command line interface (CLI) program, Discord IM bot, and
-    primitive virtual assistant, as well as an exercise in natural language processing.
-    """
-
-    pass
-
-
-@cli.command()
-@click.option("--ascii-code", default=100, help="An integer to convert to an ASCII character.")
-def ascii(ascii_code):
-    """
-    Handles the command to convert an integer within ASCII code to an ASCII character.
-    """
-
-    the_converter = The_Converter()
-    lumberjack = Logger()
-    chango = the_converter.ascii(ascii_code, lumberjack.get_logger())
-    click.echo(chango)
+help_command = commands.DefaultHelpCommand(no_caregory="Commands")
+bot = commands.Bot(command_prefix="!", help_command=help_command)
 
 
 @bot.command(name="ascii", help="Takes an ASCII code and returns the corresponding character.")
-async def ascii_bot(ctx, ascii_code: int):
+async def ascii(ctx, ascii_code: int):
     """
     Handles the command to convert an ASCII code to an ASCII character.
     """
@@ -142,6 +118,21 @@ async def create_channel(ctx, channel_name="test-channel"):
         await guild.create_text_channel(channel_name)
 
 
+@bot.command(name="createfile", help="Creates a file.")
+@commands.has_role("admin")
+async def create_file(ctx, file_name: str, content: str):
+    """
+    Handles the command to create a new text (.txt) file, as long as the user is an administrator.
+    """
+
+    await ctx.send("I'll write this down for later.")
+    if not os.path.exists(file_name):
+        file = open(file_name, "w")
+        file.write(content)
+        file.close()
+        await ctx.send(f"{file_name} has been created.")
+        
+        
 @bot.command(name="game", help="Responds with a random game suggestion.")
 async def gamedex(ctx):
     """
@@ -315,38 +306,6 @@ async def on_ready():
     """
 
     print(f"{bot.user.name} is connected to Discord.")
-
-
-def parse_tree():
-    """
-    Handles commands from the command line.
-    """
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--bytes",
-                        action="store",
-                        nargs=1,
-                        help="Usage: ./deme.py --bytes [number]",
-                        dest="bytes_args")
-    parser.add_argument("--hexadecimal",
-                        action="store",
-                        nargs=1,
-                        help="Usage: ./deme.py --hexadecimal [number]",
-                        dest="hex_args")
-
-    args = parser.parse_args()
-
-    if args.bytes_args:
-        number = int(args.bytes_args[0])
-        the_converter = The_Converter()
-        lumberjack = Logger()
-        the_converter.bytes(number, lumberjack.get_logger())
-
-    elif args.hexadecimal_args:
-        number = int(args.hexadecimal_args[0])
-        the_converter = The_Converter()
-        lumberjack = Logger()
-        the_converter.hexadecimal(number, lumberjack.get_logger())
     
     
 @bot.command(name="rolldice", help="Simulates rolling dice.")
@@ -391,17 +350,4 @@ async def self_care(ctx):
     response = random.choice(self_care)
     await ctx.send(response)
 
-when_propmted = input("Would you like to connect to Discord? [Y]es/[n]o: ")
-if when_propmted == "y":
-    print("Okay. Deme is connecting to Discord.")
-    bot.run("TOKEN")
-
-elif when_propmted == "n":
-    print("Okay. Deme was not connected to Discord.")
-    if __name__ == "__main__":
-
-        parse_tree()
-        cli()
-
-else:
-    pass
+bot.run("TOKEN")
