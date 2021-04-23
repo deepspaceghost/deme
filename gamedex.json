@@ -12,7 +12,24 @@ keys = {
         "T for Teen": "2",
         "M for Mature": "3"
     },
-    "genres": {"3": "horror", "2": ["puzzle", "science fiction", "stealth", "strategy"]},
+    "genres": {
+        "3": "horror",
+        "2.5": ["cyberpunk", "dark science fiction", "eldritch horror"],
+        "2": [
+        	"abstract",
+        	"crime",
+        	"detective",
+        	"mystery",
+        	"post-apocalyptic",
+        	"puzzle",
+        	"science fiction",
+        	"stealth",
+        	"strategy",
+        	"tactical",
+        	"thriller"
+        ],
+        "1": ["comic", "manga", "rpg"]
+    },
     "letter class": {"B Class": "8 - 9", "C Class": "6 - 7", "D Class": "4 - 5"},
     "meta_scores": {"87.49< or <91.66": "2", "83.32< and <87.49": "1.5", "79.15< and <83.32": "1"}
 }
