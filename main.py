@@ -5,6 +5,7 @@ import random
 from discord.ext import commands
 from dotenv import load_dotenv
 from googlesearch import search
+from time import sleep
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -43,29 +44,49 @@ async def bytes(ctx, number: int):
     await ctx.send(cadabra)
         
         
-@bot.command(name="clean", help="Responds with a random cleaning tasks.")
-async def cleandex(ctx):
+@bot.command(name="clean", help="Responds with a random cleaning task, by time period.")
+async def cleandex(ctx, period: str):
     """
-    Handles the command to request to a suggestion for cleaning.
+    Handles the command to request to a suggestion for cleaning, depending on the period.
     """
 
-    tasks = [
+    day_tasks = [
         "Have you put clean dishes away today?",
         "Have you swept today?",
         "Have you taken out the trash today?",
         "Have you washed a load of dishes today?",
-        "Have you wiped the kitchen sink out today?",
+        "Have you wiped the countertops today?",
+        "Have you wiped the kitchen sink out today?"
+    ]
+
+    week_tasks = [
         "Have you cleaned the floors this week?",
         "Have you cleaned the mirror(s) this week?",
-        "Have you dusted your shelves this week?"
+        "Have you dusted your shelves this week?",
+        "Have you vacuumed the apartment / house this week?"
+    ]
+
+    month_tasks = [
         "Have you cleaned the vents this month?",
         "Have you organized your dresser drawers this month?",
         "Have you scrubbed the shower grout this month?",
-        "Have you vacuumed your car this month?"
+        "Have you vacuumed the car this month?"
     ]
 
-    response = random.choice(tasks)
-    await ctx.send(response)
+    if period == "day":
+        response = random.choice(day_tasks)
+        await ctx.send(response)
+
+    elif period == "week":
+        response = random.choice(week_tasks)
+        await ctx.send(response)
+
+    elif period == "month":
+        response = random.choice(month_tasks)
+        await ctx.send(response)
+
+    else:
+        await ctx.send("Use 'day', 'week', or 'month' for a more specific task.")
     
 
 @bot.listen("on_message")
@@ -249,6 +270,24 @@ async def on_ready():
     """
 
     print(f"{bot.user.name} is connected to Discord.")
+    
+    
+@bot.command(name="persephone", help="Summons Persephone.")
+async def persephone(ctx):
+    """
+    Handles the command to summon Persephone.
+    """
+
+    opening = [
+        "PERSEPHONE ORACULAR",
+        "a hemingway thought",
+        "chapter one: total recall",
+        "coming soon"
+    ]
+
+    for i in range(4):
+        await ctx.send(opening[i])
+        sleep(6.5)
     
     
 @bot.command(name="rockpaperscissors", help="Play rock, paper, scissors, with Deme.")
