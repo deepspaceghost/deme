@@ -260,7 +260,7 @@ async def on_member_join(member):
     """
 
     await member.create_dm()
-    await member.dm_channel.send(f"Hi {member.name}, welcome to Artinov!")
+    await member.dm_channel.send(f"Hi {member.name}, welcome to demiurge!")
 
 
 @bot.event
@@ -288,6 +288,27 @@ async def persephone(ctx):
     for i in range(4):
         await ctx.send(opening[i])
         sleep(6.5)
+    
+    
+@bot.command(name="phonedown", help="Suggests phone-free activities.")
+async def phone_down(ctx):
+    """
+    """
+
+    phone_down = [
+        "Take a walk.",
+        "Cuddle someone.",
+        "Read a book.",
+        "Put pen to paper.",
+        "Go on an adventure.",
+        "Play a game.",
+        "Work out. Type !exercise for some suggestions.",
+        "Make something.",
+        "Have a dance party."
+    ]
+
+    response = random.choice(phone_down)
+    await ctx.send(response)
     
     
 @bot.command(name="rockpaperscissors", help="Play rock, paper, scissors, with Deme.")
@@ -360,7 +381,7 @@ async def self_care(ctx):
         "Write this down: journaling is 4 percent of self-care.",
         "Therapy is 4 percent of self-care.",
         "Setting intentions is 4 percent of self-care.",
-        "Inner work is 4 percent of self-care.",
+        "Inner work is 4 percent of self-care. Take 20 minutes to self-reflect.",
         "Setting goals is 4 percent of self-care."
     ]
 
