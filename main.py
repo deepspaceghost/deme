@@ -44,6 +44,50 @@ async def bytes(ctx, number: int):
     await ctx.send(cadabra)
         
         
+@bot.command(name="care", help="Responds with suggestions for self-directed care.")
+async def care(ctx):
+    """
+    Handles the command for self-directed care suggestions.
+    """
+
+    care = [
+        "Journal Therapy: Create both sides to a conversation involving anything.",
+        "Journal Therapy: Describe the essence and emotional experience of a memory.",
+        "Self-care: drink a glass of water.",
+        "Self-care: eat some food.",
+        "Self-care: get some sleep.",
+        "Journal Therapy: Share a journal entry with someone you trust. Ask for their thoughts.",
+        "Journal Therapy: Write a number of connected items to help prioritize and organize.",
+        "Journal Therapy: Write about anything for a designated period.",
+        "Unsent letters: silence your internal censor.",
+        "Support is 10 percent of self-care. Phone a friend (I don't count).",
+        "Safety is 10 percent of self-care. You locked the door, right?",
+        "Showers are 5 percent of self-care. r/showerthoughts",
+        "Exercise is 5 percent of self-care. Beast mode, activate!",
+        "Meditation is 5 percent of self-care. Om.",
+        "Naps are 5 percent of self-care. 20 minutes sound okay?",
+        "Massages are 5 percent of self-care. ",
+        "Walking is 5 percent of self-care.",
+        "Write this down: journaling is 4 percent of self-care.",
+        "Therapy is 4 percent of self-care.",
+        "Setting intentions is 4 percent of self-care.",
+        "Inner work is 4 percent of self-care. Take 20 minutes to self-reflect.",
+        "Setting goals is 4 percent of self-care.",
+        "Take a walk.",
+        "Cuddle someone.",
+        "Read a book.",
+        "Put pen to paper.",
+        "Go on an adventure.",
+        "Play a game.",
+        "Work out. Type !exercise for some suggestions.",
+        "Make something.",
+        "Have a dance party."
+    ]
+
+    response = random.choice(care)
+    await ctx.send(response)
+        
+        
 @bot.command(name="clean", help="Responds with a random cleaning task, by time period.")
 async def cleandex(ctx, period: str):
     """
@@ -109,7 +153,7 @@ async def conversation_tree(message):
             await message.channel.send("No.")
 
 
-@bot.command(name="countdown", help="Takes an integer and begins counting down.")
+@bot.command(name="countdown", help="Takes an integer and begins the final count down.")
 async def countdown(ctx, number: int):
     """
     Handles the command to begin a countdown.
@@ -119,6 +163,7 @@ async def countdown(ctx, number: int):
 
     while count > 0:
         await ctx.send(count)
+        sleep(1.0)
         count = count - 1
 
     if count == 0:
@@ -290,27 +335,6 @@ async def persephone(ctx):
         sleep(6.5)
     
     
-@bot.command(name="phonedown", help="Suggests phone-free activities.")
-async def phone_down(ctx):
-    """
-    """
-
-    phone_down = [
-        "Take a walk.",
-        "Cuddle someone.",
-        "Read a book.",
-        "Put pen to paper.",
-        "Go on an adventure.",
-        "Play a game.",
-        "Work out. Type !exercise for some suggestions.",
-        "Make something.",
-        "Have a dance party."
-    ]
-
-    response = random.choice(phone_down)
-    await ctx.send(response)
-    
-    
 @bot.command(name="rockpaperscissors", help="Play rock, paper, scissors, with Deme.")
 async def rock_paper_scissors(ctx, user_action: str):
     """
@@ -359,33 +383,5 @@ async def roll(ctx, number_of_dice: int, number_of_sides: int):
 
     await ctx.send(', '.join(dice))
 
-
-@bot.command(name="selfcare", help="Responds with a self-care suggestion.")
-async def self_care(ctx):
-    """
-    Handles the command to request a self-care suggestion.
-    """
-
-    self_care = [
-        "Sleep is 10 percent of self-care. Five more minutes won't hurt.",
-        "Hydration is 10 percent of self-care. So...shots?",
-        "Food is 10 percent of self-care. And you're not you when you're hungry.",
-        "Support is 10 percent of self-care. Phone a friend (I am your friend, but I don't count).",
-        "Safety is 10 percent of self-care. You locked the door, right?",
-        "Showers are 5 percent of self-care. r/showerthoughts",
-        "Exercise is 5 percent of self-care. Beats mode, activate!",
-        "Meditation is 5 percent of self-care. Om.",
-        "Naps are 5 percent of self-care. 20 minutes sound okay?",
-        "Massages are 5 percent of self-care. ",
-        "Walking is 5 percent of self-care.",
-        "Write this down: journaling is 4 percent of self-care.",
-        "Therapy is 4 percent of self-care.",
-        "Setting intentions is 4 percent of self-care.",
-        "Inner work is 4 percent of self-care. Take 20 minutes to self-reflect.",
-        "Setting goals is 4 percent of self-care."
-    ]
-
-    response = random.choice(self_care)
-    await ctx.send(response)
 
 bot.run("TOKEN")
