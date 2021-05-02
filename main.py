@@ -535,7 +535,7 @@ async def watts(message):
                 await message.channel.send(future[i])
                 time.sleep(5.334)
 
-        elif "future" in message.content.lower() and "living" in message.content.lower():
+        elif "future" in message.content.lower() and "live" in message.content.lower():
 
             future2 = [
                 "No valid plans for the future can be made",
@@ -558,6 +558,18 @@ async def watts(message):
             for i in range(3):
                 await message.channel.send(physical[i])
                 time.sleep(4.191)
+
+        elif "potato" in message.content.lower() and "while" in message.content.lower():
+
+            potato = [
+                "Zen does not confuse spirituality with thinking about God while one",
+                "is peeling potatoes. Zen spirituality is just to peel the potatoes.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(potato[i])
+                time.sleep(4.572)
 
 
 bot.run("TOKEN")
