@@ -1,12 +1,12 @@
 INTRODUCTION
 ------------
 
-Deme (short for Demeter) is a Dicord IM bot, keyword search engine, virtual assistant, and an
+Deme (short for Demeter) is a Discord IM bot, keyword search engine, virtual assistant, and an
 exercise in a natural language processing and computational linguistics. All future development
 will be focused on widening Deme's ability to interact with other applications, providing Deme with
 a more robust database, and increasing Deme's ability to interact with human language. Features
 in-development include PERSEPHONE HESITATED, a text-based "tech-noir programmer adventure" game,
-SISYPHUS, a web crawler and scraper, and Daedalus, a neural network.
+SISYPHUS, a web crawler and scraper, and DAEDALUS, a neural network.
 
 
 REQUIREMENTS
