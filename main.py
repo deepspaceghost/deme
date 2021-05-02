@@ -1,24 +1,37 @@
+import datetime
 import discord
 import os
 import random
+import time
 
 from discord.ext import commands
 from dotenv import load_dotenv
 from googlesearch import search
-from time import sleep
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 GUILD = os.getenv("DISCORD_GUILD")
 
-help_command = commands.DefaultHelpCommand(no_caregory="Commands")
+help_command = commands.DefaultHelpCommand(no_category="Commands")
 bot = commands.Bot(command_prefix="!", help_command=help_command)
+
+
+@bot.command(name="add", help="Does what it says on the box.")
+async def add(ctx, *args: int):
+    """
+    Handles the command to add numbers.
+    """
+
+    the_sum = 0
+    for x in args:
+        the_sum += x
+    await ctx.send(the_sum)
 
 
 @bot.command(name="ascii", help="Takes an ASCII code. Returns the corresponding character.")
 async def ascii(ctx, ascii_code: int):
     """
-    Handles the command to convert an ASCII code to an ASCII character.
+    Handles the command to convert a ASCII code to an ASCII character.
     """
 
     await ctx.send("Let's see...")
@@ -42,8 +55,8 @@ async def bytes(ctx, number: int):
     await ctx.send("Converting integer...")
     cadabra = bytes(number)
     await ctx.send(cadabra)
-        
-        
+
+
 @bot.command(name="care", help="Responds with suggestions for self-directed care.")
 async def care(ctx):
     """
@@ -86,12 +99,14 @@ async def care(ctx):
 
     response = random.choice(care)
     await ctx.send(response)
-        
-        
-@bot.command(name="clean", help="Responds with a random cleaning task, by time period.")
+
+
+@bot.command(name="clean",
+             help="Responds with a random cleaning task, by time period. (day | week | month)")
 async def cleandex(ctx, period: str):
     """
-    Handles the command to request to a suggestion for cleaning, depending on the period.
+    Handles the command to request to a
+    suggestion for cleaning, depending on the period.
     """
 
     day_tasks = [
@@ -131,7 +146,7 @@ async def cleandex(ctx, period: str):
 
     else:
         await ctx.send("Use 'day', 'week', or 'month' for a more specific task.")
-    
+
 
 @bot.listen("on_message")
 async def conversation_tree(message):
@@ -140,16 +155,16 @@ async def conversation_tree(message):
     """
 
     if message.author != bot.user:
-        if message.content == "Do you read me Deme?":
+        if message.content == "Do you read me, Deme?":
             await message.channel.send(f"Affirmative, {message.author}. I read you.")
 
-        elif message.content == "What is the meaning of life Deme?":
+        elif message.content == "What is the meaning of life, Deme?":
             await message.channel.send("To experience ice cream, I suppose.")
 
-        elif message.content == "Why am I here Deme?":
+        elif message.content == "Why am I here, Deme?":
             await message.channel.send("It's inherent to the programming of the matrix.")
 
-        elif message.content == "Will you marry me Deme?":
+        elif message.content == "Will you marry me, Deme?":
             await message.channel.send("No.")
 
 
@@ -163,18 +178,19 @@ async def countdown(ctx, number: int):
 
     while count > 0:
         await ctx.send(count)
-        sleep(1.0)
+        time.sleep(1.0)
         count = count - 1
 
     if count == 0:
         await ctx.send("Go!")
-            
-            
+
+
 @bot.command(name="createchannel", help="Creates a channel.")
 @commands.has_role("admin")
-async def create_channel(ctx, channel_name="test-channel"):
+async def create_channel(ctx, channel_name: str):
     """
-    Handles the command to create a new text channel, as long as the user is an administrator.
+    Handles the command to create a new text
+    channel, as long as the user is an administrator.
     """
 
     guild = ctx.guild
@@ -188,7 +204,8 @@ async def create_channel(ctx, channel_name="test-channel"):
 @commands.has_role("admin")
 async def create_file(ctx, file_name: str, content: str):
     """
-    Handles the command to create a new text (.txt) file, as long as the user is an administrator.
+    Handles the command to create a new text (.txt)
+    file, as long as the user is an administrator.
     """
 
     await ctx.send("I'll write this down for later.")
@@ -197,8 +214,28 @@ async def create_file(ctx, file_name: str, content: str):
         file.write(content)
         file.close()
         await ctx.send(f"{file_name} has been created.")
-        
-        
+
+    else:
+        if_file_exists = [
+            f"Gerty, am I a clone? {file_name} already exists. To",
+            "continue, rename or go to another directory."
+        ]
+
+        for i in range(2):
+            await ctx.send(if_file_exists[i])
+            time.sleep(3.048)
+
+
+@bot.command(name="currenttime", help="Gives the time.")
+async def current_time(ctx):
+    """
+    Handles the command to give the time.
+    """
+
+    ct = datetime.datetime.now().time()
+    await ctx.send(ct.strftime("%H:%M:%S"))
+
+
 @bot.command(name="exercise", help="Reminders for daily exercise.")
 async def exercise(ctx):
     """
@@ -212,12 +249,30 @@ async def exercise(ctx):
 
     response = random.choice(exercises)
     await ctx.send(response)
-        
-        
+
+
+@bot.command(name="flipcoin", help="Does what it says on he box.")
+async def flip(ctx):
+    """
+    Handles the command to flip a coin.
+    """
+
+    sides = [
+        "heads",
+        "heads",
+        "tails",
+        "tails",
+        "tails"
+    ]
+
+    response = random.choice(sides)
+    await ctx.send(response)
+
+
 @bot.command(name="game", help="Responds with a random game suggestion.")
 async def gamedex(ctx):
     """
-    Handles the command to request to a game suggestion.
+    Handles the command to request a game suggestion.
     """
 
     games = [
@@ -246,17 +301,18 @@ async def gamedex(ctx):
     await ctx.send(response)
 
 
-@bot.command(name="hex", help="Takes a number and returns the corresponding hexadecimal digits.")
+@bot.command(name="hexadecimal", help="A number to convert to hexadecimal digits.")
 async def hexadecimal(ctx, number: int):
     """
-    Handles the command to convert an integer to a string object containing two hexadecimal digits.
+    Handles the command to convert an integer to a
+    string object containing two hexadecimal digits.
     """
 
     await ctx.send("Converting integer...")
     pocus = hex(number)
     await ctx.send(pocus)
 
-                  
+
 @bot.listen("on_message")
 async def hey_deme(message):
     """
@@ -301,7 +357,7 @@ async def on_error(event, *args, **kargs):
 @bot.event
 async def on_member_join(member):
     """
-    Handles what happens when a new member joins a guild.
+    Handles what happens when a new user joins a guild.
     """
 
     await member.create_dm()
@@ -311,12 +367,36 @@ async def on_member_join(member):
 @bot.event
 async def on_ready():
     """
-    Handles what happens when the Bot has established a connection to Discord.
+    Handles what happens when the Bot is online.
     """
 
-    print(f"{bot.user.name} is connected to Discord.")
-    
-    
+    print(f"{bot.user.name} (v0.0.0.179) is connected to Discord.")
+
+
+@bot.command(name="open", help="Opens a file.")
+@commands.has_role("admin")
+async def open_text_file(ctx, file_name: str):
+    """
+    Handles the command to open a text (.txt)
+    file, as long as the user is an administrator.
+    """
+
+    await ctx.send("Opening text file...")
+    if os.path.exists(file_name):
+        f = open(file_name, "r")
+        await ctx.send(f.read())
+
+    else:
+        if_file_does_not_exist = [
+            "I'm sorry, Dave. I'm afraid I can't do that.",
+            f"{file_name} does not exists. To continue, try a different name."
+        ]
+
+        for i in range(2):
+            await ctx.send(if_file_does_not_exist[i])
+            time.sleep(3.62)
+
+
 @bot.command(name="persephone", help="Summons Persephone.")
 async def persephone(ctx):
     """
@@ -332,11 +412,20 @@ async def persephone(ctx):
 
     for i in range(4):
         await ctx.send(opening[i])
-        sleep(6.5)
-    
-    
-@bot.command(name="rockpaperscissors", help="Play rock, paper, scissors, with Deme.")
-async def rock_paper_scissors(ctx, user_action: str):
+        time.sleep(1.875)
+
+
+@bot.command(name="random", help="Generates a random number between two numbers.")
+async def random_number(ctx, first_number: int, second_number: int):
+    """
+    Handles the command for a random number between two numbers.
+    """
+
+    await ctx.send(random.randint(first_number, second_number))
+
+
+@bot.command(name="rockpaperscissors", help="Does what it says on the box.")
+async def rock_paper_scissors(ctx, rock_paper_or_scissors: str):
     """
     Handles the command to play rock, paper, scissors.
     """
@@ -348,29 +437,29 @@ async def rock_paper_scissors(ctx, user_action: str):
     ]
 
     computer_action = random.choice(possible_actions)
-    if user_action == computer_action:
-        await ctx.send(f"We both selected {user_action}. It's a tie!")
+    if rock_paper_or_scissors == computer_action:
+        await ctx.send(f"We both selected {rock_paper_or_scissors}. It's a tie!")
 
-    elif user_action == "rock":
+    elif rock_paper_or_scissors == "rock":
         if computer_action == "scissors":
             await ctx.send("Rock smashes scissors! You win!")
         else:
             await ctx.send("Paper covers rock! You lose.")
 
-    elif user_action == "paper":
+    elif rock_paper_or_scissors == "paper":
         if computer_action == "rock":
             await ctx.send("Paper covers rock! You win!")
         else:
             await ctx.send("Scissors cuts paper! You lose.")
 
-    elif user_action == "scissors":
+    elif rock_paper_or_scissors == "scissors":
         if computer_action == "paper":
             await ctx.send("Scissors cuts paper! You win!")
         else:
             await ctx.send("Rock smashes scissors! You lose.")
-    
-    
-@bot.command(name="rolldice", help="Simulates rolling dice.")
+
+
+@bot.command(name="rolldice", help="Does what it says on the box.")
 async def roll(ctx, number_of_dice: int, number_of_sides: int):
     """
     Handles the command to roll dice.
@@ -382,6 +471,93 @@ async def roll(ctx, number_of_dice: int, number_of_sides: int):
     ]
 
     await ctx.send(', '.join(dice))
+
+
+@bot.command(name="timer", help="Sets a timer for 5 minutes.")
+async def timer(ctx):
+    """
+    Handles the command to set a 5 minute timer.
+    """
+
+    timer = [
+        "Timer started.",
+        "4 minutes left.",
+        "3 minutes left.",
+        "2 minutes left.",
+        "1 minute left.",
+        "Time's up."
+    ]
+
+    for i in range(6):
+        await ctx.send(timer[i])
+        time.sleep(60)
+
+
+@bot.listen("on_message")
+async def watts(message):
+    """
+    Handles what happens when the user triggers Deme to wax philosophical.
+    """
+
+    if message.author != bot.user:
+        if "change" in message.content.lower() and "sense" in message.content.lower():
+
+            change = [
+                "The only way to make sense out of change is to",
+                "plunge into it, move with it, and join the dance.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(change[i])
+                time.sleep(4.381)
+
+        elif "bite" in message.content.lower() and "like" in message.content.lower():
+
+            bite = [
+                "Trying to define yourself is like trying to bite your own teeth.",
+                "Alan Watts"
+            ]
+
+            for i in range(2):
+                await message.channel.send(bite[i])
+                time.sleep(2.667)
+
+        elif "future" in message.content.lower() and "present" in message.content.lower():
+
+            future = [
+                "I have realized that the past and future are real illusions, that",
+                "they exist in the present, which is what there is and all there is.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(future[i])
+                time.sleep(5.334)
+
+        elif "future" in message.content.lower() and "living" in message.content.lower():
+
+            future2 = [
+                "No valid plans for the future can be made",
+                "by those who have no capacity for living now.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(future2[i])
+                time.sleep(3.81)
+
+        elif "physical" in message.content.lower() and "much" in message.content.lower():
+
+            physical = [
+                "You and I are all as much continuous with the",
+                "physical universe as a wave is continuous with the ocean.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(physical[i])
+                time.sleep(4.191)
 
 
 bot.run("TOKEN")
