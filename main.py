@@ -473,6 +473,30 @@ async def roll(ctx, number_of_dice: int, number_of_sides: int):
     await ctx.send(', '.join(dice))
 
 
+@bot.command(name="brute", help="Takes a substitution cipher and reverts to plain text.")
+async def substitution_decryption(ctx, cipher_text, rotation: int):
+    """
+    Handles the command to pass a message through a substitution cipher.
+    """
+
+    letters = string.ascii_lowercase
+    unmask = letters[len(letters) - rotation:] + letters[:len(letters) - rotation]
+    trantab = str.maketrans(letters, unmask)
+    await ctx.send(cipher_text.translate(trantab))
+
+
+@bot.command(name="caesar", help="Takes a string an passes it through a substitution cipher.")
+async def substitution_encryption(ctx, plain_text, rotation: int):
+    """
+    Handles the command to pass a message through a substitution cipher.
+    """
+
+    letters = string.ascii_lowercase
+    mask = letters[rotation:] + letters[:rotation]
+    trantab = str.maketrans(letters, mask)
+    await ctx.send(plain_text.translate(trantab))
+    
+    
 @bot.command(name="timer", help="Sets a timer for 5 minutes.")
 async def timer(ctx):
     """
