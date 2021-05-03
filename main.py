@@ -330,6 +330,21 @@ async def hey_deme(message):
                 await message.channel.send(j)
 
 
+@bot.command(name="list", help="Lists text files in Deme's directory.")
+async def list(ctx):
+    """
+    Handles the command to list Deme's text files.
+    """
+
+    plain_text_file_list = [
+        "github.txt",
+        "requirements.txt",
+        "voodoo.txt"
+    ]
+
+    await ctx.send(plain_text_file_list)
+                
+                
 @bot.event
 async def on_command_error(ctx, error):
     """
@@ -495,6 +510,25 @@ async def substitution_encryption(ctx, plain_text, rotation: int):
     mask = letters[rotation:] + letters[:rotation]
     trantab = str.maketrans(letters, mask)
     await ctx.send(plain_text.translate(trantab))
+    
+    
+@bot.listen("on_message")
+async def thank(message):
+    """
+    Handles what happens when a user thanks Deme.
+    """
+
+    if message.author != bot.user:
+        if message.content.startswith("thank") or message.content.startswith("Thank"):
+            
+            you_are_welcome = [
+                "My pleasure.",
+                "No problem."
+                "You're welcome."
+            ]
+
+            response = random.choice(you_are_welcome)
+            await message.channel.send(response)
     
     
 @bot.command(name="timer", help="Sets a timer for 5 minutes.")
