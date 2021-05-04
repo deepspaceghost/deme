@@ -522,9 +522,9 @@ async def thank(message):
         if message.content.startswith("thank") or message.content.startswith("Thank"):
             
             you_are_welcome = [
-                "My pleasure.",
-                "No problem."
-                "You're welcome."
+                f"My pleasure, {message.author}.",
+                f"No problem, {message.author}."
+                f"You're welcome, {message.author}."
             ]
 
             response = random.choice(you_are_welcome)
