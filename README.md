@@ -22,7 +22,7 @@ REQUIREMENTS
 * requests==2.25.1
 
 
-MINTAINER(S)
+MAINTAINER(S)
 -----------
 
 Current maintainer(s):
