@@ -330,6 +330,26 @@ async def hey_deme(message):
                 await message.channel.send(j)
 
 
+@bot.listen("on_message")
+async def jung(message):
+    """
+    Handles what happens when the user triggers Deme to wax philosophical.
+    """
+
+    if message.author != bot.user:
+        if "awake" in message.content.lower() and "look" in message.content.lower():
+
+            awake = [
+                "Who looks outside, dreams;"
+                "who looks inside, awakes."
+                "Carl Jung"
+            ]
+
+            for i in range(3):
+                await message.channel.send(awake[i])
+                time.sleep(1.91)
+                
+                
 @bot.command(name="list", help="Lists text files in Deme's directory.")
 async def list(ctx):
     """
