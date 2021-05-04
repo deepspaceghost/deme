@@ -570,6 +570,18 @@ async def watts(message):
                 await message.channel.send(change[i])
                 time.sleep(4.381)
 
+        elif "connect" in message.content.lower() and "quiet" in message.content.lower():
+
+            connect = [
+                "But I'll tell you what hermits realize. If you go off into a far, far forest and",
+                "get very quiet, you'll come to understand that you're connected with everything.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(connect[i])
+                time.sleep(5.91)
+
         elif "bite" in message.content.lower() and "like" in message.content.lower():
 
             bite = [
@@ -605,6 +617,18 @@ async def watts(message):
                 await message.channel.send(future2[i])
                 time.sleep(3.81)
 
+        elif "open" in message.content.lower() and "turn" in message.content.lower():
+
+            open = [
+                "But the attitude of faith is to let go, and",
+                "become open to truth, whatever it might turn out to be.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(open[i])
+                sleep(4.381)
+
         elif "physical" in message.content.lower() and "much" in message.content.lower():
 
             physical = [
@@ -628,6 +652,18 @@ async def watts(message):
             for i in range(3):
                 await message.channel.send(potato[i])
                 time.sleep(4.572)
+
+        elif "there" in message.content.lower() and "look" in message.content.lower():
+
+            there = [
+                "You don't look out there for God,",
+                "something in the sky, you look in you.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(there[i])
+                time.sleep(3.239)
 
 
 bot.run("TOKEN")
