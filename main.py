@@ -2,12 +2,14 @@ import datetime
 import discord
 import os
 import random
+import string
 import time
 
 from discord.ext import commands
 from dotenv import load_dotenv
 from googlesearch import search
 
+# Loads the DISCORD_TOKEN and DISCORD_GUILD strings from the .env file.
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 GUILD = os.getenv("DISCORD_GUILD")
@@ -227,6 +229,7 @@ async def create_file(ctx, file_name: str, content: str):
 
 
 @bot.command(name="currenttime", help="Gives the time.")
+# Defines an asynchronous function to give the current time.
 async def current_time(ctx):
     """
     Handles the command to give the time.
@@ -275,6 +278,7 @@ async def gamedex(ctx):
     Handles the command to request a game suggestion.
     """
 
+    # Creates a list of strings, and assigns it the name "games."
     games = [
         "Game: Bloodborne, Class: (92, Horror / RPG, M), Console: PS4",
         "Game: Divinity: Original Sin II - DE, Class: (92, RPG, M), Console: Switch",
@@ -348,8 +352,8 @@ async def jung(message):
             for i in range(3):
                 await message.channel.send(awake[i])
                 time.sleep(1.91)
-                
-                
+
+
 @bot.command(name="list", help="Lists text files in Deme's directory.")
 async def list(ctx):
     """
@@ -363,8 +367,36 @@ async def list(ctx):
     ]
 
     await ctx.send(plain_text_file_list)
-                
-                
+
+
+@bot.command(name="np", help="Suggests a philosopher.")
+async def nextphilosopher(ctx):
+    """
+    Handles the command for a suggestions for a philosopher.
+    """
+
+    philosophers = [
+        "Jean Burden",
+        "Joseph Campbell",
+        "Haridas Chaudhuri",
+        "Monica Furlong",
+        "Allen Ginsberg",
+        "Chungliang Al Huang",
+        "Christmas Humphreys",
+        "Aldous Huxley",
+        "Jiddu Krishnamurti",
+        "Seraphim Rose",
+        "Ruth Fuller Sasaki",
+        "Gary Snyder",
+        "D. T. Suzuki",
+        "Robert Anton Wilson",
+        "Bankei Yōtaku"
+    ]
+
+    response = random.choice(philosophers)
+    await ctx.send(response)
+
+
 @bot.event
 async def on_command_error(ctx, error):
     """
@@ -405,7 +437,7 @@ async def on_ready():
     Handles what happens when the Bot is online.
     """
 
-    print(f"{bot.user.name} (v0.0.0.179) is connected to Discord.")
+    print(f"{bot.user.name} (v0.0.0.153) is connected to Discord.")
 
 
 @bot.command(name="open", help="Opens a file.")
@@ -438,6 +470,7 @@ async def persephone(ctx):
     Handles the command to summon Persephone.
     """
 
+    # Creates a list of strings, and assigns it the name "opening."
     opening = [
         "PERSEPHONE ORACULAR",
         "a hemingway thought",
@@ -450,12 +483,32 @@ async def persephone(ctx):
         time.sleep(1.875)
 
 
+@bot.command(name="plot", help="Suggests a plot device at random.")
+async def plot(ctx):
+    """
+    Handles the command to suggest a plot device at random.
+    """
+
+    plot = [
+        "1886, An Inhabitant in Carcosa",
+        "1891, Haïta the Shepherd",
+        "1895, The Repairer of Reputations",
+        "1895, The Mask",
+        "1895, In the Court of the Dragons",
+        "1895, The Yellow Sign"
+    ]
+
+    response = random.choice(plot)
+    await ctx.send(response)
+
+
 @bot.command(name="random", help="Generates a random number between two numbers.")
 async def random_number(ctx, first_number: int, second_number: int):
     """
     Handles the command for a random number between two numbers.
     """
 
+    # Sends the result of the !random command.
     await ctx.send(random.randint(first_number, second_number))
 
 
@@ -471,6 +524,7 @@ async def rock_paper_scissors(ctx, rock_paper_or_scissors: str):
         "scissors"
     ]
 
+    # Assigns an item from the possible_actions list at random.
     computer_action = random.choice(possible_actions)
     if rock_paper_or_scissors == computer_action:
         await ctx.send(f"We both selected {rock_paper_or_scissors}. It's a tie!")
@@ -488,6 +542,7 @@ async def rock_paper_scissors(ctx, rock_paper_or_scissors: str):
             await ctx.send("Scissors cuts paper! You lose.")
 
     elif rock_paper_or_scissors == "scissors":
+        # If Deme chose paper at random...
         if computer_action == "paper":
             await ctx.send("Scissors cuts paper! You win!")
         else:
@@ -495,6 +550,8 @@ async def rock_paper_scissors(ctx, rock_paper_or_scissors: str):
 
 
 @bot.command(name="rolldice", help="Does what it says on the box.")
+# Defines an asynchronous function to take two (2) integers, the
+# number of dice and the number of sides, and simulates a dice roll.
 async def roll(ctx, number_of_dice: int, number_of_sides: int):
     """
     Handles the command to roll dice.
@@ -530,8 +587,9 @@ async def substitution_encryption(ctx, plain_text, rotation: int):
     mask = letters[rotation:] + letters[:rotation]
     trantab = str.maketrans(letters, mask)
     await ctx.send(plain_text.translate(trantab))
-    
-    
+
+
+# Passes the on_message function through the @bot.listen function.
 @bot.listen("on_message")
 async def thank(message):
     """
@@ -540,7 +598,7 @@ async def thank(message):
 
     if message.author != bot.user:
         if message.content.startswith("thank") or message.content.startswith("Thank"):
-            
+
             you_are_welcome = [
                 f"My pleasure, {message.author}.",
                 f"No problem, {message.author}."
@@ -549,8 +607,30 @@ async def thank(message):
 
             response = random.choice(you_are_welcome)
             await message.channel.send(response)
-    
-    
+
+        if message.content.startswith("thanx") or message.content.startswith("Thanx"):
+
+            you_are_welcome = [
+                f"My pleasure, {message.author}.",
+                f"No problem, {message.author}."
+                f"You're welcome, {message.author}."
+            ]
+
+            response = random.choice(you_are_welcome)
+            await message.channel.send(response)
+
+        if message.content.startswith("thnx") or message.content.startswith("Thnx"):
+
+            you_are_welcome = [
+                f"My pleasure, {message.author}.",
+                f"No problem, {message.author}."
+                f"You're welcome, {message.author}."
+            ]
+
+            response = random.choice(you_are_welcome)
+            await message.channel.send(response)
+
+
 @bot.command(name="timer", help="Sets a timer for 5 minutes.")
 async def timer(ctx):
     """
@@ -647,7 +727,7 @@ async def watts(message):
 
             for i in range(3):
                 await message.channel.send(open[i])
-                sleep(4.381)
+                time.sleep(4.381)
 
         elif "physical" in message.content.lower() and "much" in message.content.lower():
 
@@ -675,6 +755,7 @@ async def watts(message):
 
         elif "there" in message.content.lower() and "look" in message.content.lower():
 
+            # Creates a list of strings and assigns it the name "there."
             there = [
                 "You don't look out there for God,",
                 "something in the sky, you look in you.",
@@ -686,4 +767,4 @@ async def watts(message):
                 time.sleep(3.239)
 
 
-bot.run("TOKEN")
+bot.run(TOKEN)
