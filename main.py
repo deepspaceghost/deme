@@ -431,6 +431,40 @@ async def on_member_join(member):
     await member.dm_channel.send(f"Hi {member.name}, welcome to demiurge!")
 
 
+# Wraps in the function in the bot.event decorator.
+@bot.event
+# Defines the on_morning function and passes it the argument ctx, similar to self.
+async def on_morning(ctx):
+    # This function handles what happens in the event the current time is 4:15am.
+
+    # Gets the current time and assigns it to the variable "ct."
+    ct = datetime.datetime.now().time()
+    """
+    Formats the "ct" variable to something readable and
+    assigns it to the variable "current_formatted_time."
+    """
+    current_formatted_time = ct.strftime("%H:%M:%S")
+    """
+    Creates a list named "morning" and formats the
+    items on the list with the earlier variables.
+    """
+    morning = [
+        "Good morning.",
+        f"It's {current_formatted_time},",
+        "the weather in [location] is",
+        "[degrees] and [condition]."
+    ]
+
+    # Compares the variable against a string (checks the time)
+    if current_formatted_time == "04:15:00":
+        # Iterates through each item in the "morning" list.
+        for i in range(4):
+            # Sends the items of the morning list, similar to print().
+            await ctx.send(morning[i])
+            # Modifies ctx.send() to send the items on the list every two (2) seconds.
+            time.sleep(2)
+    
+    
 @bot.event
 async def on_ready():
     """
