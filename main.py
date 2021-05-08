@@ -474,27 +474,45 @@ async def on_ready():
     print(f"{bot.user.name} (v0.0.0.153) is connected to Discord.")
 
 
+# Creates the !open command and its help message.
 @bot.command(name="open", help="Opens a file.")
+# Stops the command if the user does not have admin permission.
 @commands.has_role("admin")
+# Defines the open_text_file function and passes it the argument ctx,
+# similar to self, and file_name, a string of the name of the file the user
+# wants to open.
 async def open_text_file(ctx, file_name: str):
-    """
-    Handles the command to open a text (.txt)
-    file, as long as the user is an administrator.
-    """
 
-    await ctx.send("Opening text file...")
+    # Checks to see if the file the user wants to open exists.
     if os.path.exists(file_name):
+        # Opens the file as a readable document and assigns its contents to the
+        # variable "f."
         f = open(file_name, "r")
+        # Reads the contents of the file, and sends it, similar to print().
         await ctx.send(f.read())
 
+    # If the file name is written as something other than a string.
+    elif file_name is not str:
+        # Sends a string to help the user, similar to print().
+        await ctx.send("This isn't a string. Please alter your query.")
+
+    # Catches any other instances.
     else:
+        # Creates a list of help messages, assigns it the name
+        # "if_file_does_not_exist," and formats a string with the file_name
+        # argument.
         if_file_does_not_exist = [
             "I'm sorry, Dave. I'm afraid I can't do that.",
             f"{file_name} does not exists. To continue, try a different name."
         ]
 
+        # Iterates through each item in the "if_file_does_not_exist" list.
         for i in range(2):
+            # Sends the items of the if_file_does_not_exist list, similar
+            # to print().
             await ctx.send(if_file_does_not_exist[i])
+            # Modifies ctx.send() to send the items on the list every
+            # three-point-six-five (3.65) seconds.
             time.sleep(3.62)
 
 
