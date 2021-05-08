@@ -13,6 +13,8 @@ from googlesearch import search
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 GUILD = os.getenv("DISCORD_GUILD")
+LATITUDE = os.get.env("LATITUDE")
+LONGITUDE = os.getenv("LONGITUDE")
 
 help_command = commands.DefaultHelpCommand(no_category="Commands")
 bot = commands.Bot(command_prefix="!", help_command=help_command)
@@ -431,38 +433,55 @@ async def on_member_join(member):
     await member.dm_channel.send(f"Hi {member.name}, welcome to demiurge!")
 
 
-# Wraps in the function in the bot.event decorator.
-@bot.event
-# Defines the on_morning function and passes it the argument ctx, similar to self.
-async def on_morning(ctx):
-    # This function handles what happens in the event the current time is 4:15am.
+# Wraps in the function in the bot.listen decorator.
+@bot.listen("on_message")
+# Defines the morning function and passes it the argument ctx, similar to
+# self.
+async def morning(message):
 
-    # Gets the current time and assigns it to the variable "ct."
+    # Gets the current time and assigns it to the variable ct.
     ct = datetime.datetime.now().time()
-    """
-    Formats the "ct" variable to something readable and
-    assigns it to the variable "current_formatted_time."
-    """
+    # Formats the ct variable human readability and assigns it to the
+    # variable current_formatted_time.
     current_formatted_time = ct.strftime("%H:%M:%S")
-    """
-    Creates a list named "morning" and formats the
-    items on the list with the earlier variables.
-    """
-    morning = [
-        "Good morning.",
-        f"It's {current_formatted_time},",
-        "the weather in [location] is",
-        "[degrees] and [condition]."
-    ]
+    # Creates a Nominatim object and initialize Nominatim API.
+    geolocator = Nominatim(user_agent="geoapiExercises")
+    # Assigns a latitude to a variable.
+    latitude = LATITUDE
+    # Assigns a longitude to a variable.
+    longitude = LONGITUDE
+    # Obtains location data from the latitude and longitude (think reverse
+    # engineering) and assigns it to a variable.
+    location = geolocator.reverse(latitude + "," + longitude)
+    # Parses the data and turns it into a dictionary assigned the name
+    # address.
+    address = location.raw["address"]
+    # Takes the city from the data in the dictionary, and assigns it to a
+    # variable.
+    city = address.get("city", "")
+    # Checks to make sure the activating message was not sent by a bot.
+    if message.author != bot.user:
 
-    # Compares the variable against a string (checks the time)
-    if current_formatted_time == "04:15:00":
-        # Iterates through each item in the "morning" list.
-        for i in range(4):
-            # Sends the items of the morning list, similar to print().
-            await ctx.send(morning[i])
-            # Modifies ctx.send() to send the items on the list every two (2) seconds.
-            time.sleep(2)
+        # Checks to make sure the activating message starts with the word
+        # "Good" with a capital g, and contains th word "morning."
+        if message.content.startswith("Good") and "morning" in message.content.lower():
+
+            # Creates a list named morning and formats the items on the
+            # list with the earlier variables.
+            morning = [
+                f"Good morning, {message.author}. It's {current_formatted_time},",
+                f"the weather in {city} is [degrees] and [condition]."
+            ]
+
+            # Iterates through each item in the morning list.
+            for i in range(2):
+                # Sends the items of the morning list, similar to print().
+                await message.channel.send(morning[i])
+                # Modifies message.channel.send() to send the items on the
+                # list matching the words-per-second (wps) of a proficient
+                # reader (280-350 wpm, or 5.25 wps) Items are sent every
+                # one-point-two-three-nine (1.239) seconds.
+                time.sleep(1.239)
     
     
 @bot.event
@@ -471,7 +490,7 @@ async def on_ready():
     Handles what happens when the Bot is online.
     """
 
-    print(f"{bot.user.name} (v0.0.0.153) is connected to Discord.")
+    print(f"{bot.user.name} (v0.0.0.144) is connected to Discord.")
 
 
 # Creates the !open command and its help message.
