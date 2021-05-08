@@ -604,7 +604,7 @@ async def rock_paper_scissors(ctx, rock_paper_or_scissors: str):
 @bot.command(name="rolldice", help="Does what it says on the box.")
 # Defines an asynchronous function to take two (2) integers, the
 # number of dice and the number of sides, and simulates a dice roll.
-async def roll(ctx, number_of_dice: int, number_of_sides: int):
+async def roll_a_dice(ctx, number_of_dice: int, number_of_sides: int):
     """
     Handles the command to roll dice.
     """
@@ -617,6 +617,78 @@ async def roll(ctx, number_of_dice: int, number_of_sides: int):
     await ctx.send(', '.join(dice))
 
 
+@bot.command(name="rollgoon", help="Generates a goon. Created by Tommy Sunders aka warlockteeth.")
+async def roll_a_goon(ctx):
+
+    goon_origin = [
+        "human",
+        "Elf",
+        "Orc",
+        "Goblin",
+        "Dwarf",
+        "Cat",
+        "Dino",
+        "Gnome",
+        "Whale",
+        "Skel",
+        "Golem",
+        "Gel"
+    ]
+
+    goon_type = [
+        "fire",
+        "Ice",
+        "Cosmic",
+        "Necro",
+        "Plant",
+        "Rock",
+        "Metal",
+        "Water",
+        "Air",
+        "Tech"
+    ]
+
+    goon_class = [
+        "mage",
+        "Rogue",
+        "Bard",
+        "Ranger",
+        "Warrior",
+        "Priest"
+    ]
+
+    goon_modifier = [
+        "is also a ghost",
+        "Is possessed by lvl 20 unders[here elderdemon.",
+        "Has aquired a cursed item.",
+        "Is waiting for a centaur potion to wear off.",
+        "Is at peak allergy season.",
+        "Just escaped the pizza dimension.",
+        "Has one hand.",
+        "Recently had a medical procedure.",
+        "Wears sunglasses, even indoors.",
+        "Wears a fake eyepatch to seem mysterious.",
+        "Has a bird familiar.",
+        "Is a decent ventriloguist.",
+        "Wears a mask.",
+        "Levitates for some reason.",
+        "Drinks like *a lot* of coffee.",
+        "Is also a vampire.",
+        "Rides a sweet mount & won't get off for any reason.",
+        "Is a big wig in the army of the Blorken Empire.",
+        "Is royalty.",
+        "Has a really cool hat & everyone is mad jelly."
+    ]
+
+    random_goon_origin = random.choice(goon_origin)
+    random_goon_type = random.choice(goon_type)
+    random_goon_class = random.choice(goon_class)
+    random_goon_modifier = random.choice(goon_modifier)
+
+    await ctx.send(f"A {random_goon_origin} {random_goon_type} {random_goon_class} ")
+    await ctx.send(f"who {random_goon_modifier}.")
+    
+    
 @bot.command(name="brute", help="Takes a substitution cipher and reverts to plain text.")
 async def substitution_decryption(ctx, cipher_text, rotation: int):
     """
