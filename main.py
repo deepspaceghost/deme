@@ -617,9 +617,14 @@ async def roll_a_dice(ctx, number_of_dice: int, number_of_sides: int):
     await ctx.send(', '.join(dice))
 
 
+# Uses the bot.command decorator and creates the !rollgoon command and its
+# help message.
 @bot.command(name="rollgoon", help="Generates a goon. Created by Tommy Sunders aka warlockteeth.")
+# Creates an asynchronous function called roll_a_goon, and passes it the
+# ctx argument, similar to self.
 async def roll_a_goon(ctx):
 
+    # Creates a list of goon races and assigns it the name goon_origin.
     goon_origin = [
         "human",
         "Elf",
@@ -635,6 +640,7 @@ async def roll_a_goon(ctx):
         "Gel"
     ]
 
+    # Creates a list of goon types and assigns it the name goon_type.
     goon_type = [
         "fire",
         "Ice",
@@ -648,6 +654,7 @@ async def roll_a_goon(ctx):
         "Tech"
     ]
 
+    # Creates a list of goon classes and assigns it the name goon_classes.
     goon_class = [
         "mage",
         "Rogue",
@@ -657,6 +664,8 @@ async def roll_a_goon(ctx):
         "Priest"
     ]
 
+    # Creates a list of goon modifiers and assigns it the name
+    # goon_modifiers.
     goon_modifier = [
         "is also a ghost",
         "Is possessed by lvl 20 unders[here elderdemon.",
@@ -680,12 +689,24 @@ async def roll_a_goon(ctx):
         "Has a really cool hat & everyone is mad jelly."
     ]
 
+    # Chooses a random item from the goon_origin list and assigns the
+    # choice to random_goon_origin.
     random_goon_origin = random.choice(goon_origin)
+    # Chooses a random item from the goon_type list and assigns the choice
+    # to random_goon_type.
     random_goon_type = random.choice(goon_type)
+    # Chooses a random item from the goon_class list and assigns the choice
+    # to random_goon_class.
     random_goon_class = random.choice(goon_class)
+    # Chooses a random item from the goon_modifier list and assigns the
+    # choice to random_goon_modifier.
     random_goon_modifier = random.choice(goon_modifier)
 
+    # Sends a string formated with the earlier variables, similar to
+    # print().
     await ctx.send(f"A {random_goon_origin} {random_goon_type} {random_goon_class} ")
+    # Sends a string formated with the earlier variables, similar to
+    # print().
     await ctx.send(f"who {random_goon_modifier}.")
     
     
