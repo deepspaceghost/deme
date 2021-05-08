@@ -931,4 +931,117 @@ async def watts(message):
                 time.sleep(3.239)
 
 
+# Wraps in the function in the bot.listen decorator.
+@bot.listen("on_message")
+# Defines the morning function and passes it the argument ctx, similar to
+# self.
+async def weather(message):
+
+    # Gets the current time and assigns it to the variable ct.
+    ct = datetime.datetime.now().time()
+    # Formats the ct variable human readability and assigns it to the
+    # variable current_formatted_time.
+    current_formatted_time = ct.strftime("%H:%M:%S")
+    # Creates a Nominatim object and initialize Nominatim API.
+    geolocator = Nominatim(user_agent="geoapiExercises")
+   # Obtains location data from the latitude and longitude (think reverse
+    # engineering) and assigns it to a variable.
+    location = geolocator.reverse(LATITUDE + "," + LONGITUDE)
+    # Parses the data and turns it into a dictionary assigned the name
+    # address.
+    address = location.raw["address"]
+    # Takes the city from the data in the dictionary, and assigns it to a
+    # variable.
+    city = address.get("city", "")
+    # Creates a variable to store the base url.
+    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    # Creates a variable to store the name of the city.
+    city_name = "Columbus"
+    # Creates a variable to store a new string with the previous weather
+    # variables, and adds the imperial parameter to convert the temperture
+    # to Fahrenheit.
+    complete_url = base_url + "&appid=" + WEATHER_TOKEN + "&q=" + city_name + "&units=imperial"
+    # Creates a variable to store the information requested by the previous
+    # URL.
+    response = requests.get(complete_url)
+    # Creates a variable to store the JSON data as a Python list with
+    # nested dictionaries.
+    weather_list = response.json()
+    # Creates a variable to store the value of the "main" key.
+    y = weather_list["main"]
+    # Creates a variable to store the value corresponding to the "temp"
+    # key.
+    current_temperature = y["temp"]
+    # Creates a variable to store the value of the "weather" key.
+    z = weather_list["weather"]
+    # Creates a variable to store the value corresponding to the
+    # "description" key at the 0 index.
+    weather_description = z[0]["description"]
+    # Checks to make sure the activating message was not sent by a bot.
+    if message.author != bot.user:
+
+        # Checks to make sure the activating message starts with the word
+        # "Good" with a capital g, and contains th word "morning."
+        if message.content.startswith("Good") and "morning" in message.content.lower():
+
+            # Creates a list named morning and formats the items on the
+            # list with the earlier variables.
+            morning = [
+                f"Good morning. It's {current_formatted_time}, the weather in {city} is",
+                f"{current_temperature}°F, with {weather_description}."
+            ]
+
+            # Iterates through each item in the morning list.
+            for i in range(2):
+                # Sends the items of the morning list, similar to print().
+                await message.channel.send(morning[i])
+                # Modifies message.channel.send() to send the items on the
+                # list matching the words-per-second (wps) of a proficient
+                # reader (280-350 wpm, or 5.25 wps) Items are sent every
+                # one-point-two-three-nine (1.239) seconds.
+                time.sleep(1.239)
+
+        # Checks to make sure the activating message starts with the word
+        # "Good" with a capital g, and contains th word "afternoon."
+        elif message.content.startswith("Good") and "afternoon" in message.content.lower():
+
+            # Creates a list named morning and formats the items on the
+            # list with the earlier variables.
+            afternoon = [
+                f"Good afternoon. It's {current_formatted_time}, the weather in {city} is",
+                f"{current_temperature}°F, with {weather_description}."
+            ]
+
+            # Iterates through each item in the morning list.
+            for i in range(2):
+                # Sends the items of the morning list, similar to print().
+                await message.channel.send(afternoon[i])
+                # Modifies message.channel.send() to send the items on the
+                # list matching the words-per-second (wps) of a proficient
+                # reader (280-350 wpm, or 5.25 wps) Items are sent every
+                # one-point-two-three-nine (1.239) seconds.
+                time.sleep(1.239)
+
+        # Checks to make sure the activating message starts with the word
+        # "Good" with a capital g, and contains th word "evening."
+        elif message.content.startswith("Good") and "evening" in message.content.lower():
+
+            # Creates a list named morning and formats the items on the
+            # list with the earlier variables.
+            evening = [
+                f"Good evening. It's {current_formatted_time}, the weather in {city} is",
+                f"{current_temperature}°F, with {weather_description}."
+            ]
+
+            # Iterates through each item in the morning list.
+            for i in range(2):
+                # Sends the items of the morning list, similar to print().
+                await message.channel.send(evening[i])
+                # Modifies message.channel.send() to send the items on the
+                # list matching the words-per-second (wps) of a proficient
+                # reader (280-350 wpm, or 5.25 wps) Items are sent every
+                # one-point-two-three-nine (1.239) seconds.
+                time.sleep(1.239)
+                
+                
 bot.run(TOKEN)
