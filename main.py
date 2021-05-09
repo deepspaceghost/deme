@@ -15,6 +15,7 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 GUILD = os.getenv("DISCORD_GUILD")
 LATITUDE = os.get.env("LATITUDE")
 LONGITUDE = os.getenv("LONGITUDE")
+WEATHER_TOKEN = os.getenv("WEATHER_TOKEN")
 
 help_command = commands.DefaultHelpCommand(no_category="Commands")
 bot = commands.Bot(command_prefix="!", help_command=help_command)
