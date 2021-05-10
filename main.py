@@ -337,24 +337,57 @@ async def hey_deme(message):
                 await message.channel.send(j)
 
 
+# Wraps the function in and passes the function through the bot.listen
+# decorator.
 @bot.listen("on_message")
+# Defines the function jung, which takes a message as its argument.
 async def jung(message):
-    """
-    Handles what happens when the user triggers Deme to wax philosophical.
-    """
 
+    # Checks to makes sure the message was sent by a user and not a bot.
     if message.author != bot.user:
+        # Checks to make sure the message contains the words "awake" and
+        # "look" in lowercase.
         if "awake" in message.content.lower() and "look" in message.content.lower():
 
+            # Creates a list of strings and assigns it the name awake.
             awake = [
                 "Who looks outside, dreams;"
                 "who looks inside, awakes."
                 "Carl Jung"
             ]
 
+            # Iterates over each item in the list.
             for i in range(3):
+                # Sends the channel the contents of the list, similar to
+                # print().
                 await message.channel.send(awake[i])
+                # Modifies message.channel.send() to send the items on the
+                # list matching the words-per-second (wps) of a proficient
+                # reader (280-350 wpm, or 5.25 wps) Items are sent every
+                # one-point-nine-one (1.91) seconds.
                 time.sleep(1.91)
+
+        # Checks to make sure the message contains the words "other" and
+        # "dark" in lowercase.
+        elif "other" in message.content.lower() and "dark" in message.content.lower():
+
+            # Creates a list of strings and assigns it the name other.
+            other = [
+                "Knowing your own darkness is the best method",
+                "for dealing with the darknesses of other people.",
+                "Carl Jung"
+            ]
+
+            # Iterates over each item in the list.
+            for i in range(3):
+                # Sends the channel the contents of the list, simialr to
+                # print().
+                await message.channel.send(other[i])
+                # Modifies message.channel.send() to send the items on the
+                # list matching the words-per-second (wps) of a proficient
+                # reader (280-350 wpm, or 5.25 wps) Items are sent every
+                # three-point-four-two-nine (3.429) seconds.
+                time.sleep(3.429)
 
 
 @bot.command(name="list", help="Lists text files in Deme's directory.")
