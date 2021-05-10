@@ -575,7 +575,7 @@ async def on_command_error(ctx, error):
     """
 
     if isinstance(error, commands.errors.CheckFailure):
-        await ctx.send("You do not have the correct role for this command.")
+        await ctx.send("You are not authorized to use this command.")
 
 
 @bot.event
