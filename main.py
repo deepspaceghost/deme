@@ -173,6 +173,13 @@ async def conversation_tree(message):
             await message.channel.send("No.")
 
 
+@bot.command(name="thecount",
+             help="Takes two strings: a smaller string to search within a larger string.")
+async def count_occurrence(ctx, larger_string, smaller_string):
+
+    await ctx.send(larger_string.count(smaller_string))
+            
+            
 @bot.command(name="countdown", help="Takes an integer and begins the final count down.")
 async def countdown(ctx, number: int):
     """
