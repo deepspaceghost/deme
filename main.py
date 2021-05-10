@@ -372,8 +372,7 @@ async def jung(message):
 
             # Creates a list of strings and assigns it the name awake.
             awake = [
-                "Who looks outside, dreams;"
-                "who looks inside, awakes."
+                "Who looks outside, dreams; who looks inside, awakes."
                 "Carl Jung"
             ]
 
@@ -382,6 +381,91 @@ async def jung(message):
                 # Sends the channel the contents of the list, similar to
                 # print().
                 await message.channel.send(awake[i])
+                # Modifies message.channel.send() to send the items on the
+                # list matching the words-per-second (wps) of a proficient
+                # reader (280-350 wpm, or 5.25 wps) Items are sent every
+                # one-point-nine-one (1.91) seconds.
+                time.sleep(1.91)
+
+        # Checks to make sure the message contains the words "between" and
+        # "sense" in lowercase.
+        elif "between" in message.content.lower() and "sense" in message.content.lower():
+            
+            # Creates a list of strings and assigns it the name between.
+            between = [
+                "The pendulum of the mind alternates between",
+                "sense and nonsense, not between right and wrong.",
+                "Carl Jung"
+            ]
+
+            # Iterates over each item in the list.
+            for i in range(3):
+                # Sends the channel the contents of the list, similar to
+                # print().
+                await message.channel.send(between[i])
+                # Modifies message.channel.send() to send the items on the
+                # list matching the words-per-second (wps) of a proficient
+                # reader (280-350 wpm, or 5.25 wps) Items are sent every
+                # three-point-two-three-nine (3.239) seconds.
+                time.sleep(3.239)
+
+        # Checks to make sure the message contains the words "complete" and
+        # "thing" in lowercase.
+        elif "complete" in message.content.lower() and "thing" in message.content.lower():
+
+            # Creates a list of strings and assigns it the name complete.
+            complete = [
+                "The most terrifying thing is to accept oneself completely.",
+                "Carl Jung"
+            ]
+
+            # Iterates over each item in the list.
+            for i in range(2):
+                # Sends the channel the contents of the list, similar to
+                # print().
+                await message.channel.send(complete[i])
+                # Modifies message.channel.send() to send the items on the
+                # list matching the words-per-second (wps) of a proficient
+                # reader (280-350 wpm, or 5.25 wps) Items are sent every
+                # two-point-one (2.1) seconds.
+                time.sleep(2.1)
+
+        # Checks to make sure the message contains the words "conscious"
+        # and "there" in lowercase.
+        elif "conscious" in message.content.lower() and "there" in message.content.lower():
+
+            # Creates a list of strings and assigns it the name conscious.
+            conscious = [
+                "There is no coming to consciousness without pain.",
+                "Carl Jung"
+            ]
+
+            # Iterates over each item in the list.
+            for i in range(2):
+                # Sends the channel the contents of the list, similar to
+                # print().
+                await message.channel.send(conscious[i])
+                # Modifies message.channel.send() to send the items on the
+                # list matching the words-per-second (wps) of a proficient
+                # reader (280-350 wpm, or 5.25 wps) Items are sent every
+                # one-point-nine-one (1.91) seconds.
+                time.sleep(1.91)
+
+        # Checks to make sure the message contains the words "necessary"
+        # and "health" in lowercase.
+        elif "necessary" in message.content.lower() and "health" in message.content.lower():
+
+            # Creates a list of strings and assigns it the name necessary.
+            necessary = [
+                "Man needs difficulties; they are necessary for health.",
+                "Carl Jung"
+            ]
+
+            # Iterates over each item in the list.
+            for i in range(2):
+                # Sends the channel the contents of the list, similar to
+                # print().
+                await message.channel.send(necessary[i])
                 # Modifies message.channel.send() to send the items on the
                 # list matching the words-per-second (wps) of a proficient
                 # reader (280-350 wpm, or 5.25 wps) Items are sent every
@@ -409,6 +493,27 @@ async def jung(message):
                 # reader (280-350 wpm, or 5.25 wps) Items are sent every
                 # three-point-four-two-nine (3.429) seconds.
                 time.sleep(3.429)
+
+        # Checks to make sure the message contains the words "secret" and
+        # "there" in lowercase.
+        elif "secret" in message.content.lower() and "there" in message.content.lower():
+
+            # Creates a list of strings and assigns it the name secret.
+            secret = [
+                "In all chaos there is a cosmos, in all disorder a secret order.",
+                "Carl Jung"
+            ]
+
+            # Iterates over each item in the list.
+            for i in range(2):
+                # Sends the channel the contents of the list, simialr to
+                # print().
+                await message.channel.send(secret[i])
+                # Modifies message.channel.send() to send the items on the
+                # list matching the words-per-second (wps) of a proficient
+                # reader (280-350 wpm, or 5.25 wps) Items are sent every
+                # two-point-eight-five-eight (2.858) seconds.
+                time.sleep(2.858)
 
 
 @bot.command(name="list", help="Lists text files in Deme's directory.")
