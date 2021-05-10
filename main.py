@@ -405,8 +405,27 @@ async def list(ctx):
     await ctx.send(plain_text_file_list)
 
 
+@bot.command(name="ncom", help="Suggests a computer.")
+async def next_computer(ctx):
+
+    computers = [
+        "Ark",
+        "E.D.I.T.H.",
+        "GAIA",
+        "Legion",
+        "Millennium Falcon Navigation Computer (L3-37)",
+        "NEXT",
+        "Rehoboam",
+        "SAM (2017)",
+        "SAM (2019)"
+    ]
+
+    response = random.choice(computers)
+    await ctx.send(response)
+    
+    
 @bot.command(name="np", help="Suggests a philosopher.")
-async def nextphilosopher(ctx):
+async def next_philosopher(ctx):
     """
     Handles the command for a suggestions for a philosopher.
     """
@@ -433,6 +452,115 @@ async def nextphilosopher(ctx):
     await ctx.send(response)
 
 
+@bot.command(name="npro", help="Suggests a project.")
+async def next_project(ctx, level: int):
+    """
+    """
+
+    level_one_projects = [
+        "Basic Calculator",
+        "MadLibs Generator",
+        "Rock, Paper, Scissors",
+        "Cross Sum of a Number",
+        "Counter App",
+        "Tic-Tac-Toe"
+    ]
+
+    level_two_projects = [
+        "Dictionary",
+        "YouTube Downloader"
+    ]
+
+    level_three_projects = [
+        "Dice Rolling Simulaor",
+        "Number Guessing game",
+        "Binary Search Algorithm",
+        "Alarm Clock",
+        "Scientific Calculator",
+        "Website Blocker",
+        "Random Password Generator"
+    ]
+
+    level_four_projects = [
+        "Currency Converter",
+        "Instagram Photo Downloader",
+        "Speech to Text Converter",
+        "Content Aggregator",
+        "Regex Query Tool",
+        "URL Shortener",
+        "Post-It Note",
+        "Quiz Application",
+        "MP3 Player",
+        "Alarm Tool",
+        "File Manager",
+        "Expense Tracker",
+        "Contact Book",
+        "Site Connectivity Checker",
+        "Bulk File Rename Tool",
+        "Directory Tree Generator"
+    ]
+
+    level_five_projects = [
+        "Password Manager",
+        "Flappy Bird Game",
+        "IG Automation",
+        "Web Crawler"
+    ]
+
+    level_six_projects = [
+        "Speed Typing Test",
+        "Plagiarism Checker",
+        "Music Player",
+        "Telegram / Discord Bot",
+        "Digit Classifier"
+    ]
+
+    level_seven_projects = [
+        "Face Detection",
+        "Ecom - Site",
+        "Twitter Bot"
+    ]
+
+    level_eight_projects = [
+        "Stock Price Prediction",
+        "Real-time chat",
+        "Twitch Clone",
+        "Movie Recommendation System"
+    ]
+
+    if level == 1:
+        response = random.choice(level_one_projects)
+        await ctx.send(response)
+
+    elif level == 2:
+        response = random.choice(level_two_projects)
+        await ctx.send(response)
+
+    elif level == 3:
+        response = random.choice(level_three_projects)
+        await ctx.send(response)
+
+    elif level == 4:
+        response = random.choice(level_four_projects)
+        await ctx.send(response)
+
+    elif level == 5:
+        response = random.choice(level_five_projects)
+        await ctx.send(response)
+
+    elif level == 6:
+        response = random.choice(level_six_projects)
+        await ctx.send(response)
+
+    elif level == 7:
+        response = random.choice(level_seven_projects)
+        await ctx.send(response)
+
+    elif level == 8:
+        response = random.choice(level_eight_projects)
+        await ctx.send(response)
+    
+    
 @bot.event
 async def on_command_error(ctx, error):
     """
@@ -465,57 +593,6 @@ async def on_member_join(member):
 
     await member.create_dm()
     await member.dm_channel.send(f"Hi {member.name}, welcome to demiurge!")
-
-
-# Wraps in the function in the bot.listen decorator.
-@bot.listen("on_message")
-# Defines the morning function and passes it the argument ctx, similar to
-# self.
-async def morning(message):
-
-    # Gets the current time and assigns it to the variable ct.
-    ct = datetime.datetime.now().time()
-    # Formats the ct variable human readability and assigns it to the
-    # variable current_formatted_time.
-    current_formatted_time = ct.strftime("%H:%M:%S")
-    # Creates a Nominatim object and initialize Nominatim API.
-    geolocator = Nominatim(user_agent="geoapiExercises")
-    # Assigns a latitude to a variable.
-    latitude = LATITUDE
-    # Assigns a longitude to a variable.
-    longitude = LONGITUDE
-    # Obtains location data from the latitude and longitude (think reverse
-    # engineering) and assigns it to a variable.
-    location = geolocator.reverse(latitude + "," + longitude)
-    # Parses the data and turns it into a dictionary assigned the name
-    # address.
-    address = location.raw["address"]
-    # Takes the city from the data in the dictionary, and assigns it to a
-    # variable.
-    city = address.get("city", "")
-    # Checks to make sure the activating message was not sent by a bot.
-    if message.author != bot.user:
-
-        # Checks to make sure the activating message starts with the word
-        # "Good" with a capital g, and contains th word "morning."
-        if message.content.startswith("Good") and "morning" in message.content.lower():
-
-            # Creates a list named morning and formats the items on the
-            # list with the earlier variables.
-            morning = [
-                f"Good morning, {message.author}. It's {current_formatted_time},",
-                f"the weather in {city} is [degrees] and [condition]."
-            ]
-
-            # Iterates through each item in the morning list.
-            for i in range(2):
-                # Sends the items of the morning list, similar to print().
-                await message.channel.send(morning[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # one-point-two-three-nine (1.239) seconds.
-                time.sleep(1.239)
     
     
 @bot.event
