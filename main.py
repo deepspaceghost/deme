@@ -106,14 +106,15 @@ async def care(ctx):
     await ctx.send(response)
 
 
+# Uses the bot.command decorator and creates the !clean command and its
+# help message.
 @bot.command(name="clean",
              help="Responds with a random cleaning task, by time period. (day | week | month)")
+# Defines the cleandex function, which takes the arguments ctx, similar to
+# self, and period, a string denoting how often the task should be done.
 async def cleandex(ctx, period: str):
-    """
-    Handles the command to request to a
-    suggestion for cleaning, depending on the period.
-    """
 
+    # Creates a list and assigns it the name day_tasks.
     day_tasks = [
         "Have you put clean dishes away today?",
         "Have you swept today?",
@@ -123,6 +124,7 @@ async def cleandex(ctx, period: str):
         "Have you wiped the kitchen sink out today?"
     ]
 
+    # Creates a list and assigns it the name week_tasks.
     week_tasks = [
         "Have you cleaned the floors this week?",
         "Have you cleaned the mirror(s) this week?",
@@ -130,6 +132,7 @@ async def cleandex(ctx, period: str):
         "Have you vacuumed the apartment / house this week?"
     ]
 
+    # Creates a list and assigns it the name month_tasks.
     month_tasks = [
         "Have you cleaned the vents this month?",
         "Have you organized your dresser drawers this month?",
@@ -137,19 +140,30 @@ async def cleandex(ctx, period: str):
         "Have you vacuumed the car this month?"
     ]
 
+    # Checks to see if the period given was day.
     if period == "day":
+        # Assigns a random item from the day_tasks list.
         response = random.choice(day_tasks)
+        # Sends the task assigned to response, similar to print().
         await ctx.send(response)
 
+    # Checks to see if the period given was week.
     elif period == "week":
+        # Assigns a random item from the week_tasks list.
         response = random.choice(week_tasks)
+        # Sends the task assigned to response, similar to print().
         await ctx.send(response)
 
+    # Checks to see if th period given was month.
     elif period == "month":
+        # Assigns a random item from the month_tasks list.
         response = random.choice(month_tasks)
+        # Sends the task assigned to response, similar to print().
         await ctx.send(response)
 
+    # Defaults to this line if no period was given.
     else:
+        # Sends a secondary help message, similar to print().
         await ctx.send("Use 'day', 'week', or 'month' for a more specific task.")
 
 
