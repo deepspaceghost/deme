@@ -608,7 +608,7 @@ async def on_ready():
     Handles what happens when the Bot is online.
     """
 
-    print(f"{bot.user.name} (v0.0.0.144) is connected to Discord.")
+    print(f"{bot.user.name} (v0.0.0.145) is at your service.")
 
 
 # Creates the !open command and its help message.
