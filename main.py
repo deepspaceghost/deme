@@ -857,19 +857,24 @@ async def rock_paper_scissors(ctx, rock_paper_or_scissors: str):
             await ctx.send("Rock smashes scissors! You lose.")
 
 
+# Uses the bot.command decorator and creates the !rolldice command and its
+# help message.
 @bot.command(name="rolldice", help="Does what it says on the box.")
-# Defines an asynchronous function to take two (2) integers, the
-# number of dice and the number of sides, and simulates a dice roll.
+# Defines an asynchronous function called roll_a_dice, and passes three (3)
+# arguments: ctx, similar to self, the first integer, the number of dice,
+# and the second integer, the number of sides.
 async def roll_a_dice(ctx, number_of_dice: int, number_of_sides: int):
-    """
-    Handles the command to roll dice.
-    """
 
+    # Creates a list of the range of sides, chooses a number from this
+    # range at random, and iterates this action over the number of dice,
+    # and assigns it the name dice.
     dice = [
         str(random.choice(range(1, number_of_sides + 1)))
         for _ in range(number_of_dice)
     ]
 
+    # Sends the channel the results of the roll, joined by a comma (,);
+    # similar to print().
     await ctx.send(', '.join(dice))
 
 
