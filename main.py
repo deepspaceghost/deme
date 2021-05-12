@@ -711,13 +711,16 @@ async def on_error(event, *args, **kargs):
             raise
 
 
+# Wraps the function in a bot.event decorator.
 @bot.event
+# Defines the on_member_join function and passes it the argument member, a
+# string of the activating username.
 async def on_member_join(member):
-    """
-    Handles what happens when a new user joins a guild.
-    """
 
+    # Creates a direct message "channel" for the joining member.
     await member.create_dm()
+    # Cteates and sends the direct message, formatted with the joining
+    # members username.
     await member.dm_channel.send(f"Hi {member.name}, welcome to demiurge!")
     
     
