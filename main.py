@@ -754,12 +754,12 @@ async def roll_a_goon(ctx):
     goon_origin = [
         "human",
         "Elf",
-        "Orc",
+        "orc",
         "Goblin",
         "Dwarf",
-        "Cat",
+        "cat",
         "Dino",
-        "Gnome",
+        "gnome",
         "Whale",
         "Skel",
         "Golem",
@@ -772,12 +772,12 @@ async def roll_a_goon(ctx):
         "Ice",
         "Cosmic",
         "Necro",
-        "Plant",
+        "plant",
         "Rock",
         "Metal",
         "Water",
-        "Air",
-        "Tech"
+        "air",
+        "tech"
     ]
 
     # Creates a list of goon classes and assigns it the name goon_classes.
@@ -785,7 +785,7 @@ async def roll_a_goon(ctx):
         "mage",
         "Rogue",
         "Bard",
-        "Ranger",
+        "ranger",
         "Warrior",
         "Priest"
     ]
@@ -798,26 +798,26 @@ async def roll_a_goon(ctx):
         "Has aquired a cursed item.",
         "Is waiting for a centaur potion to wear off.",
         "Is at peak allergy season.",
-        "Just escaped the pizza dimension.",
+        "just escaped the pizza dimension",
         "Has one hand.",
         "Recently had a medical procedure.",
         "Wears sunglasses, even indoors.",
         "Wears a fake eyepatch to seem mysterious.",
-        "Has a bird familiar.",
+        "has a bird familiar",
         "Is a decent ventriloguist.",
         "Wears a mask.",
-        "Levitates for some reason.",
+        "levitates for some reason",
         "Drinks like *a lot* of coffee.",
         "Is also a vampire.",
         "Rides a sweet mount & won't get off for any reason.",
         "Is a big wig in the army of the Blorken Empire.",
         "Is royalty.",
-        "Has a really cool hat & everyone is mad jelly."
+        "has a really cool hat & everyone is mad jelly."
     ]
 
     # Chooses a random item from the goon_origin list and assigns the
     # choice to random_goon_origin.
-    random_goon_origin = random.choice(goon_origin)
+    random_g_o = random.choice(goon_origin)
     # Chooses a random item from the goon_type list and assigns the choice
     # to random_goon_type.
     random_goon_type = random.choice(goon_type)
@@ -825,15 +825,15 @@ async def roll_a_goon(ctx):
     # to random_goon_class.
     random_goon_class = random.choice(goon_class)
     # Chooses a random item from the goon_modifier list and assigns the
-    # choice to random_goon_modifier.
-    random_goon_modifier = random.choice(goon_modifier)
+    # choice to random_g_m.
+    random_g_m = random.choice(goon_modifier)
 
     # Sends a string formated with the earlier variables, similar to
     # print().
-    await ctx.send(f"A {random_goon_origin} {random_goon_type} {random_goon_class} ")
-    # Sends a string formated with the earlier variables, similar to
-    # print().
-    await ctx.send(f"who {random_goon_modifier}.")
+    mbed = discord.Embed(
+        title="Here's your goon:",
+        description=f"A {random_g_o} {random_goon_type} {random_goon_class} who {random_g_m}.")
+    await ctx.send(embed=mbed)
     
     
 @bot.command(name="brute", help="Takes a substitution cipher and reverts to plain text.")
