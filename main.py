@@ -669,25 +669,12 @@ async def persephone(ctx):
         time.sleep(1.875)
 
 
-@bot.command(name="plot", help="Suggests a plot device at random.")
-async def plot(ctx):
-    """
-    Handles the command to suggest a plot device at random.
-    """
-
-    plot = [
-        "1886, An Inhabitant in Carcosa",
-        "1891, Haïta the Shepherd",
-        "1895, The Repairer of Reputations",
-        "1895, The Mask",
-        "1895, In the Court of the Dragons",
-        "1895, The Yellow Sign"
-    ]
-
-    response = random.choice(plot)
-    await ctx.send(response)
-
-
+@bot.command(name="randomfact", help="Does what it says on the box.")
+async def random_fact(ctx):
+    mbed = discord.Embed(title="Did you know?", description=randfacts.getFact())
+    await ctx.send(embed=mbed)
+        
+        
 @bot.command(name="random", help="Generates a random number between two numbers.")
 async def random_number(ctx, first_number: int, second_number: int):
     """
