@@ -1,0 +1,8 @@
+__title__ = "commerrors"
+__description__ = "Package to generate common errors"
+__url__ = "https://github.com/deepspaceghost/deme-app/tree/commerrors"
+__version__ = "0.0.0.148"
+__author__ = "deepspaceghost"
+__author_email__ = "ghostblac@protonmail.com"
+__license__ = "none"
+__copyright__ = "© 2021 demiurge"
