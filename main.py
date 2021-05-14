@@ -210,8 +210,14 @@ async def cleandex(ctx, period: str):
         await ctx.send("Use 'day', 'week', or 'month' for a more specific task.")
 
 
-@bot.command(name="commonmisconception", help="Does what it says on the box.")
+@bot.command(name="misconception", help="Generates a common misconception.")
 async def common_misconception(ctx):
+    """
+    Type the !misconception command in a Discord server, and this function
+    pulls a common misconception from a list provided by the commerrors
+    module.
+    """
+
     mbed = discord.Embed(title="Did you know?", description=commerrors.get_error())
     await ctx.send(embed=mbed)
 
