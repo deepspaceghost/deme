@@ -38,6 +38,13 @@ async def add(ctx, *args: int):
     await ctx.send(the_sum)
 
 
+@bot.command(name="areasquare", help="Takes a number and squares it.")
+async def area_square(ctx, number: int):
+    square = number ** 2
+    mbed = discord.Embed(title="Here is your result:", description=f"{square}")
+    await ctx.send(embed=mbed)
+    
+    
 @bot.command(name="ascii", help="Takes an ASCII code. Returns the corresponding character.")
 async def ascii(ctx, ascii_code: int):
     """
