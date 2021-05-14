@@ -915,6 +915,17 @@ async def thank(message):
             await message.channel.send(response)
 
 
+@bot.command(name="until", help="Calculates the time until the date entered is reached.")
+async def time_until(ctx, year: int, month: int, day: int, hour: int):
+    """
+    """
+
+    future_date = datetime.datetime(year=year, month=month, day=day, hour=hour)
+    time_until = future_date - datetime.datetime.now()
+    mbed = discord.Embed(title="Time until arrival:", description=f"{time_until}")
+    await ctx.send(embed=mbed)
+            
+            
 @bot.command(name="timer", help="Sets a timer for 5 minutes.")
 async def timer(ctx):
     """
