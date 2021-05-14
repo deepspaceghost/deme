@@ -2,10 +2,12 @@ import calendar
 import commerrors
 import datetime
 import discord
+import gamedex
 import os
 import randfacts
 import random
 import requests
+import selfcare
 import string
 import time
 
@@ -358,37 +360,14 @@ async def flip(ctx):
     await ctx.send(response)
 
 
-@bot.command(name="game", help="Responds with a random game suggestion.")
-async def gamedex(ctx):
+@bot.command(name="gamedex", help="Generates a random game, from the class provided.")
+async def game_dex(ctx):
     """
     Handles the command to request a game suggestion.
     """
 
-    # Creates a list of strings, and assigns it the name "games."
-    games = [
-        "Game: Bloodborne, Class: (92, Horror / RPG, M), Console: PS4",
-        "Game: Divinity: Original Sin II - DE, Class: (92, RPG, M), Console: Switch",
-        "Game: God of War, Class: (94, M), Console: PS4",
-        "Game: Grand Theft Auto V, Class (97, Crime, M), Console: PS4",
-        "Game: Hades, Class: (93, RPG, T), Console: Switch",
-        "Game: INSIDE, Class: S (16), Console: Switch",
-        "Game: Journey, Class: (92, E), Console: PS4",
-        "Game: The Last of Us Part II, Class: (93, Horror / Sci-fi, M), Console: PS4",
-        "Game: The Last of Us Remastered, Class: (95, Horror / Sci-fi, M), Console: PS4",
-        "Game: The Legend of Zelda: Breath of the Wild, Class: B (11.5), Console: Switch",
-        "Game: Metal Gear Solid V: The Phantom Pain, Class: (93, Espionage, M), Console: PS4",
-        "Game: Ori and the Will of the Wisps, Class: (93, E), Console: Switch",
-        "Game: Persona 5, Class: (93, Anime / RPG, M), Console: PS4",
-        "Game: Persona 5 Royale, Class: (95, Anime / RPG, M), Console: PS4",
-        "Game: Red Dead Redemption 2, Class: B (10), Console: PS4",
-        "Game: Super Mario Odyssey, Class: (97, E10), Console: Switch",
-        "Game: Super Smash Brothers Ultimate, Class: (93, E10), Console: switch",
-        "Game: Uncharted 4: A Thief's End, Class: (93, T), Console: PS4",
-        "Game: Undertale, Class: (93, RPG, E10), Console: Switch",
-    ]
-
-    response = random.choice(games)
-    await ctx.send(response)
+    mbed = discord.Embed(title=f"Let's play a game...", description=gamedex.get_game())
+    await ctx.send(embed=mbed)
 
 
 @bot.command(name="hexadecimal", help="A number to convert to hexadecimal digits.")
