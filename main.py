@@ -945,12 +945,11 @@ async def timer(ctx):
         time.sleep(60)
 
 
-# Wraps the function in and passes the function through the bot.listen
-# decorator.
 @bot.listen("on_message")
 async def watts(message):
     """
-    Handles what happens when the user triggers Deme to wax philosophical.
+    This function sends quotes attributed to Alan Watts when certain
+    keyword requirements are met.
     """
 
     if message.author != bot.user:
@@ -1051,7 +1050,6 @@ async def watts(message):
 
         elif "there" in message.content.lower() and "look" in message.content.lower():
 
-            # Creates a list of strings and assigns it the name "there."
             there = [
                 "You don't look out there for God,",
                 "something in the sky, you look in you.",
