@@ -224,12 +224,11 @@ async def common_misconception(ctx):
     await ctx.send(embed=mbed)
 
 
-# Wraps the function in and passes the function through the bot.listen
-# decorator.
 @bot.listen("on_message")
 async def conversation_tree(message):
     """
-    Handles what happens when the user wants to have a conversation with Deme.
+    This function scans for certain sentences and responds with
+    predeterminded responses.
     """
 
     if message.author != bot.user:
