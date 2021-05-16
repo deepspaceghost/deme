@@ -683,10 +683,14 @@ async def random_number(ctx, first_number: int, second_number: int):
     await ctx.send(random.randint(first_number, second_number))
 
 
-@bot.command(name="rockpaperscissors", help="Does what it says on the box.")
+@bot.command(name="rps",
+             help="Follow this command with either rock, paper, or scissors to play the game.")
 async def rock_paper_scissors(ctx, rock_paper_or_scissors: str):
     """
-    Handles the command to play rock, paper, scissors.
+    This function returns an action from a list of possible actions at
+    random. When a user uses the !rps command, followed by their choice of
+    either rock, paper, or scissors, Deme will respond with its own choice
+    and determine the winner.
     """
 
     possible_actions = [
@@ -695,7 +699,6 @@ async def rock_paper_scissors(ctx, rock_paper_or_scissors: str):
         "scissors"
     ]
 
-    # Assigns an item from the possible_actions list at random.
     computer_action = random.choice(possible_actions)
     if rock_paper_or_scissors == computer_action:
         await ctx.send(f"We both selected {rock_paper_or_scissors}. It's a tie!")
@@ -713,7 +716,6 @@ async def rock_paper_scissors(ctx, rock_paper_or_scissors: str):
             await ctx.send("Scissors cuts paper! You lose.")
 
     elif rock_paper_or_scissors == "scissors":
-        # If Deme chose paper at random...
         if computer_action == "paper":
             await ctx.send("Scissors cuts paper! You win!")
         else:
