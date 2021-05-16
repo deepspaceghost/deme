@@ -76,34 +76,25 @@ async def bytes(ctx, number: int):
     await ctx.send(cadabra)
 
 
-# Wraps the function in and passes the function through the bot.listen
-# decorator.
 @bot.listen("on_message")
-# Defines the function campbell, which takes a message as its argument.
 async def campbell(message):
+    """
+    This function generates a quote by Joseph Campbell when certain
+    requirements are met. When a user message includes at least 2 (two)
+    activating words, a relevant quote is produced.
+    """
 
-    # Checks to makes sure the message was sent by a user and not a bot.
     if message.author != bot.user:
 
-        # Checks to make sure the message contains the words "treasure" and
-        # "enter" in lowercase.
         if "treasure" in message.content.lower() and "enter" in message.content.lower():
 
-            # Creates a list of strings and assigns it the name treasure.
             treasure = [
                 "The cave you fear to enter holds the treasure you seek."
                 "Joseph Campbell"
             ]
 
-            # Iterates over each item in the list.
             for i in range(2):
-                # Sends the channel the contents of the list, similar to
-                # print().
                 await message.channel.send(treasure[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # two-point-four-seven-seven (2.477) seconds.
                 time.sleep(2.477)
 
 
