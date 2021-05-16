@@ -676,6 +676,25 @@ async def random_number(ctx, first_number: int, second_number: int):
     await ctx.send(random.randint(first_number, second_number))
 
 
+@bot.command(name="rp", help="Generates a random password.")
+async def random_password(ctx, length: int):
+    """
+    This function generates a password at random. When a user uses the !rp
+    command, followed by the desired length of the password, the function
+    pulls from four (4) lists of characters to generate a passowrd matching
+    the predeterminded length.
+    """
+
+    lower = "abcdefghijklmnopqrstuvwxyz"
+    upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    numbers = "123456789"
+    symbols = "[]{}()*;/,._-"
+    characters = lower + upper + numbers + symbols
+    password_length = length
+    password = "".join(random.sample(characters, password_length))
+    await ctx.send(password)
+    
+    
 @bot.command(name="rps",
              help="Follow this command with either rock, paper, or scissors to play the game.")
 async def rock_paper_scissors(ctx, rock_paper_or_scissors: str):
