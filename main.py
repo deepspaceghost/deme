@@ -676,10 +676,12 @@ async def random_fact(ctx):
 @bot.command(name="random", help="Generates a random number between two numbers.")
 async def random_number(ctx, first_number: int, second_number: int):
     """
-    Handles the command for a random number between two numbers.
+    This function generates a random number between any 2 (two) numbers, as
+    long as they are integers (whole numbers). When a user uses the !random
+    command, followed by 2 (two) numbers, a random number between those 2
+    (two) numbers is returned.
     """
 
-    # Sends the result of the !random command.
     await ctx.send(random.randint(first_number, second_number))
 
 
