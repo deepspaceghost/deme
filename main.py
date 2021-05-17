@@ -946,6 +946,28 @@ async def timer(ctx):
         time.sleep(60)
 
 
+@bot.command(name="tip", help="Calculates a tip amount.")
+async def tip(ctx, bill: float, percent: float, people: int):
+    """
+    This function takes a bill amount and percentage, both floats, and the
+    number of people, an integer, and calculates the tip by multiplying the
+    bill amount by the percentage. The function then checks the number of
+    people, and determines the individual amount basedon this number.
+    """
+
+    tip = bill * percent
+    total = bill + tip
+    if int(people) < 2:
+        await ctx.send(f"Your bill was {bill}.")
+        await ctx.send(f"The tip should be {tip} or 20% of your bill.")
+        await ctx.send(f"Your total is {total}.")
+
+    elif int(people) > 1:
+        await ctx.send(f"The bill was {bill}.")
+        await ctx.send(f"{percent} of the bill is {tip}.")
+        await ctx.send(f"Your total is {total / people}.")
+        
+        
 @bot.listen("on_message")
 async def watts(message):
     """
