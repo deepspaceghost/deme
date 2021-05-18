@@ -848,6 +848,14 @@ async def roll_a_goon(ctx):
     await ctx.send(embed=mbed)
 
 
+@bot.command(name="squares", help="")
+async def side_square(ctx, number: int):
+    side = math.sqrt(number)
+    mbed = discord.Embed(title="Square | Solve for side:",
+                         description=f"a = square root of an area = {side}")
+    await ctx.send(embed=mbed)
+    
+    
 @bot.command(name="brute", help="Takes a substitution cipher and reverts to plain text.")
 async def substitution_decryption(ctx, cipher_text, rotation: int):
     """
