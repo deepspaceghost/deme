@@ -40,10 +40,11 @@ async def add(ctx, *args: int):
     await ctx.send(the_sum)
 
 
-@bot.command(name="areasquare", help="Takes a number and squares it.")
+@bot.command(name="squarea",
+             help="Calculates the area of a square. This also finds the square of a number.")
 async def area_square(ctx, number: int):
-    square = number ** 2
-    mbed = discord.Embed(title="Here is your result:", description=f"{square}")
+    area = number ** 2
+    mbed = discord.Embed(title="Square | Solve for area:", description=f"A = side ** 2 = {area}.")
     await ctx.send(embed=mbed)
     
     
@@ -848,7 +849,7 @@ async def roll_a_goon(ctx):
     await ctx.send(embed=mbed)
 
 
-@bot.command(name="squares", help="")
+@bot.command(name="squares", help="Calculates the root of a square.")
 async def side_square(ctx, number: int):
     side = math.sqrt(number)
     mbed = discord.Embed(title="Square | Solve for side:",
