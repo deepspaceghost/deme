@@ -935,24 +935,22 @@ async def time_until(ctx, year: int, month: int, day: int, hour: int):
     await ctx.send(embed=mbed)
             
             
-@bot.command(name="timer", help="Sets a timer for 5 minutes.")
-async def timer(ctx):
+@bot.command(name="timer", help="Does what it says on the box.")
+async def timer(ctx, minute, second):
     """
     Handles the command to set a 5 minute timer.
     """
 
-    timer = [
+    timer_set = (minute * 60) + second
+
+    tick_tock = [
         "Timer started.",
-        "4 minutes left.",
-        "3 minutes left.",
-        "2 minutes left.",
-        "1 minute left.",
         "Time's up."
     ]
 
-    for i in range(6):
-        await ctx.send(timer[i])
-        time.sleep(60)
+    for i in range(2):
+        await ctx.send(tick_tock[i])
+        time.sleep(int(timer_set))
 
 
 @bot.command(name="tip", help="Calculates a tip amount.")
