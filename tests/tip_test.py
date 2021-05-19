@@ -6,14 +6,9 @@ def tip(meal: float, tip: int, tax: int, people: int):
     people, and determines the individual amount basedon this number.
     """
 
-    meal = float(input().strip())
-    tip = int(input().strip())
-    tax = int(input().strip())
-    people = int(input().strip())
-
     add_tip = meal * (tip / 100)
     add_tax = meal * (tax / 100)
-    final_cost = meal + add_tip + add_tax
+    final_cost = meal + round(add_tip) + round(add_tax)
 
     if int(people) < 2:
         print(f"Your bill was {meal}.")
@@ -38,14 +33,14 @@ def test_tip():
     add_tip = meal * (tip / 100)
     add_tax = meal * (tax / 100)
 
-    final_cost = (meal + add_tip + add_tax) / people
-    assert final_cost == 14.5079, "Should be 14.5079"
+    final_cost = (meal + round(add_tip) + round(add_tax)) / people
+    assert final_cost == 14.49, "Should be 14.49"
 
 
 print("Initializing test! (1/1)")
 try:
     print("")
-    print(tip(23.98, 20, 71, 2))
+    print(tip(23.98, 20, 1, 2))
     test_tip()
     print("")
 except AssertionError:
