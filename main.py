@@ -995,25 +995,28 @@ async def timer(ctx, minute, second):
 
 
 @bot.command(name="tip", help="Calculates a tip amount.")
-async def tip(ctx, bill: float, percent: float, people: int):
+async def tip(ctx, meal: float, tip: int, tax: int, people: int):
     """
-    This function takes a bill amount and percentage, both floats, and the
-    number of people, an integer, and calculates the tip by multiplying the
-    bill amount by the percentage. The function then checks the number of
-    people, and determines the individual amount basedon this number.
+    This function takes a meal amount, a float, the tip, tax, and number of
+    people, all integers, and calculates the tip by multiplying the meal
+    amount by the percentage of both the tip and the tax (by dividing both
+    100 (one hundred)). The function then checks the number of people, and
+    determines the individual amount based on this number.
     """
 
-    tip = bill * percent
-    total = bill + tip
+    add_tip = meal * (tip / 100)
+    add_tax = meal * (tax / 100)
+    final_cost = meal + round(add_tip) + round(add_tax)
+
     if int(people) < 2:
-        await ctx.send(f"Your bill was {bill}.")
-        await ctx.send(f"The tip should be {tip} or 20% of your bill.")
-        await ctx.send(f"Your total is {total}.")
+        await ctx.send(f"Your bill was {meal}.")
+        await ctx.send(f"{tip / 100} of the bill is {add_tip}.")
+        await ctx.send(f"The total is {final_cost}.")
 
     elif int(people) > 1:
-        await ctx.send(f"The bill was {bill}.")
-        await ctx.send(f"{percent} of the bill is {tip}.")
-        await ctx.send(f"Your total is {total / people}.")
+        await ctx.send(f"The bill was {meal}.")
+        await ctx.send(f"{tip / 100} of the bill is {add_tip}.")
+        await ctx.send(f"Your total is {final_cost / people}.")
         
         
 @bot.listen("on_message")
