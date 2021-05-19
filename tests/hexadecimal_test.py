@@ -1,7 +1,5 @@
 def hexadecimal(number: int):
     """
-    Handles the command to convert an integer to a
-    string object containing two hexadecimal digits.
     """
 
     print("Converting integer...")
@@ -9,10 +7,19 @@ def hexadecimal(number: int):
     print(str(pocus))
 
 
+def test_hexadecimal():
+    """
+    """
+
+    number = 9
+    assert hex(number) == "0x9", "Should be 0x9"
+
+
 print("Initializing test! (1/1)")
 try:
     print("")
     print(hexadecimal(9))
+    test_hexadecimal()
     print("")
 except AssertionError:
     print("Whoops! Executing a hexadecimal() call got an AssertionError!")
