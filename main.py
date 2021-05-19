@@ -552,6 +552,32 @@ async def list(ctx):
     await ctx.send(plain_text_file_list)
 
 
+@bot.command(name="meditate", help="1-minute breathing exercise.")
+async def meditate(ctx):
+    """
+    """
+
+    meditate = [
+        "Bring awareness to your breath.",
+        "Breathe in.",
+        "Breathe out.",
+        "Breathe in.",
+        "Breathe out.",
+        "Breathe in.",
+        "Breathe out.",
+        "Breathe in.",
+        "Breathe out.",
+        "Breathe in.",
+        "Breathe out.",
+        "Breathe in.",
+        "Breathe out."
+    ]
+
+    for i in range(13):
+        await ctx.send(meditate[i])
+        time.sleep(4.615)
+    
+    
 @bot.event
 async def on_command_error(ctx, error):
     """
