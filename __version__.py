@@ -1,0 +1,8 @@
+__title__ = "obstrategs"
+__description__ = "Package to generate oblique strategies"
+__url__ = "https://github.com/deepspaceghost/deme-app/tree/obstrategs"
+__version__ = "0.0.0.153"
+__author__ = "deepspaceghost"
+__author_email__ = "ghostblac@protonmail.com"
+__license__ = "none"
+__copyright__ = "© 2021 demiurge"
