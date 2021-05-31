@@ -5,7 +5,8 @@ games = {
     "4": "Meteorfall: Journey (Reg, 95, Post-apocalyptic, RPG, Strategy, E) iOS, 1/25/2018 [9]",
     "5": "Framed Collection (Reg, 79, Crime, Manga, Puzzle), Switch, 11/13/2014 [8.5]",
     "6": "Doodle God (Reg, 75, Abstract, Puzzle, T) iOS, 06/11/2010 [7.5]",
-    "7": "Super Mario Odyssey (Reg, 97, E10+) Switch, 10/27/2017 [5]"
+    "7": "Super Mario Odyssey (Reg, 97, E10+) Switch, 10/27/2017 [5]",
+    "8": "Fantasy Strike (Reg, 75, Manga, T), Switch, 07/25/2019 [4.5]"
 }
 
 Grand Theft Auto 5 (97) PS4, 11/18/2014
