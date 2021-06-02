@@ -1,18 +1,18 @@
-# Deme
-- ----
+Deme
+----
 
 Deme (short for Demeter) is an exercise in a natural language processing
 and computational linguistics. Current development is focused on increasing
 Deme's ability to interact with human language. Features in development are
 labeled as "[name]-deme-feature."
 
-## Table of Contents
--- ----- -- --------
+Table of Contents
+----- -- --------
 
 - [Getting Started](#getting-started)
 
-## Getting Started
--- ------- -------
+Getting Started
+------- -------
 
 First, get the code on your system. The simplest method is via git ([git installation instructions](https://gist.github.com/derhuerst/1b15ff4652a867391f03)):
 - `cd ~/`
@@ -26,8 +26,8 @@ This script sets up dependencies and a [virtualenv][about-virtualenv]. If runnin
 
 NOTE: The default branch for this repository is "main", which should be considered a work-in-progress. It's also the most stable version.
 
-## REQUIREMENTS
--- ------------
+REQUIREMENTS
+------------
 
 * discord.py==1.7.1
 * Flask==1.1.2
@@ -38,8 +38,8 @@ NOTE: The default branch for this repository is "main", which should be consider
 * requests==2.25.1
 
 
-## MAINTAINER(S)
--- -----------
+MAINTAINER(S)
+-----------
 
 Current maintainer(s):
 * deepspaceghost - https://github.com/deepspaceghost
