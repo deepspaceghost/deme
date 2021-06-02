@@ -7,12 +7,12 @@ Deme's ability to interact with human language. Features in development are
 labeled as "[name]-deme-feature."
 
 Table of Contents
------ -- --------
+-----------------
 
 - [Getting Started](#getting-started)
 
 Getting Started
-------- -------
+---------------
 
 First, get the code on your system. The simplest method is via git ([git installation instructions](https://gist.github.com/derhuerst/1b15ff4652a867391f03)):
 - `cd ~/`
@@ -39,7 +39,7 @@ REQUIREMENTS
 
 
 MAINTAINER(S)
------------
+-------------
 
 Current maintainer(s):
 * deepspaceghost - https://github.com/deepspaceghost
