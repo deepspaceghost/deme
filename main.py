@@ -365,6 +365,14 @@ yourself_words = [
 ]
 
 
+@bot.command(name="squarea",
+             help="Calculates the area of a square. This also finds the square of a number.")
+async def area_square(ctx, number: int):
+    area = number ** 2
+    mbed = discord.Embed(title="Square | Solve for area:", description=f"A = side ** 2 = {area}.")
+    await ctx.send(embed=mbed)
+
+
 @bot.command(name="add", help="Does what it says on the box.")
 async def add(ctx, *args: int):
     """
