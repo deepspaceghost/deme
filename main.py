@@ -1,14 +1,21 @@
+#!/usr/bin/python3
+
 import calendar
 import commerrors
 import datetime
 import discord
 import gamedex
+import exercise
+import math
+import obstrategs
 import os
+import prousthon
 import randfacts
 import random
 import requests
 import selfcare
 import string
+import tarot
 import time
 
 from discord.ext import commands
@@ -26,6 +33,336 @@ WEATHER_TOKEN = os.getenv("OPEN_WEATHER_MAP")
 
 help_command = commands.DefaultHelpCommand(no_category="Commands")
 bot = commands.Bot(command_prefix="!", help_command=help_command)
+
+better_words = [
+    "best",
+    "better",
+    "bettered",
+    "bettering",
+    "betters",
+    "good",
+    "one's betters",
+    "well"
+]
+
+between_words = [
+    "between",
+    "betwixt"
+]
+
+bite_words = [
+    "bit",
+    "bite",
+    "bites",
+    "bitten",
+    "biting"
+]
+
+bread_words = [
+    "bread"
+]
+
+command_words = [
+    "adjure",
+    "bid",
+    "charge",
+    "command",
+    "direct",
+    "enjoin",
+    "instruct",
+    "order",
+    "prescribe",
+    "require",
+    "tell"
+]
+
+conscious_words = [
+    "alert",
+    "awake",
+    "aware",
+    "feel",
+    "reactive",
+    "responsive",
+    "sentient",
+    "stir"
+]
+
+dance_words = [
+    "dance",
+    "danced",
+    "dances",
+    "dancing"
+]
+
+define_words = [
+    "define",
+    "defined",
+    "defines",
+    "defining"
+]
+
+deliquesce_words = [
+    "deliquesce",
+    "deliquesced",
+    "deliquesces",
+    "deliquescing"
+]
+
+enter_words = [
+    "enter",
+    "infiltrate",
+    "invade"
+]
+
+fluffy_words = [
+    "cushion",
+    "down",
+    "feather",
+    "fleece",
+    "floccose",
+    "flocculent",
+    "fluff",
+    "fur",
+    "fuzz",
+    "hair",
+    "lanate",
+    "lanose",
+    "shag",
+    "soft",
+    "velvet",
+    "wool"
+]
+
+how_are_you_phrases = [
+    "Deme, how are you?",
+    "Deme, how are u?",
+    "Deme, how r you?",
+    "Deme, how r u?",
+    "Deme, how're you?",
+    "Deme, how're u?",
+    "How are you, Deme?",
+    "how are you, Deme?",
+    "How r you, Deme?",
+    "how r you, Deme",
+    "How are u, Deme?",
+    "how are u, Deme?",
+    "How r u, Deme?",
+    "how r u, Deme?"
+    "How're you, Deme?",
+    "How're u, Deme?",
+    "how're you, Deme?",
+    "how're u, Deme?"
+]
+
+illusion_words = [
+    "apparition",
+    "fantasy",
+    "hallucination",
+    "illusion",
+    "mirage",
+    "phantasm",
+    "phantom",
+    "specter",
+    "vision"
+]
+
+join_words = [
+    "join",
+    "joined",
+    "joining",
+    "joins"
+]
+
+necessary_words = [
+    "compulsory",
+    "demand",
+    "essential",
+    "imperative",
+    "incumbent",
+    "indispensable",
+    "mandatory",
+    "necessary",
+    "need",
+    "obligatory",
+    "require",
+    "requisite",
+    "vital"
+]
+
+own_words = [
+    "own",
+    "owned",
+    "-owned"
+    "owning"
+    "owns"
+]
+
+physical_words = [
+    "body",
+    "corporal",
+    "corporeal",
+    "flesh",
+    "physical",
+    "somatic"
+]
+
+plunge_words = [
+    "plunge",
+    "plunged",
+    "plunges",
+    "plunging"
+]
+
+possible_words = [
+    "achieve",
+    "attain",
+    "do",
+    "feasible"
+    "manage",
+    "on",
+    "possible",
+    "practice",
+    "realize",
+    "viable",
+    "work"
+]
+
+pretend_words = [
+    "affect",
+    "dissemble",
+    "dissimulate",
+    "kid",
+    "pose",
+    "posture",
+    "pretend",
+    "profess",
+    "sham"
+]
+
+realize_words = [
+    "appreciate",
+    "apprehend",
+    "ascertain",
+    "cognize",
+    "comprehend",
+    "conceive",
+    "discern",
+    "discover",
+    "find",
+    "get",
+    "grasp",
+    "know",
+    "notice",
+    "perceive",
+    "realize",
+    "recognize",
+    "register",
+    "savvy",
+    "see",
+    "suss",
+    "twig",
+    "understand",
+]
+
+sense_words = [
+    "sense",
+    "sensed",
+    "senses",
+    "sensing"
+]
+
+tooth_words = [
+    "tooth",
+    "teeth"
+]
+
+treasure_words = [
+    "cash",
+    "fortune",
+    "gem",
+    "gold",
+    "jewel",
+    "money",
+    "rich",
+    "silver",
+    "treasure",
+    "valueable",
+    "wealth",
+]
+
+universe_words = [
+    "cosmos",
+    "creation",
+    "infinity",
+    "macrocosm",
+    "totality",
+    "universe"
+]
+
+unsorted_words = [
+    "clarify",
+    "denticle",
+    "denticulation",
+    "dentition",
+    "describe",
+    "dive",
+    "elucidate",
+    "explain",
+    "explicate",
+    "expound",
+    "fang",
+    "feel",
+    "gnasher",
+    "hear",
+    "interpret",
+    "jump",
+    "percept",
+    "sensation",
+    "sensibility",
+    "sight",
+    "smell",
+    "taste",
+    "touch",
+    "tush",
+    "tusk"
+]
+
+what_do_you_think_phrases = [
+    "Deme, wat do u think?",
+    "Deme, wat do you think?",
+    "Deme, wat u think?",
+    "Deme, wat you think?",
+    "Deme, what do u think?",
+    "Deme, what do you think?",
+    "Deme, what u think?",
+    "Deme, what you think?",
+    "Wat do u think, Deme?",
+    "Wat u think, Deme?",
+    "wat do u think, Deme?",
+    "wat u think, Deme?",
+    "Wat do you think, Deme?",
+    "Wat you think, Deme?",
+    "wat do you think, Deme?",
+    "wat you think, Deme?",
+    "What do u think, Deme?",
+    "What u think, Deme?",
+    "what do u think, Deme?",
+    "what u think, Deme?",
+    "What do you think, Deme?",
+    "What you think, Deme?",
+    "what do you think, Deme?",
+    "what you think, Deme?"
+]
+
+your_words = [
+    "Your",
+    "your"
+]
+
+yourself_words = [
+    "yourself",
+    "yourselves"
+]
 
 
 @bot.command(name="add", help="Does what it says on the box.")
