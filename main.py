@@ -384,6 +384,21 @@ async def area_square(ctx, number: int):
     await ctx.send(embed=mbed)
 
 
+@bot.command(name="trianglea", help="Calculates the area of a triangle.")
+async def area_triangle(ctx, height: int, base: int):
+    """
+    This function takes two numbers, first is the height, which is
+    multiplied by the second number, the base. The result is then divided
+    by two (2), and the function sends an embeded message with the
+    explaining formula, formatted with the corresponding strings.
+    """
+
+    area = (height * base) / 2
+    mbed = discord.Embed(title="Triangle | Solve for area:",
+                         description=f"A = (height * base) / 2 = {area}.")
+    await ctx.send(embed=mbed)
+    
+    
 @bot.command(name="add", help="Does what it says on the box.")
 async def add(ctx, *args: int):
     """
