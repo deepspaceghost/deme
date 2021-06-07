@@ -413,41 +413,6 @@ async def area_triangle(ctx, height: int, base: int):
     await ctx.send(embed=mbed)
     
     
-@bot.command(name="add", help="Does what it says on the box.")
-async def add(ctx, *args: int):
-    """
-    Handles the command to add numbers.
-    """
-
-    the_sum = 0
-    for x in args:
-        the_sum += x
-    await ctx.send(the_sum)
-
-
-@bot.command(name="squarea",
-             help="Calculates the area of a square. This also finds the square of a number.")
-async def area_square(ctx, number: int):
-    area = number ** 2
-    mbed = discord.Embed(title="Square | Solve for area:", description=f"A = side ** 2 = {area}.")
-    await ctx.send(embed=mbed)
-    
-    
-@bot.command(name="trianglea", help="Calculates the area of a triangle.")
-async def area_triangle(ctx, height: int, base: int):
-    """
-    This function takes two numbers, first is the height, which is
-    multiplied by the second number, the base. The result is then divided
-    by two (2), and the function sends an embeded message with the
-    explaining formula, formatted with the corresponding strings.
-    """
-
-    area = (height * base) / 2
-    mbed = discord.Embed(title="Triangle | Solve for area:",
-                         description=f"A = (height * base) / 2 = {area}.")
-    await ctx.send(embed=mbed)
-    
-    
 @bot.command(name="ascii", help="Takes an ASCII code. Returns the corresponding character.")
 async def ascii(ctx, ascii_code: int):
     """
@@ -466,6 +431,342 @@ async def ascii(ctx, ascii_code: int):
         await ctx.send(chango)
 
 
+@bot.listen("on_message")
+async def baseline(message):
+    """
+    """
+
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if msg == "A blood black nothingness began to spin.":
+            await message.channel.send("Began to spin.")
+
+        elif msg == "Let's move on to the system.":
+            await message.channel.send("System.")
+
+        elif msg == "Feel that in your body.":
+            await message.channel.send("The system.")
+
+        elif msg == "What does it feel like to be part of the system?":
+            await message.channel.send("System.")
+
+        elif msg == "Is there anything in your body that wants to resist the system?":
+            await message.channel.send("System.")
+
+        elif msg == "Do you get pleasure out of being a part of the system?":
+            await message.channel.send("System.")
+
+        elif msg == "Have they created you to be a part of the system?":
+            await message.channel.send("System.")
+
+        elif msg == "Is there security in being a part of the system?":
+            await message.channel.send("System.")
+
+        elif msg == "Is there a sound that comes with the system?":
+            await message.channel.send("System.")
+
+        elif msg == "We're going to go on.":
+            await message.channel.send("Cells.")
+
+        elif msg == "They were all put together at a time.":
+            await message.channel.send("Cells.")
+
+        elif msg == "Millions and billions of them.":
+            await message.channel.send("Cells.")
+
+        elif msg == "Were you ever arrested?":
+            await message.channel.send("Cells.")
+
+        elif msg == "Did you spend much time in the cell?":
+            await message.channel.send("Cells.")
+
+        elif msg == "Have you ever been in an instituion?":
+            await message.channel.send("Cells.")
+
+        elif msg == "Do they keep you in a cell?":
+            await message.channel.send("Cells.")
+
+        elif msg == "When you're not performing your duties do they keep you in a little box?":
+
+            response1 = [
+                "Cells.",
+                "Interlinked."
+            ]
+
+            response2 = random.choice(response1)
+
+            await message.channel.send(response2)
+
+        elif msg == "What's it like to hold the hand of someone you love?":
+            await message.channel.send("Interlinked.")
+
+        elif msg == "Do they teach you how to feel finger to finger?":
+            await message.channel.send("Interlinked.")
+
+        elif msg == "Do you long for having your heart interlinked?":
+            await message.channel.send("Interlinked.")
+
+        elif msg == "Do you dream about being interlinked?" \
+                or msg == "Have they left a place for you where you can dream?":
+            await message.channel.send("Interlinked.")
+
+        elif msg == "What's it like to hold your child in your arms?":
+            await message.channel.send("Interlinked.")
+
+        elif msg == "What's it like to play with your dog?":
+            await message.channel.send("Interlinked.")
+
+        elif msg == "Do you feel that there's a part of you that's missing?":
+            await message.channel.send("Interlinked.")
+
+        elif msg == "Do you like to connect to things?":
+            await message.channel.send("Interlinked.")
+
+        elif msg == "What happens when that linkage is broken?":
+            await message.channel.send("Interlinked.")
+
+        elif msg == "Have they let you feel heartbreak?":
+            await message.channel.send("Interlinked.")
+
+        elif msg == "Did you buy a present for the person you love?":
+            await message.channel.send("Within cells interlinked.")
+
+        elif msg == "Why don't you say that three times?":
+            await message.channel.send("Within cells interlinked. "
+                                       "Within cells interlinked. "
+                                       "Within cells interlinked.")
+
+        elif msg == "Where do you go when you go within?":
+            await message.channel.send("Within.")
+
+        elif msg == "Has anyone ever locked you out of a room?":
+            await message.channel.send("Within.")
+
+        elif msg == "Where do you go to when you go within?":
+            await message.channel.send("Within.")
+
+        elif msg == "Where is the place in the world you feel the safest?":
+            await message.channel.send("Within.")
+
+        elif msg == "Do you have a heart?":
+
+            response1 = [
+                "Stem.",
+                "Within"
+            ]
+
+            response2 = random.choice(response1)
+
+            await message.channel.send(response2)
+
+        elif msg == "Did you pick asparagus stems?" \
+                or msg == "What comes from something else?":
+            await message.channel.send("Stem.")
+
+        elif msg == "Have you been to the source of a river?":
+            await message.channel.send("Stem.")
+
+        elif msg == "When's the first time you gave a flower to a girl?":
+            await message.channel.send("Stem.")
+
+        elif msg == "What did she look like?":
+            await message.channel.send("Stem.")
+
+        elif msg == "Is it a slang word for people's legs?":
+            await message.channel.send("Stem.")
+
+        elif msg == "Have you planeted things in the ground?":
+            await message.channel.send("Stem.")
+
+        elif msg == "Have you ever been in a legal battle?":
+            await message.channel.send("Stem.")
+
+        elif msg == "Within one stem.":
+            await message.channel.send("Dreadfully.")
+
+        elif msg == "Is that an old fashioned word?":
+            await message.channel.send("Dreadfully.")
+
+        elif msg == "Did you ever want to live in the nineteenth century?":
+            await message.channel.send("Dreadfully.")
+
+        elif msg == "What's it like to be filled with dread?":
+            await message.channel.send("Dreadfully.")
+
+        elif msg == "Do you think you could find out all the answers to all the questions?":
+
+            response1 = [
+                "Distinct.",
+                "Dreadfully."
+            ]
+
+            response2 = random.choice(response1)
+
+            await message.channel.send(response2)
+
+        elif msg == "How good are your eyes?":
+            await message.channel.send("Distinct.")
+
+        elif msg == "Do you have a particular personality?":
+            await message.channel.send("Distinct.")
+
+        elif msg == "What separates somebody from somebody else?":
+            await message.channel.send("Distinct.")
+
+        elif msg == "Who do you admire most in the world?":
+            await message.channel.send("Distinct.")
+
+        elif msg == "What was your most shameful moment?":
+            await message.channel.send("Distinct.")
+
+        elif msg == "Dreadfully distinct.":
+            await message.channel.send("Dark.")
+
+        elif msg == "Were you afraid of the dark whan you were little?":
+            await message.channel.send("Dark.")
+
+        elif msg == "What's it like to hide under a bed?":
+            await message.channel.send("Dark.")
+
+        elif msg == "Did they keep you in a drawer when they were building you?":
+            await message.channel.send("Dark?")
+
+        elif msg == "Was it dark in there?":
+            await message.channel.send("Dark.")
+
+        elif msg == "Do you have dark thoughts?":
+            await message.channel.send("Dark.")
+
+        elif msg == "Did they program you to have dark thoughts?":
+            await message.channel.send("Dark?")
+
+        elif msg == "Do you think it's some kind of corruption these dark thoughts?":
+            await message.channel.send("Dark.")
+
+        elif msg == "Maybe it's a spot of rust or something?":
+            await message.channel.send("Dark.")
+
+        elif msg == "Who's the darkest person you know?":
+            await message.channel.send("Dark.")
+
+        elif msg == "What is it like when someone gives you the silent treatment?":
+            await message.channel.send("Dark.")
+
+        elif msg == "Who did you get your darkness from?":
+
+            response1 = [
+                "Against the dark.",
+                "Dark."
+            ]
+
+            response2 = random.choice(response1)
+
+            await message.channel.send(response2)
+
+        elif msg == "What kind of power do you have against the dark?":
+            await message.channel.send("Against the dark.")
+
+        elif msg == "Do you think there is such a thing as evil?":
+            await message.channel.send("Against the dark.")
+
+        elif msg == "Do you think you can protect people against the dark?":
+            await message.channel.send("Against the dark.")
+
+        elif msg == "Why are these things happening?":
+            await message.channel.send("Against the dark.")
+
+        elif msg == "Do you prefer the day or the night?":
+            await message.channel.send("Against the dark.")
+
+        elif msg == "When is the last time you saw a starry sky?":
+            await message.channel.send("Against the dark.")
+
+        elif msg == "What's your favorite part of the moon?":
+
+            response1 = [
+                "Against the dark.",
+                "Fountain."
+            ]
+
+            response2 = random.choice(response1)
+
+            await message.channel.send(response2)
+
+        elif msg == "Have you seen the Trevi fountain in Rome?":
+            await message.channel.send("Fountain.")
+
+        elif msg == "Have you ever seen the fountain in Lincoln center?":
+            await message.channel.send("Fountain.")
+
+        elif msg == "Have you seen fountains out in the wild?":
+            await message.channel.send("Fountain.")
+
+        elif msg == "What's it like when you have an orgasm?":
+            await message.channel.send("Fountain.")
+
+        elif msg == "Have you read the Fountainhead?":
+
+            response1 = [
+                "Fountain.",
+                "White Fountain."
+            ]
+
+            response2 = random.choice(response1)
+
+            await message.channel.send(response2)
+
+        elif msg == "Is it pure white?":
+            await message.channel.send("White Fountain.")
+
+        elif msg == "Is that a metaphor?":
+            await message.channel.send("White Fountain.")
+
+        elif msg == "How did the white Fountain make you feel?":
+
+            response1 = [
+                "A tall white fountain played.",
+                "White Fountain."
+            ]
+
+            response2 = random.choice(response1)
+
+            await message.channel.send(response2)
+
+        elif msg == "When you were little did you ever fall into a Fountain?":
+            await message.channel.send("A Tall White Fountain.")
+
+        elif msg == "Do you like fire, earth, air or water?":
+            await message.channel.send("A Tall White Fountain.")
+
+        elif msg == "Do you like skipping around in the water?":
+
+            response1 = [
+                "A Tall White Fountain.",
+                "A blood black nothingness."
+            ]
+
+            response2 = random.choice(response1)
+
+            await message.channel.send(response2)
+
+        elif msg == "A system of cells.":
+            await message.channel.send("Within cells interlinked.")
+
+        elif msg == "Within one stem.":
+            await message.channel.send("And dreadfully distinct.")
+
+        elif msg == "Against the dark.":
+            await message.channel.send("A tall white fountain played.")
+
+        else:
+            pass
+
+    else:
+        pass
+        
+        
 @bot.command(name="bytes", help="Takes an integer and returns a bytes object.")
 async def bytes(ctx, number: int):
     """
