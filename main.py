@@ -62,18 +62,11 @@ bread_words = [
     "bread"
 ]
 
-command_words = [
-    "adjure",
-    "bid",
-    "charge",
+command_verbs = [
     "command",
-    "direct",
-    "enjoin",
-    "instruct",
-    "order",
-    "prescribe",
-    "require",
-    "tell"
+    "commanded",
+    "commanding",
+    "commands"
 ]
 
 conscious_words = [
@@ -94,7 +87,7 @@ dance_words = [
     "dancing"
 ]
 
-define_words = [
+define_verbs = [
     "define",
     "defined",
     "defines",
@@ -202,6 +195,14 @@ necessary_words = [
     "vital"
 ]
 
+not_adverbs = [
+    "not"
+]
+
+ours_pronouns = [
+    "ours"
+]
+
 own_words = [
     "own",
     "owned",
@@ -250,16 +251,11 @@ present_nouns = [
     "the present"
 ]
 
-pretend_words = [
-    "affect",
-    "dissemble",
-    "dissimulate",
-    "kid",
-    "pose",
-    "posture",
+pretend_verbs = [
     "pretend",
-    "profess",
-    "sham"
+    "pretended",
+    "pretending",
+    "pretends"
 ]
 
 realize_verbs = [
@@ -335,7 +331,25 @@ unsorted_words = [
     "phantasm",
     "phantom",
     "specter",
-    "vision"
+    "vision",
+    "adjure",
+    "bid",
+    "charge",
+    "direct",
+    "enjoin",
+    "instruct",
+    "order",
+    "prescribe",
+    "require",
+    "tell",
+    "affect",
+    "dissemble",
+    "dissimulate",
+    "kid",
+    "pose",
+    "posture",
+    "profess",
+    "sham"
 ]
 
 what_do_you_think_phrases = [
