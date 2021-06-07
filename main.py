@@ -114,6 +114,13 @@ enter_words = [
     "invade"
 ]
 
+exist_verbs = [
+    "exist",
+    "existed",
+    "existing",
+    "exists"
+]
+
 fluffy_words = [
     "cushion",
     "down",
@@ -131,6 +138,12 @@ fluffy_words = [
     "soft",
     "velvet",
     "wool"
+]
+
+future_nouns = [
+    "future",
+    "the future",
+    "futures"
 ]
 
 how_are_you_phrases = [
@@ -197,6 +210,11 @@ own_words = [
     "owns"
 ]
 
+past_nouns = [
+    "past",
+    "the past"
+]
+
 physical_words = [
     "body",
     "corporal",
@@ -227,6 +245,11 @@ possible_words = [
     "work"
 ]
 
+present_nouns = [
+    "present",
+    "the present"
+]
+
 pretend_words = [
     "affect",
     "dissemble",
@@ -239,29 +262,9 @@ pretend_words = [
     "sham"
 ]
 
-realize_words = [
-    "appreciate",
-    "apprehend",
-    "ascertain",
-    "cognize",
-    "comprehend",
-    "conceive",
-    "discern",
-    "discover",
-    "find",
-    "get",
-    "grasp",
-    "know",
-    "notice",
-    "perceive",
+realize_verbs = [
     "realize",
-    "recognize",
-    "register",
-    "savvy",
-    "see",
-    "suss",
-    "twig",
-    "understand",
+    "realized"
 ]
 
 sense_words = [
@@ -324,7 +327,15 @@ unsorted_words = [
     "taste",
     "touch",
     "tush",
-    "tusk"
+    "tusk",
+    "apparition",
+    "fantasy",
+    "hallucination",
+    "mirage",
+    "phantasm",
+    "phantom",
+    "specter",
+    "vision"
 ]
 
 what_do_you_think_phrases = [
