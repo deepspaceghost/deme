@@ -2185,70 +2185,23 @@ async def weather(message):
     # Creates a variable to store the value corresponding to the
     # "description" key at the 0 index.
     weather_description = z[0]["description"]
-    # Checks to make sure the activating message was not sent by a bot.
     if message.author != bot.user:
 
-        # Checks to make sure the activating message starts with the word
-        # "Good" with a capital g, and contains th word "morning."
-        if message.content.startswith("Good") and "morning" in message.content.lower():
+        msg = message.content
 
-            # Creates a list named morning and formats the items on the
-            # list with the earlier variables.
-            morning = [
-                f"Good morning. It's {current_formatted_time}, the weather in {city} is",
+        if msg.startswith("Good") and "Deme" in msg and "morning" in msg.lower() \
+            or "afternoon" in msg.lower() \
+                or "evening" in msg.lower():
+
+            response = [
+                "Hey hey.",
+                f"It's {current_formatted_time}, the weather in {city} is",
                 f"{current_temperature}°F, with {weather_description}."
             ]
 
-            # Iterates through each item in the morning list.
-            for i in range(2):
-                # Sends the items of the morning list, similar to print().
-                await message.channel.send(morning[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # one-point-two-three-nine (1.239) seconds.
-                time.sleep(1.239)
+            for i in range(3):
 
-        # Checks to make sure the activating message starts with the word
-        # "Good" with a capital g, and contains th word "afternoon."
-        elif message.content.startswith("Good") and "afternoon" in message.content.lower():
-
-            # Creates a list named morning and formats the items on the
-            # list with the earlier variables.
-            afternoon = [
-                f"Good afternoon. It's {current_formatted_time}, the weather in {city} is",
-                f"{current_temperature}°F, with {weather_description}."
-            ]
-
-            # Iterates through each item in the morning list.
-            for i in range(2):
-                # Sends the items of the morning list, similar to print().
-                await message.channel.send(afternoon[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # one-point-two-three-nine (1.239) seconds.
-                time.sleep(1.239)
-
-        # Checks to make sure the activating message starts with the word
-        # "Good" with a capital g, and contains th word "evening."
-        elif message.content.startswith("Good") and "evening" in message.content.lower():
-
-            # Creates a list named morning and formats the items on the
-            # list with the earlier variables.
-            evening = [
-                f"Good evening. It's {current_formatted_time}, the weather in {city} is",
-                f"{current_temperature}°F, with {weather_description}."
-            ]
-
-            # Iterates through each item in the morning list.
-            for i in range(2):
-                # Sends the items of the morning list, similar to print().
-                await message.channel.send(evening[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # one-point-two-three-nine (1.239) seconds.
+                await message.channel.send(response[i])
                 time.sleep(1.239)
 
         else:
