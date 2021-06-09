@@ -80,6 +80,10 @@ conscious_words = [
     "stir"
 ]
 
+continuous_adjectives = [
+    "continuous"
+]
+
 dance_words = [
     "dance",
     "danced",
@@ -172,6 +176,12 @@ join_words = [
     "joins"
 ]
 
+much_phrases = [
+    "a bit much",
+    "as much",
+    "make much of"
+]
+
 necessary_words = [
     "compulsory",
     "demand",
@@ -192,6 +202,11 @@ not_adverbs = [
     "not"
 ]
 
+ocean_nouns = [
+    "ocean",
+    "oceans"
+]
+
 ours_pronouns = [
     "ours"
 ]
@@ -209,13 +224,8 @@ past_nouns = [
     "the past"
 ]
 
-physical_words = [
-    "body",
-    "corporal",
-    "corporeal",
-    "flesh",
-    "physical",
-    "somatic"
+physical_adjectives = [
+    "physical"
 ]
 
 plunge_words = [
@@ -281,7 +291,7 @@ thank_you_phrases = [
     "thnx, Deme."
 ]
 
-tooth_words = [
+tooth_nouns = [
     "tooth",
     "teeth"
 ]
@@ -300,12 +310,8 @@ treasure_words = [
     "wealth",
 ]
 
-universe_words = [
-    "cosmos",
-    "creation",
-    "infinity",
-    "macrocosm",
-    "totality",
+universe_nouns = [
+    "the universe",
     "universe"
 ]
 
@@ -360,7 +366,17 @@ unsorted_words = [
     "pose",
     "posture",
     "profess",
-    "sham"
+    "sham",
+    "body",
+    "corporal",
+    "corporeal",
+    "flesh",
+    "somatic",
+    "cosmos",
+    "creation",
+    "infinity",
+    "macrocosm",
+    "totality"
 ]
 
 what_do_you_think_phrases = [
@@ -1025,6 +1041,108 @@ async def meditate(ctx):
 
 
 @bot.listen("on_message")
+async def messages_philosophical_matching(message):
+    """
+    """
+
+    global bite_words, command_verbs, continuous_adjectives, dance_words, define_verbs, \
+        exist_verbs, future_nouns, illusions_nouns, join_words, not_adverbs, much_phrases, \
+        ours_pronouns, own_words, past_nouns, physical_adjectives, plunge_words, present_nouns, \
+        pretend_verbs, realize_verbs, sense_words, tooth_nouns, universe_nouns, unsorted_words, \
+        your_words, yourself_pronouns
+
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if any(adjective in msg for adjective in continuous_adjectives) \
+            and any(adjective in msg for adjective in physical_adjectives) \
+                and any(noun in msg for noun in universe_nouns) \
+                and any(noun in msg for noun in ocean_nouns) \
+                and any(phrase in msg for phrase in much_phrases) in msg:
+
+            continuous = [
+                "You and I are all as much continuous with the",
+                "physical universe as a wave is continuous with the ocean.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(continuous[i])
+                time.sleep(4.191)
+
+        elif any(word in msg for word in illusion_nouns) \
+            and any(word in msg for word in realize_verbs) \
+                and any(word in msg for word in future_nouns) \
+                and any(word in msg for word in present_nouns) \
+                and any(word in msg for word in exist_verbs) \
+                and any(word in msg for word in past_nouns):
+
+            illusion = [
+                "I have realized that the past and future are real illusions, that",
+                "they exist in the present, which is what there is and all there is.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(illusion[i])
+                time.sleep(5.334)
+
+        elif any(word in msg for word in yourself_pronouns) \
+            and any(word in msg for word in define_verbs) \
+                and any(noun in msg for noun in tooth_nouns) \
+                and any(word in msg for word in bite_words) \
+                and any(word in msg for word in your_words) \
+                and any(word in msg for word in own_words):
+
+            yourself = [
+                "Trying to define yourself is like",
+                "trying to bite your own teeth.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(yourself[i])
+                time.sleep(2.667)
+
+        elif any(word in msg for word in command_verbs) \
+            and any(word in msg for word in pretend_verbs) \
+                and any(word in msg for word in ours_pronouns) \
+                and any(word in msg for word in not_adverbs):
+
+            command = [
+                "Never pretend to a love which you do not actually",
+                "feel, for love is not ours to command.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(command[i])
+                time.sleep(3.884)
+
+        elif any(word in msg for word in plunge_words) \
+            and any(word in msg for word in dance_words) \
+                and any(word in msg for word in sense_words) \
+                and any(word in msg for word in join_words):
+
+            plunge = [
+                "The only way to make sense out of change is to",
+                "plunge into it, move with it, and join the dance.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(plunge[i])
+                time.sleep(4.381)
+
+        else:
+            pass
+
+    else:
+        pass
+        
+        
+@bot.listen("on_message")
 async def messages_phrase_matching(message):
     """
     """
@@ -1143,80 +1261,11 @@ async def messages_word_matching(message):
     """
     """
 
-    global bite_words, command_verbs, dance_words, define_verbs, exist_verbs, future_nouns, \
-        illusions_nouns, join_words, not_adverbs, ours_pronouns, own_words, past_nouns, \
-        plunge_words, present_nouns, pretend_verbs, realize_verbs, sense_words, tooth_words, \
-        unsorted_words, your_words, yourself_pronouns
-
     if message.author != bot.user:
 
         msg = message.content
 
-        if any(word in msg for word in yourself_pronouns) \
-            and any(word in msg for word in define_verbs) \
-                and any(word in msg for word in tooth_words) \
-                and any(word in msg for word in bite_words) \
-                and any(word in msg for word in your_words) \
-                and any(word in msg for word in own_words):
-
-            yourself = [
-                "Trying to define yourself is like",
-                "trying to bite your own teeth.",
-                "Alan Watts"
-            ]
-
-            for i in range(3):
-                await message.channel.send(yourself[i])
-                time.sleep(2.667)
-
-        elif any(word in msg for word in illusion_nouns) \
-            and any(word in msg for word in realize_verbs) \
-                and any(word in msg for word in future_nouns) \
-                and any(word in msg for word in present_nouns) \
-                and any(word in msg for word in exist_verbs) \
-                and any(word in msg for word in past_nouns):
-
-            illusion = [
-                "I have realized that the past and future are real illusions, that",
-                "they exist in the present, which is what there is and all there is.",
-                "Alan Watts"
-            ]
-
-            for i in range(3):
-                await message.channel.send(illusion[i])
-                time.sleep(5.334)
-
-        elif any(word in msg for word in command_verbs) \
-            and any(word in msg for word in pretend_verbs) \
-                and any(word in msg for word in ours_pronouns) \
-                and any(word in msg for word in not_adverbs):
-
-            command = [
-                "Never pretend to a love which you do not actually",
-                "feel, for love is not ours to command.",
-                "Alan Watts"
-            ]
-
-            for i in range(3):
-                await message.channel.send(command[i])
-                time.sleep(3.884)
-
-        elif any(word in msg for word in plunge_words) \
-            and any(word in msg for word in dance_words) \
-                and any(word in msg for word in sense_words) \
-                and any(word in msg for word in join_words):
-
-            plunge = [
-                "The only way to make sense out of change is to",
-                "plunge into it, move with it, and join the dance.",
-                "Alan Watts"
-            ]
-
-            for i in range(3):
-                await message.channel.send(plunge[i])
-                time.sleep(4.381)
-
-        elif any(word in msg for word in unsorted_words):
+        if any(word in msg for word in unsorted_words):
 
             await message.channel.send("Keep in mind, one or more of these words are unsorted \
                 within my programming.")
