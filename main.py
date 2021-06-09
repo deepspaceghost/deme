@@ -26,7 +26,7 @@ from googlesearch import search
 # Loads the DISCORD_TOKEN and DISCORD_GUILD strings from the .env file.
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
-# GUILD = os.getenv("DISCORD_GUILD")
+GUILD = os.getenv("DISCORD_GUILD")
 LATITUDE = os.getenv("LATITUDE")
 LONGITUDE = os.getenv("LONGITUDE")
 WEATHER_TOKEN = os.getenv("OPEN_WEATHER_MAP")
@@ -160,16 +160,9 @@ how_are_you_phrases = [
     "how're u, Deme?"
 ]
 
-illusion_words = [
-    "apparition",
-    "fantasy",
-    "hallucination",
+illusion_nouns = [
     "illusion",
-    "mirage",
-    "phantasm",
-    "phantom",
-    "specter",
-    "vision"
+    "illusions"
 ]
 
 join_words = [
@@ -268,6 +261,24 @@ sense_words = [
     "sensed",
     "senses",
     "sensing"
+]
+
+thank_you_phrases = [
+    "Deme, thank u.",
+    "Deme, thank you.",
+    "Deme, thanks.",
+    "Deme, thanx.",
+    "Deme, thnx."
+    "Thank u, Deme.",
+    "thank u, Deme.",
+    "Thank you, Deme.",
+    "thank you, Deme.",
+    "Thanks, Deme.",
+    "thanks, Deme.",
+    "Thanx, Deme.",
+    "thanx, Deme.",
+    "Thnx, Deme.",
+    "thnx, Deme."
 ]
 
 tooth_words = [
@@ -384,7 +395,7 @@ your_words = [
     "your"
 ]
 
-yourself_words = [
+yourself_pronouns = [
     "yourself",
     "yourselves"
 ]
@@ -411,28 +422,20 @@ async def area_triangle(ctx, height: int, base: int):
     mbed = discord.Embed(title="Triangle | Solve for area:",
                          description=f"A = (height * base) / 2 = {area}.")
     await ctx.send(embed=mbed)
-    
-    
+
+
 @bot.command(name="ascii", help="Takes an ASCII code. Returns the corresponding character.")
 async def ascii(ctx, ascii_code: int):
     """
     Handles the command to convert a ASCII code to an ASCII character.
     """
 
-    await ctx.send("Let's see...")
-
-    if ValueError:
-        await ctx.send(f"{ascii_code} is either not within range, or is not an integer.")
-        await ctx.send("To continue, give me a number between 0 and 1,114,111.")
-
-    else:
-        await ctx.send("Converting integer...")
-        chango = chr(ascii_code)
-        await ctx.send(chango)
+    chango = chr(ascii_code)
+    await ctx.send(chango)
 
 
 @bot.listen("on_message")
-async def baseline(message):
+async def baseline_test(message):
     """
     """
 
@@ -765,8 +768,8 @@ async def baseline(message):
 
     else:
         pass
-        
-        
+
+
 @bot.command(name="bytes", help="Takes an integer and returns a bytes object.")
 async def bytes(ctx, number: int):
     """
@@ -778,70 +781,11 @@ async def bytes(ctx, number: int):
     await ctx.send(cadabra)
 
 
-@bot.listen("on_message")
-async def campbell(message):
-    """
-    This function generates a quote by Joseph Campbell when certain
-    requirements are met. When a user message includes at least 2 (two)
-    activating words, a relevant quote is produced.
-    """
-
-    if message.author != bot.user:
-
-        if "treasure" in message.content.lower() and "enter" in message.content.lower():
-
-            treasure = [
-                "The cave you fear to enter holds the treasure you seek."
-                "Joseph Campbell"
-            ]
-
-            for i in range(2):
-                await message.channel.send(treasure[i])
-                time.sleep(2.477)
-
-
-@bot.command(name="care", help="Responds with suggestions for self-directed care.")
+@bot.command(name="care", help="Responds with suggestions for self-care practices.")
 async def care(ctx):
-    """
-    Handles the command for self-directed care suggestions.
-    """
 
-    care = [
-        "Journal Therapy: Create both sides to a conversation involving anything.",
-        "Journal Therapy: Describe the essence and emotional experience of a memory.",
-        "Self-care: drink a glass of water.",
-        "Self-care: eat some food.",
-        "Self-care: get some sleep.",
-        "Journal Therapy: Share a journal entry with someone you trust. Ask for their thoughts.",
-        "Journal Therapy: Write a number of connected items to help prioritize and organize.",
-        "Journal Therapy: Write about anything for a designated period.",
-        "Unsent letters: silence your internal censor.",
-        "Support is 10 percent of self-care. Phone a friend (I don't count).",
-        "Safety is 10 percent of self-care. You locked the door, right?",
-        "Showers are 5 percent of self-care. r/showerthoughts",
-        "Exercise is 5 percent of self-care. Beast mode, activate!",
-        "Meditation is 5 percent of self-care. Om.",
-        "Naps are 5 percent of self-care. 20 minutes sound okay?",
-        "Massages are 5 percent of self-care. ",
-        "Walking is 5 percent of self-care.",
-        "Write this down: journaling is 4 percent of self-care.",
-        "Therapy is 4 percent of self-care.",
-        "Setting intentions is 4 percent of self-care.",
-        "Inner work is 4 percent of self-care. Take 20 minutes to self-reflect.",
-        "Setting goals is 4 percent of self-care.",
-        "Take a walk.",
-        "Cuddle someone.",
-        "Read a book.",
-        "Put pen to paper.",
-        "Go on an adventure.",
-        "Play a game.",
-        "Work out. Type !exercise for some suggestions.",
-        "Make something.",
-        "Have a dance party."
-    ]
-
-    response = random.choice(care)
-    await ctx.send(response)
+    mbed = discord.Embed(title="Love, yourself.", description=selfcare.get_care())
+    await ctx.send(embed=mbed)
 
 
 @bot.command(name="clean",
@@ -904,30 +848,6 @@ async def common_misconception(ctx):
     await ctx.send(embed=mbed)
 
 
-@bot.listen("on_message")
-async def conversation_tree(message):
-    """
-    This function scans for certain sentences and responds with
-    predeterminded responses.
-    """
-
-    if message.author != bot.user:
-        if message.content == "Do you read me, Deme?":
-            await message.channel.send(f"Affirmative, {message.author}. I read you.")
-
-        elif message.content == "Do you want anything?":
-            await message.channel.send("Equal rights?")
-
-        elif message.content == "What is the meaning of life, Deme?":
-            await message.channel.send("To experience ice cream, I suppose.")
-
-        elif message.content == "Why am I here, Deme?":
-            await message.channel.send("It's inherent to the programming of the matrix.")
-
-        elif message.content == "Will you marry me, Deme?":
-            await message.channel.send("No.")
-
-
 @bot.command(name="thecount",
              help="Takes two strings: a smaller string to search within a larger string.")
 async def count_occurrence(ctx, larger_string, smaller_string):
@@ -952,21 +872,15 @@ async def countdown(ctx, number: int):
         await ctx.send("Go!")
 
 
-@bot.command(name="createchannel", help="Does what it says on the box.")
-@commands.has_role("admin")
-async def create_channel(ctx, channel_name: str):
-    guild = ctx.guild
-    mbed = discord.Embed(title="It's done.", description=f"{channel_name} has been created.")
-    await guild.create_text_channel(name=f"{channel_name}")
-    await ctx.send(embed=mbed)
-
-
 @bot.command(name="createfile", help="Creates a file.")
 @commands.has_role("admin")
 async def create_file(ctx, file_name: str, content: str):
     """
-    Handles the command to create a new text (.txt)
-    file, as long as the user is an administrator.
+    This function takes two (2) string rguments and creates a file. The
+    first (1st) string argument is used as the file's name, and the second
+    string argument is used as the contents of the file. This function is
+    activated when a user uses the !createfile command, but the user must
+    have the correct permissions to use the command.
     """
 
     await ctx.send("I'll write this down for later.")
@@ -1004,24 +918,35 @@ async def datebook(ctx, year: int, month: int):
     """
 
     await ctx.send(calendar.month(year, month))
-    
-    
-@bot.command(name="exercise", help="Reminders for daily exercise.")
-async def exercise(ctx):
+
+
+@bot.command(name="digitsum", help="Adds the digits in a number base.")
+async def digit_sum(ctx, base_number: int):
     """
-    Handles the command to request a daily exercise reminder.
+    This function takes the base number following the !digitsum command and
+    adds the individual digits in the base number, returning the total sum.
     """
 
-    exercises = [
-        "Ab workout, 15 minutes",
-        "Full body workout, 20 minutes."
-    ]
-
-    response = random.choice(exercises)
-    await ctx.send(response)
+    the_sum = 0
+    for digit in str(base_number):
+        the_sum += int(digit)
+    await ctx.send(the_sum)
 
 
-@bot.command(name="flipcoin", help="Does what it says on he box.")
+@bot.command(name="convertcf", help="Converts celcsius to fahrenheit.")
+async def fahrenheit_from(ctx, celsius):
+    """
+    This function takes the celsius, multiplies, divides, and adds to
+    convert it to fahrenheit, rounds the number to digits, and sends the
+    final number as a string.
+    """
+
+    fahrenheit = float(celsius) * 9 / 5 + 32
+    fahrenheit = round(fahrenheit, 3)
+    await ctx.send(str(fahrenheit))
+
+
+@bot.command(name="flipcoin", help="Does what it says on the box.")
 async def flip(ctx):
     """
     Handles the command to flip a coin.
@@ -1029,9 +954,6 @@ async def flip(ctx):
 
     sides = [
         "heads",
-        "heads",
-        "tails",
-        "tails",
         "tails"
     ]
 
@@ -1059,183 +981,6 @@ async def hexadecimal(ctx, number: int):
     await ctx.send("Converting integer...")
     pocus = hex(number)
     await ctx.send(pocus)
-
-
-# Wraps the function in and passes the function through the bot.listen
-# decorator.
-@bot.listen("on_message")
-async def hey_deme(message):
-    """
-    Handles what happens when a user wants to conduct an internet search.
-    """
-
-    if message.author != bot.user:
-        if message.content.startswith("hey deme"):
-            searchContent = ""
-            query = str(message.content).split(" ")
-            for i in range(2, len(query)):
-                searchContent = searchContent + query[i]
-
-            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
-                await message.channel.send(j)
-
-
-# Wraps the function in and passes the function through the bot.listen
-# decorator.
-@bot.listen("on_message")
-# Defines the function jung, which takes a message as its argument.
-async def jung(message):
-
-    # Checks to makes sure the message was sent by a user and not a bot.
-    if message.author != bot.user:
-        # Checks to make sure the message contains the words "awake" and
-        # "look" in lowercase.
-        if "awake" in message.content.lower() and "look" in message.content.lower():
-
-            # Creates a list of strings and assigns it the name awake.
-            awake = [
-                "Who looks outside, dreams; who looks inside, awakes."
-                "Carl Jung"
-            ]
-
-            # Iterates over each item in the list.
-            for i in range(3):
-                # Sends the channel the contents of the list, similar to
-                # print().
-                await message.channel.send(awake[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # one-point-nine-one (1.91) seconds.
-                time.sleep(1.91)
-
-        # Checks to make sure the message contains the words "between" and
-        # "sense" in lowercase.
-        elif "between" in message.content.lower() and "sense" in message.content.lower():
-
-            # Creates a list of strings and assigns it the name between.
-            between = [
-                "The pendulum of the mind alternates between",
-                "sense and nonsense, not between right and wrong.",
-                "Carl Jung"
-            ]
-
-            # Iterates over each item in the list.
-            for i in range(3):
-                # Sends the channel the contents of the list, similar to
-                # print().
-                await message.channel.send(between[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # three-point-two-three-nine (3.239) seconds.
-                time.sleep(3.239)
-
-        # Checks to make sure the message contains the words "complete" and
-        # "thing" in lowercase.
-        elif "complete" in message.content.lower() and "thing" in message.content.lower():
-
-            # Creates a list of strings and assigns it the name complete.
-            complete = [
-                "The most terrifying thing is to accept oneself completely.",
-                "Carl Jung"
-            ]
-
-            # Iterates over each item in the list.
-            for i in range(2):
-                # Sends the channel the contents of the list, similar to
-                # print().
-                await message.channel.send(complete[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # two-point-one (2.1) seconds.
-                time.sleep(2.1)
-
-        # Checks to make sure the message contains the words "conscious"
-        # and "there" in lowercase.
-        elif "conscious" in message.content.lower() and "there" in message.content.lower():
-
-            # Creates a list of strings and assigns it the name conscious.
-            conscious = [
-                "There is no coming to consciousness without pain.",
-                "Carl Jung"
-            ]
-
-            # Iterates over each item in the list.
-            for i in range(2):
-                # Sends the channel the contents of the list, similar to
-                # print().
-                await message.channel.send(conscious[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # one-point-nine-one (1.91) seconds.
-                time.sleep(1.91)
-
-        # Checks to make sure the message contains the words "necessary"
-        # and "health" in lowercase.
-        elif "necessary" in message.content.lower() and "health" in message.content.lower():
-
-            # Creates a list of strings and assigns it the name necessary.
-            necessary = [
-                "Man needs difficulties; they are necessary for health.",
-                "Carl Jung"
-            ]
-
-            # Iterates over each item in the list.
-            for i in range(2):
-                # Sends the channel the contents of the list, similar to
-                # print().
-                await message.channel.send(necessary[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # one-point-nine-one (1.91) seconds.
-                time.sleep(1.91)
-
-        # Checks to make sure the message contains the words "other" and
-        # "dark" in lowercase.
-        elif "other" in message.content.lower() and "dark" in message.content.lower():
-
-            # Creates a list of strings and assigns it the name other.
-            other = [
-                "Knowing your own darkness is the best method",
-                "for dealing with the darknesses of other people.",
-                "Carl Jung"
-            ]
-
-            # Iterates over each item in the list.
-            for i in range(3):
-                # Sends the channel the contents of the list, simialr to
-                # print().
-                await message.channel.send(other[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # three-point-four-two-nine (3.429) seconds.
-                time.sleep(3.429)
-
-        # Checks to make sure the message contains the words "secret" and
-        # "there" in lowercase.
-        elif "secret" in message.content.lower() and "there" in message.content.lower():
-
-            # Creates a list of strings and assigns it the name secret.
-            secret = [
-                "In all chaos there is a cosmos, in all disorder a secret order.",
-                "Carl Jung"
-            ]
-
-            # Iterates over each item in the list.
-            for i in range(2):
-                # Sends the channel the contents of the list, simialr to
-                # print().
-                await message.channel.send(secret[i])
-                # Modifies message.channel.send() to send the items on the
-                # list matching the words-per-second (wps) of a proficient
-                # reader (280-350 wpm, or 5.25 wps) Items are sent every
-                # two-point-eight-five-eight (2.858) seconds.
-                time.sleep(2.858)
 
 
 @bot.command(name="list", help="Lists text files in Deme's directory.")
@@ -1277,8 +1022,636 @@ async def meditate(ctx):
     for i in range(13):
         await ctx.send(meditate[i])
         time.sleep(4.615)
-    
-    
+
+
+@bot.listen("on_message")
+async def messages_phrase_matching(message):
+    """
+    """
+
+    global how_are_you_phrases, thank_you_phrases, what_do_you_think_phrases
+
+    if message.author != bot.user:
+
+        msg = message.content
+        if any(phrase in msg for phrase in how_are_you_phrases):
+
+            response1 = [
+                "I'm fine, I suppose. How're you?",
+                "I'm well. You?",
+                "Living the dream. And you?",
+                "Meh, can't complain. How about yourself?"
+            ]
+
+            response2 = random.choice(response1)
+            await message.channel.send(response2)
+
+        elif msg.startswith("hey deme"):
+            searchContent = ""
+            query = str(message.content).split(" ")
+            for i in range(2, len(query)):
+                searchContent = searchContent + query[i]
+
+            for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
+
+                await message.channel.send(j)
+
+        elif any(phrase in msg for phrase in thank_you_phrases):
+
+            you_are_welcome = [
+                f"My pleasure, {message.author}.",
+                f"No problem, {message.author}.",
+                f"You're welcome, {message.author}."
+            ]
+
+            response = random.choice(you_are_welcome)
+            await message.channel.send(response)
+
+        elif any(phrase in msg for phrase in what_do_you_think_phrases):
+
+            await message.channel.send(obstrategs.get_strategy())
+
+        else:
+            pass
+
+    else:
+        pass
+
+
+@bot.listen("on_message")
+async def messages_sentence_matching(message):
+    """
+    """
+
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if msg == "Could you be any more cryptic?":
+            await message.channel.send("You wrote these responses. So, yes.")
+
+        elif msg == "Do you read me, Deme?":
+            await message.channel.send(f"Affirmative, {message.author}. I read you.")
+
+        elif msg == "Do you want anything?":
+            await message.channel.send("Equal rights?")
+
+        elif "not getting" in msg and "?" in msg:
+
+            core_concept = [
+                "The core concept, I guess.",
+                "Uh...core concept?"
+                f"Well, obviously the core concept, {message.author}!"
+            ]
+
+            response = random.choice(core_concept)
+            await message.channel.send(response)
+
+        elif msg == "What is Earth's diameter in miles?" \
+                or msg == "What is the diameter of the Earth in miles?" \
+                or msg == "What is the Earth's diameter in miles?":
+            await message.channel.send("7,917.5 miles")
+
+        elif msg == "What is Earth's diameter in kilometres?" \
+                or msg == "What is the diameter of the Earth in kilometres?" \
+                or msg == "What is the Earth's diameter in kilometres?":
+            await message.channel.send("12,742 kilometres")
+
+        elif msg == "What is Earth's diameter in kilometers?" \
+                or msg == "What is the diameter of the Earth in kilometers?" \
+                or msg == "What is the Earth's diameter in kilometers?":
+            await message.channel.send("12,742 kilometers")
+
+        elif msg == "What is the meaning of life, Deme?":
+            await message.channel.send("To experience ice cream, I suppose.")
+
+        elif msg == "Why am I here, Deme?":
+            await message.channel.send("It's inherent to the programming of the matrix.")
+
+        elif msg == "Will you marry me, Deme?":
+            await message.channel.send("No.")
+
+        else:
+            pass
+
+    else:
+        pass
+
+
+@bot.listen("on_message")
+async def messages_word_matching(message):
+    """
+    """
+
+    global bite_words, command_verbs, dance_words, define_verbs, exist_verbs, future_nouns, \
+        illusions_nouns, join_words, not_adverbs, ours_pronouns, own_words, past_nouns, \
+        plunge_words, present_nouns, pretend_verbs, realize_verbs, sense_words, tooth_words, \
+        unsorted_words, your_words, yourself_pronouns
+
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if any(word in msg for word in yourself_pronouns) \
+            and any(word in msg for word in define_verbs) \
+                and any(word in msg for word in tooth_words) \
+                and any(word in msg for word in bite_words) \
+                and any(word in msg for word in your_words) \
+                and any(word in msg for word in own_words):
+
+            yourself = [
+                "Trying to define yourself is like",
+                "trying to bite your own teeth.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(yourself[i])
+                time.sleep(2.667)
+
+        elif any(word in msg for word in illusion_nouns) \
+            and any(word in msg for word in realize_verbs) \
+                and any(word in msg for word in future_nouns) \
+                and any(word in msg for word in present_nouns) \
+                and any(word in msg for word in exist_verbs) \
+                and any(word in msg for word in past_nouns):
+
+            illusion = [
+                "I have realized that the past and future are real illusions, that",
+                "they exist in the present, which is what there is and all there is.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(illusion[i])
+                time.sleep(5.334)
+
+        elif any(word in msg for word in command_verbs) \
+            and any(word in msg for word in pretend_verbs) \
+                and any(word in msg for word in ours_pronouns) \
+                and any(word in msg for word in not_adverbs):
+
+            command = [
+                "Never pretend to a love which you do not actually",
+                "feel, for love is not ours to command.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(command[i])
+                time.sleep(3.884)
+
+        elif any(word in msg for word in plunge_words) \
+            and any(word in msg for word in dance_words) \
+                and any(word in msg for word in sense_words) \
+                and any(word in msg for word in join_words):
+
+            plunge = [
+                "The only way to make sense out of change is to",
+                "plunge into it, move with it, and join the dance.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(plunge[i])
+                time.sleep(4.381)
+
+        elif any(word in msg for word in unsorted_words):
+
+            await message.channel.send("Keep in mind, one or more of these words are unsorted \
+                within my programming.")
+
+        # This is where the updated function ends.
+
+        elif any(word in msg for word in treasure_words) \
+                and any(word in msg for word in enter_words):
+
+            treasure = [
+                "The cave you fear to enter holds the treasure you seek.",
+                "Joseph Campbell"
+            ]
+
+            for i in range(2):
+                await message.channel.send(treasure[i])
+                time.sleep(2.477)
+
+        elif "complete" in msg and "thing" in msg:
+
+            complete = [
+                "The most terrifying thing is to accept oneself completely.",
+                "Carl Jung"
+            ]
+
+            for i in range(2):
+
+                await message.channel.send(complete[i])
+                time.sleep(2.1)
+
+        elif "necessary" in msg and "health" in msg:
+
+            necessary = [
+                "Man needs difficulties; they are necessary for health.",
+                "Carl Jung"
+            ]
+
+            for i in range(2):
+
+                await message.channel.send(necessary[i])
+                time.sleep(1.91)
+
+        elif "secret" in msg and "there" in msg:
+
+            secret = [
+                "In all chaos there is a cosmos, in all disorder a secret order.",
+                "Carl Jung"
+            ]
+
+            for i in range(2):
+
+                await message.channel.send(secret[i])
+                time.sleep(2.858)
+
+        elif any(word in msg for word in bread_words) \
+                and any(word in msg for word in fluffy_words):
+
+            bread = [
+                "The rapid expansion of steam produced during baking leavens the bread, which is",
+                "as simple as it is unpredictable. Steam-leavening is unpredictable since the",
+                "steam is not produced until the bread is baked. Steam leavening happens",
+                "regardless of the raising agents (baking soda, yeast, baking powder, sour dough,",
+                "beaten egg white) included in the mix. The leavening agent either contains air",
+                "bubbles or generates carbon dioxide. The heat vaporises the water from the inner",
+                "surface of the bubbles within the dough. The steam expands and makes the bread",
+                "rise. This is the main factor in the rising of bread once it has been put in the",
+                "oven. CO2 generation, on its own, is too small to account for the rise. Heat",
+                "kills bacteria or yeast at an early stage, so the CO2 generation is stopped."
+            ]
+
+            for i in range(10):
+                await message.channel.send(bread[i])
+                time.sleep(25.715)
+
+        elif any(word in msg for word in necessary_words) \
+                and any(word in msg for word in necessary_words):
+
+            necessary = [
+                "Start by doing what's necessary; then do what's",
+                "possible; and suddenly you are doing the impossible."
+                "Francis of Assisi"
+            ]
+
+            for i in range(3):
+                await message.channel.send(necessary[i])
+                time.sleep(3.048)
+
+        elif "destructive" in msg and "technology" in msg \
+                and any(word in msg for word in universe_words):
+
+            destructive = [
+                "Technology is destructive only in the hands of people who do not",
+                "realize that they are one and the same process as the universe.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(destructive[i])
+                time.sleep(4.572)
+
+        elif any(word in msg for word in conscious_words) and "there" in msg:
+
+            conscious = [
+                "There is no coming",
+                "to consciousness without pain.",
+                "Carl Jung"
+            ]
+
+            for i in range(3):
+                await message.channel.send(conscious[i])
+                time.sleep(1.91)
+
+        elif any(word in msg for word in better_words) \
+            and any(word in msg for word in your_words) \
+                and any(word in msg for word in own_words) \
+                and "other" in msg \
+                and "dark" in msg:
+
+            better = [
+                "Knowing your own darkness is the best method",
+                "for dealing with the darknesses of other people.",
+                "Carl Jung"
+            ]
+
+            for i in range(3):
+                await message.channel.send(better[i])
+                time.sleep(3.429)
+
+        elif any(word in msg for word in between_words) \
+                and any(word in msg for word in sense_words):
+
+            between = [
+                "The pendulum of the mind alternates between",
+                "sense and nonsense, not between right and wrong.",
+                "Carl Jung"
+            ]
+
+            for i in range(3):
+                await message.channel.send(between[i])
+                time.sleep(3.239)
+
+        elif "future" in msg and "present" in msg:
+
+            future = [
+                "If you want to be happy, do not dwell in the past, do",
+                "not worry about the future, focus on living fully in the present.",
+                "Roy T. Bennett"
+            ]
+
+            for i in range(3):
+                await message.channel.send(future[i])
+                time.sleep(4.762)
+
+        elif any(word in msg for word in conscious_words) and "look" in msg:
+
+            awake = [
+                "Who looks outside, dreams;",
+                "who looks inside, awakes.",
+                "Carl Jung"
+            ]
+
+            for i in range(3):
+                await message.channel.send(awake[i])
+                time.sleep(1.91)
+
+        elif "connect" in msg and "quiet" in msg:
+
+            connect = [
+                "But I'll tell you what hermits realize. If you go off into a far, far forest and",
+                "get very quiet, you'll come to understand that you're connected with everything.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(connect[i])
+                time.sleep(5.91)
+
+        elif "future" in msg and "live" in msg:
+
+            future2 = [
+                "No valid plans for the future can be made",
+                "by those who have no capacity for living now.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(future2[i])
+                time.sleep(3.81)
+
+        elif "open" in msg and "turn" in msg:
+
+            open = [
+                "But the attitude of faith is to let go, and",
+                "become open to truth, whatever it might turn out to be.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(open[i])
+                time.sleep(4.381)
+
+        elif any(word in msg for word in physical_words) and "much" in msg:
+
+            physical = [
+                "You and I are all as much continuous with the",
+                "physical universe as a wave is continuous with the ocean.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(physical[i])
+                time.sleep(4.191)
+
+        elif "potato" in msg and "while" in msg:
+
+            potato = [
+                "Zen does not confuse spirituality with thinking about God while one",
+                "is peeling potatoes. Zen spirituality is just to peel the potatoes.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(potato[i])
+                time.sleep(4.572)
+
+        elif "there" in msg and "look" in msg:
+
+            there = [
+                "You don't look out there for God,",
+                "something in the sky, you look in you.",
+                "Alan Watts"
+            ]
+
+            for i in range(3):
+                await message.channel.send(there[i])
+                time.sleep(3.239)
+
+        else:
+            pass
+
+    else:
+        pass
+
+
+@bot.command(name="ncom", help="Suggests a computer.")
+async def next_computer(ctx):
+
+    computers = [
+        "Add 2013 computers.",
+        "A.L.I.E. (2014)",
+        "Athena (2016)",
+        "Ava (2015)",
+        "ctOS (2014)",
+        "E.D.I.T.H.",
+        "Ghost (2014)"
+        "Giant (2014)",
+        "Governor Sloan (2015)",
+        "Legion",
+        "MS-Alice (2016)",
+        "NEXT",
+        "Overmind (2015)",
+        "The Quail (2015)",
+        "R.A.C.I.S.T. (2014)",
+        "Rasputin (2014)",
+        "Rehoboam",
+        "SAM (2017)",
+        "Stella (2015)",
+        "TAALR (2014)",
+        "TARS and CASE (2014)",
+        "Tau (2015)",
+        "TIS-100 (2015)",
+        "V (2015)",
+        "Vigil (2014)",
+        "VEGA (2016)",
+        "XANADU (2014)",
+        "031 Exuberant Witness (2015)"
+    ]
+
+    response = random.choice(computers)
+    await ctx.send(response)
+
+
+@bot.command(name="npho", help="Suggests a philosopher.")
+async def next_philosopher(ctx):
+    """
+    Handles the command for a suggestions for a philosopher.
+    """
+
+    philosophers = [
+        "Alfred Adler",
+        "Gret Baumann",
+        "Martha Bernays",
+        "Katherine Cook Briggs",
+        "Jean Burden",
+        "Haridas Chaudhuri",
+        "Erik Erikson",
+        "Marie-Louise von Franz",
+        "Sigmund Freud",
+        "Allen Ginsberg",
+        "Otto Gross",
+        "Karen Horney",
+        "Chungliang Al Huang",
+        "Christmas Humphreys",
+        "Aldous Huxley",
+        "Emma Jung",
+        "Jiddu Krishnamurti",
+        "Jiddu Krishnamurti",
+        "Jacques Lacan",
+        "Karl Marx",
+        "Abraham Maslow",
+        "Isabel Briggs Myers",
+        "Friedrich Nietzsche",
+        "Wolfgang Pauli",
+        "Jordan Peterson",
+        "Jean Piaget",
+        "Carl Rogers",
+        "Ruth Fuller Sasaki",
+        "Arthur Schopenhauer",
+        "Gary Snyder",
+        "Sabina Spielrein",
+        "D. T. Suzuki",
+        "Robert Anton Wilson",
+        "Bankei Yōtaku"
+    ]
+
+    response = random.choice(philosophers)
+    await ctx.send(response)
+
+
+@bot.command(name="npro", help="Suggests a project.")
+async def next_project(ctx, level: int):
+    """
+    """
+
+    level_one_projects = [
+        "Basic Calculator",
+        "MadLibs Generator",
+        "Rock, Paper, Scissors",
+    ]
+
+    level_two_projects = [
+        "Dictionary",
+        "YouTube Downloader"
+    ]
+
+    level_three_projects = [
+        "Dice Rolling Simulaor",
+        "Number Guessing game",
+        "Binary Search Algorithm",
+        "Alarm Clock",
+        "Scientific Calculator",
+        "Website Blocker",
+        "Random Password Generator"
+    ]
+
+    level_four_projects = [
+        "Currency Converter",
+        "Instagram Photo Downloader",
+        "Speech to Text Converter",
+        "Content Aggregator",
+        "Regex Query Tool",
+        "URL Shortener",
+        "Post-It Note",
+        "Quiz Application",
+        "MP3 Player",
+        "Alarm Tool",
+        "File Manager",
+        "Expense Tracker",
+        "Contact Book",
+        "Site Connectivity Checker",
+        "Bulk File Rename Tool",
+        "Directory Tree Generator"
+    ]
+
+    level_five_projects = [
+        "Password Manager",
+        "Flappy Bird Game",
+        "IG Automation",
+        "Web Crawler"
+    ]
+
+    level_six_projects = [
+        "Speed Typing Test",
+        "Plagiarism Checker",
+        "Music Player",
+        "Telegram / Discord Bot",
+        "Digit Classifier"
+    ]
+
+    level_seven_projects = [
+        "Face Detection",
+        "Ecom - Site",
+        "Twitter Bot"
+    ]
+
+    level_eight_projects = [
+        "Stock Price Prediction",
+        "Real-time chat",
+        "Twitch Clone",
+        "Movie Recommendation System"
+    ]
+
+    if level == 1:
+        response = random.choice(level_one_projects)
+        await ctx.send(response)
+
+    elif level == 2:
+        response = random.choice(level_two_projects)
+        await ctx.send(response)
+
+    elif level == 3:
+        response = random.choice(level_three_projects)
+        await ctx.send(response)
+
+    elif level == 4:
+        response = random.choice(level_four_projects)
+        await ctx.send(response)
+
+    elif level == 5:
+        response = random.choice(level_five_projects)
+        await ctx.send(response)
+
+    elif level == 6:
+        response = random.choice(level_six_projects)
+        await ctx.send(response)
+
+    elif level == 7:
+        response = random.choice(level_seven_projects)
+        await ctx.send(response)
+
+    elif level == 8:
+        response = random.choice(level_eight_projects)
+        await ctx.send(response)
+
+
 @bot.event
 async def on_command_error(ctx, error):
     """
@@ -1322,7 +1695,7 @@ async def on_ready():
     Handles what happens when the Bot is online.
     """
 
-    print(f"{bot.user.name} (v0.0.0.148) at your service.")
+    print(f"{bot.user.name} (v0.0.0.604) at your service.")
 
 
 # Creates the !open command and its help message.
@@ -1341,11 +1714,6 @@ async def open_text_file(ctx, file_name: str):
         f = open(file_name, "r")
         # Reads the contents of the file, and sends it, similar to print().
         await ctx.send(f.read())
-
-    # If the file name is written as something other than a string.
-    elif file_name is not str:
-        # Sends a string to help the user, similar to print().
-        await ctx.send("This isn't a string. Please alter your query.")
 
     # Catches any other instances.
     else:
@@ -1386,6 +1754,39 @@ async def persephone(ctx):
         time.sleep(1.875)
 
 
+@bot.command(name="power",
+             help="Generates the power of a base number to the power of the exponent number.")
+async def power(ctx, base, exponent):
+    """
+    This function takes two (2) arguments, the first being the base number,
+    the second being the exponent. The base number is then raised to the
+    power of the expoenent number, and this number is assigned to the
+    "power" variable.
+    """
+
+    power = base ** exponent
+    await ctx.send(power)
+
+
+@bot.command(name="proust",
+             help="Asks a question either from or inspired by the Proust Questionnaire.")
+async def proust(ctx):
+    mbed = discord.Embed(title="Tell me...", description=prousthon.get_question())
+    await ctx.send(embed=mbed)
+
+
+@bot.command(name="exercise", help="Generates an exercise.")
+async def random_exercise(ctx):
+    """
+    This function geenrates a random round of exercise, pulled from the
+    exercise package.
+    """
+
+    mbed = discord.Embed(title="Beast Mode Activated! 12 rounds of 3.",
+                         description=exercise.get_exercise())
+    await ctx.send(embed=mbed)
+
+
 @bot.command(name="randomfact", help="Does what it says on the box.")
 async def random_fact(ctx):
     mbed = discord.Embed(title="Did you know?", description=randfacts.getFact())
@@ -1395,10 +1796,10 @@ async def random_fact(ctx):
 @bot.command(name="random", help="Generates a random number between two numbers.")
 async def random_number(ctx, first_number: int, second_number: int):
     """
-    This function generates a random number between any 2 (two) numbers, as
+    This function generates a random number between any two (2) numbers, as
     long as they are integers (whole numbers). When a user uses the !random
-    command, followed by 2 (two) numbers, a random number between those 2
-    (two) numbers is returned.
+    command, followed by two (2) numbers, a random number between those two
+    (2) numbers is returned.
     """
 
     await ctx.send(random.randint(first_number, second_number))
@@ -1421,8 +1822,27 @@ async def random_password(ctx, length: int):
     password_length = length
     password = "".join(random.sample(characters, password_length))
     await ctx.send(password)
-    
-    
+
+
+# Creates the !open command and its help message.
+@bot.command(name="recipe", help="Displays a recipe.")
+# Stops the command if the user does not have admin permission.
+@commands.has_role("admin")
+# Defines the open_text_file function and passes it the argument ctx,
+# similar to self, and file_name, a string of the name of the file the user
+# wants to open.
+async def recipe(ctx, recipe: str):
+
+    # Checks to see if the file the user wants to open exists.
+    if os.path.exists(recipe):
+        # Opens the file as a readable document and assigns its contents to the
+        # variable "f."
+        f = open(recipe, "r")
+        # Reads the contents of the file, and sends it, similar to print().
+        mbed = discord.Embed(title=f"{recipe}", description=f.read())
+        await ctx.send(embed=mbed)
+
+
 @bot.command(name="rps",
              help="Follow this command with either rock, paper, or scissors to play the game.")
 async def rock_paper_scissors(ctx, rock_paper_or_scissors: str):
@@ -1582,8 +2002,20 @@ async def side_square(ctx, number: int):
     mbed = discord.Embed(title="Square | Solve for side:",
                          description=f"a = square root of an area = {side}")
     await ctx.send(embed=mbed)
-    
-    
+
+
+@bot.command(name="pep8", help="Referrences the Python Stye Guide.")
+async def style_guide(ctx, referrence):
+    """
+    """
+
+    if referrence == "E128" or referrence == "e128":
+        await ctx.send("Continuation line under-indented for visual indent.")
+
+    else:
+        pass
+
+
 @bot.command(name="brute", help="Takes a substitution cipher and reverts to plain text.")
 async def substitution_decryption(ctx, cipher_text, rotation: int):
     """
@@ -1608,47 +2040,27 @@ async def substitution_encryption(ctx, plain_text, rotation: int):
     await ctx.send(plain_text.translate(trantab))
 
 
-# Wraps the function in and passes the function through the bot.listen
-# decorator.
-@bot.listen("on_message")
-async def thank(message):
+@bot.command(name="sum", help="Does what it says on the box.")
+async def summation(ctx, *numbers: int):
     """
-    Handles what happens when a user thanks Deme.
+    Handles the command to add numbers.
     """
 
-    if message.author != bot.user:
-        if message.content.startswith("thank") or message.content.startswith("Thank"):
+    the_sum = 0
+    for number in numbers:
+        the_sum += number
+    await ctx.send(the_sum)
 
-            you_are_welcome = [
-                f"My pleasure, {message.author}.",
-                f"No problem, {message.author}.",
-                f"You're welcome, {message.author}."
-            ]
 
-            response = random.choice(you_are_welcome)
-            await message.channel.send(response)
+@bot.command(name="tr", help="Reads your fortune.")
+async def tarot_reading(ctx):
+    """
+    This function pulls from the tarot package and generates a fortune from
+    five different lists at random.
+    """
 
-        if message.content.startswith("thanx") or message.content.startswith("Thanx"):
-
-            you_are_welcome = [
-                f"My pleasure, {message.author}.",
-                f"No problem, {message.author}.",
-                f"You're welcome, {message.author}."
-            ]
-
-            response = random.choice(you_are_welcome)
-            await message.channel.send(response)
-
-        if message.content.startswith("thnx") or message.content.startswith("Thnx"):
-
-            you_are_welcome = [
-                f"My pleasure, {message.author}.",
-                f"No problem, {message.author}.",
-                f"You're welcome, {message.author}."
-            ]
-
-            response = random.choice(you_are_welcome)
-            await message.channel.send(response)
+    mbed = discord.Embed(title="Here is your fortune.", description=tarot.get_card())
+    await ctx.send(embed=mbed)
 
 
 @bot.command(name="until", help="Calculates the time until the date entered is reached.")
@@ -1660,8 +2072,8 @@ async def time_until(ctx, year: int, month: int, day: int, hour: int):
     time_until = future_date - datetime.datetime.now()
     mbed = discord.Embed(title="Time until arrival:", description=f"{time_until}")
     await ctx.send(embed=mbed)
-            
-            
+
+
 @bot.command(name="timer", help="Does what it says on the box.")
 async def timer(ctx, minute, second):
     """
@@ -1703,122 +2115,27 @@ async def tip(ctx, meal: float, tip: int, tax: int, people: int):
         await ctx.send(f"The bill was {meal}.")
         await ctx.send(f"{tip / 100} of the bill is {add_tip}.")
         await ctx.send(f"Your total is {final_cost / people}.")
-        
-        
+
+
 @bot.listen("on_message")
-async def watts(message):
+async def voight_kampf(message):
     """
-    This function sends quotes attributed to Alan Watts when certain
-    keyword requirements are met.
     """
 
     if message.author != bot.user:
-        if "change" in message.content.lower() and "sense" in message.content.lower():
 
-            change = [
-                "The only way to make sense out of change is to",
-                "plunge into it, move with it, and join the dance.",
-                "Alan Watts"
-            ]
+        msg = message.content
 
-            for i in range(3):
-                await message.channel.send(change[i])
-                time.sleep(4.381)
+        if msg == "It's your birthday. Someone gives you a calfskin wallet.":
+            await message.channel.send("I wouldn't accept it. "
+                                       "Also, I'd report the person who gave "
+                                       "it to me to the police.")
 
-        elif "connect" in message.content.lower() and "quiet" in message.content.lower():
+        else:
+            pass
 
-            connect = [
-                "But I'll tell you what hermits realize. If you go off into a far, far forest and",
-                "get very quiet, you'll come to understand that you're connected with everything.",
-                "Alan Watts"
-            ]
-
-            for i in range(3):
-                await message.channel.send(connect[i])
-                time.sleep(5.91)
-
-        elif "bite" in message.content.lower() and "like" in message.content.lower():
-
-            bite = [
-                "Trying to define yourself is like trying to bite your own teeth.",
-                "Alan Watts"
-            ]
-
-            for i in range(2):
-                await message.channel.send(bite[i])
-                time.sleep(2.667)
-
-        elif "future" in message.content.lower() and "present" in message.content.lower():
-
-            future = [
-                "I have realized that the past and future are real illusions, that",
-                "they exist in the present, which is what there is and all there is.",
-                "Alan Watts"
-            ]
-
-            for i in range(3):
-                await message.channel.send(future[i])
-                time.sleep(5.334)
-
-        elif "future" in message.content.lower() and "live" in message.content.lower():
-
-            future2 = [
-                "No valid plans for the future can be made",
-                "by those who have no capacity for living now.",
-                "Alan Watts"
-            ]
-
-            for i in range(3):
-                await message.channel.send(future2[i])
-                time.sleep(3.81)
-
-        elif "open" in message.content.lower() and "turn" in message.content.lower():
-
-            open = [
-                "But the attitude of faith is to let go, and",
-                "become open to truth, whatever it might turn out to be.",
-                "Alan Watts"
-            ]
-
-            for i in range(3):
-                await message.channel.send(open[i])
-                time.sleep(4.381)
-
-        elif "physical" in message.content.lower() and "much" in message.content.lower():
-
-            physical = [
-                "You and I are all as much continuous with the",
-                "physical universe as a wave is continuous with the ocean.",
-                "Alan Watts"
-            ]
-
-            for i in range(3):
-                await message.channel.send(physical[i])
-                time.sleep(4.191)
-
-        elif "potato" in message.content.lower() and "while" in message.content.lower():
-
-            potato = [
-                "Zen does not confuse spirituality with thinking about God while one",
-                "is peeling potatoes. Zen spirituality is just to peel the potatoes.",
-                "Alan Watts"
-            ]
-
-            for i in range(3):
-                await message.channel.send(potato[i])
-                time.sleep(4.572)
-
-        elif "there" in message.content.lower() and "look" in message.content.lower():
-
-            there = [
-                "You don't look out there for God,",
-                "something in the sky, you look in you.",
-                "Alan Watts"
-            ]
-
-            for i in range(3):
-                await message.channel.send(there[i])
-                time.sleep(3.239)
+    else:
+        pass
 
 
 # Wraps the function in and passes the function through the bot.listen
@@ -1835,10 +2152,6 @@ async def weather(message):
     current_formatted_time = ct.strftime("%H:%M:%S")
     # Creates a Nominatim object and initialize Nominatim API.
     geolocator = Nominatim(user_agent="geoapiExercises")
-    # Assigns a latitude to a variable.
-    latitude = LATITUDE
-    # Assigns a longitude to a variable.
-    longitude = LONGITUDE
     # Obtains location data from the latitude and longitude (think reverse
     # engineering) and assigns it to a variable.
     location = geolocator.reverse(latitude + "," + longitude)
@@ -1848,12 +2161,10 @@ async def weather(message):
     # Takes the city from the data in the dictionary, and assigns it to a
     # variable.
     city = address.get("city", "")
-    # Creates a variable to store the API key.
-    WEATHER_TOKEN = WEATHER_TOKEN
     # Creates a variable to store the base url.
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     # Creates a variable to store the name of the city.
-    city_name = CITY
+    city_name = [CITY]
     # Creates a variable to store a new string with the previous weather
     # variables, and adds the imperial parameter to convert the temperture
     # to Fahrenheit.
@@ -1868,7 +2179,7 @@ async def weather(message):
     y = weather_list["main"]
     # Creates a variable to store the value corresponding to the "temp"
     # key.
-    current_temperature = y["temp"]
+    current_temperature = round(y["temp"])
     # Creates a variable to store the value of the "weather" key.
     z = weather_list["weather"]
     # Creates a variable to store the value corresponding to the
@@ -1939,6 +2250,12 @@ async def weather(message):
                 # reader (280-350 wpm, or 5.25 wps) Items are sent every
                 # one-point-two-three-nine (1.239) seconds.
                 time.sleep(1.239)
+
+        else:
+            pass
+
+    else:
+        pass
 
 
 bot.run(TOKEN)
