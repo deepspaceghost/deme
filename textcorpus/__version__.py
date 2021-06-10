@@ -1,0 +1,8 @@
+__title__ = "textcorpus"
+__description__ = "Package to contain common and basic English words."
+__url__ = "https://github.com/deepspaceghost/deme-app/tree/textcorpus"
+__version__ = "0.0.0.604"
+__author__ = "deepspaceghost"
+__author_email__ = "ghostblac@protonmail.com"
+__license__ = "none"
+__copyright__ = "© 2021 demiurge"
