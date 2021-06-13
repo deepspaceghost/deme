@@ -182,6 +182,10 @@ much_phrases = [
     "make much of"
 ]
 
+names = [
+    "Deme", "deme"
+]
+
 necessary_words = [
     "compulsory",
     "demand",
@@ -404,6 +408,17 @@ what_do_you_think_phrases = [
     "What you think, Deme?",
     "what do you think, Deme?",
     "what you think, Deme?"
+]
+
+what_is_phrases = [
+    "Wat is",
+    "wat is",
+    "Wats",
+    "wats",
+    "What is",
+    "What's",
+    "what is",
+    "what's"
 ]
 
 your_words = [
@@ -852,16 +867,38 @@ async def cleandex(ctx, period: str):
         await ctx.send("Use 'day', 'week', or 'month' for a more specific task.")
 
 
-@bot.command(name="misconception", help="Generates a common misconception.")
-async def common_misconception(ctx):
+@bot.listen("on_message")
+async def common_misconception(message):
     """
-    Type the !misconception command in a Discord server, and this function
-    pulls a common misconception from a list provided by the commerrors
-    module.
+    This function listens for when the user requests a common
+    misconception. The misconception is then pulled from commerrors
+    package.
     """
 
-    mbed = discord.Embed(title="Did you know?", description=commerrors.get_error())
-    await ctx.send(embed=mbed)
+    global names, what_is_phrases
+
+    if message.author != bot.user:
+        msg = message.content
+
+        if any(name in msg for name in names) \
+            and any(phrase in msg for phrase in what_is_phrases) \
+                and "a common misconception" in msg \
+                and "?" in msg:
+
+            response = [
+                "Did you know?",
+                commerrors.get_error()
+            ]
+
+            for i in range(2):
+                await message.channel.send(response[i])
+                time.sleep(1)
+
+        else:
+            pass
+
+    else:
+        pass
 
 
 @bot.command(name="thecount",
