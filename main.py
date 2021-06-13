@@ -295,6 +295,12 @@ thank_you_phrases = [
     "thnx, Deme."
 ]
 
+time_phrases = [
+    "the time",
+    "time",
+    "what time is it"
+]
+
 tooth_nouns = [
     "tooth",
     "teeth"
@@ -878,6 +884,7 @@ async def common_misconception(message):
     global names, what_is_phrases
 
     if message.author != bot.user:
+        
         msg = message.content
 
         if any(name in msg for name in names) \
@@ -891,7 +898,9 @@ async def common_misconception(message):
             ]
 
             for i in range(2):
+                
                 await message.channel.send(response[i])
+                
                 time.sleep(1)
 
         else:
@@ -954,15 +963,56 @@ async def create_file(ctx, file_name: str, content: str):
             time.sleep(3.048)
 
 
-@bot.command(name="currenttime", help="Gives the time.")
-# Defines an asynchronous function to give the current time.
-async def current_time(ctx):
+@bot.listen("on_message")
+async def current_time(message):
     """
-    Handles the command to give the time.
+    This function listens for when the user requests the time. The time is
+    then generate using the datetime package, and formatted for
+    readability.
     """
 
-    ct = datetime.datetime.now().time()
-    await ctx.send(ct.strftime("%H:%M:%S"))
+    global names, time_phrases, what_is_phrases
+
+    if message.author != bot.user:
+        
+        msg = message.content
+
+        if any(name in msg for name in names) \
+            and any(phrase in msg for phrase in what_is_phrases) \
+                and "the time" in msg \
+                and "?" in msg:
+
+            current_time = datetime.datetime.now().time().strftime("%H:%M")
+
+            response = [
+                "Time for you to buy a watch.",
+                f"It's {current_time}."
+            ]
+
+            for i in range(2):
+                await message.channel.send(response[i])
+                time.sleep(5)
+
+        elif any(name in msg for name in names) \
+            and any(phrase in msg for phrase in time_phrases) \
+                and "?" in msg:
+
+            current_time = datetime.datetime.now().time().strftime("%H:%M")
+
+            response = [
+                "Time for you to buy a watch.",
+                f"It's {current_time}."
+            ]
+
+            for i in range(2):
+                await message.channel.send(response[i])
+                time.sleep(5)
+
+        else:
+            pass
+
+    else:
+        pass
 
 
 @bot.command(name="calendar", help="Takes a year and a month an generates a calendar.")
