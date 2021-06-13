@@ -62,6 +62,13 @@ bread_words = [
     "bread"
 ]
 
+can_you_phrases = [
+    "Can u",
+    "Can you",
+    "can u",
+    "can you"
+]
+
 command_verbs = [
     "command",
     "commanded",
@@ -1036,6 +1043,40 @@ async def digit_sum(ctx, base_number: int):
     await ctx.send(the_sum)
 
 
+@bot.listen("on_message")
+async def encrypt_keeper(message):
+    """
+    This function listens for when the user requests to encrypt something.
+    """
+
+    global can_you_phrases, names
+
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if any(name in msg for name in names) \
+            and any(phrase in msg for phrase in can_you_phrases) \
+                and "encrypt something for me" in msg \
+                and "?" in msg:
+
+            await message.channel.send("What do you need encrypted?")
+
+            def check(m):
+                return m.content == "A message."
+
+            msg2 = await bot.wait_for("message", check=check)
+            await message.channel.send("Oh, no, I can't encrypt those yet. Sorry.".format(msg2))
+
+        else:
+
+            pass
+
+    else:
+
+        pass
+
+    
 @bot.command(name="convertcf", help="Converts celcsius to fahrenheit.")
 async def fahrenheit_from(ctx, celsius):
     """
