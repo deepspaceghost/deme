@@ -112,6 +112,10 @@ deliquesce_words = [
     "deliquescing"
 ]
 
+direct_verbs = [
+    "direct", "directed", "directing", "directs"
+]
+
 enter_words = [
     "enter",
     "infiltrate",
@@ -285,21 +289,8 @@ sense_words = [
 ]
 
 thank_you_phrases = [
-    "Deme, thank u.",
-    "Deme, thank you.",
-    "Deme, thanks.",
-    "Deme, thanx.",
-    "Deme, thnx."
-    "Thank u, Deme.",
-    "thank u, Deme.",
-    "Thank you, Deme.",
-    "thank you, Deme.",
-    "Thanks, Deme.",
-    "thanks, Deme.",
-    "Thanx, Deme.",
-    "thanx, Deme.",
-    "Thnx, Deme.",
-    "thnx, Deme."
+    "Thank u", "thank u", "Thank you", "thank you", "Thanks", "thanks", "Thanx", "thanx", "Thnx",
+    "thnx"
 ]
 
 time_phrases = [
@@ -369,7 +360,6 @@ unsorted_words = [
     "adjure",
     "bid",
     "charge",
-    "direct",
     "enjoin",
     "instruct",
     "order",
@@ -1127,19 +1117,48 @@ async def hexadecimal(ctx, number: int):
     await ctx.send(pocus)
 
 
-@bot.command(name="list", help="Lists text files in Deme's directory.")
-async def list(ctx):
+@bot.listen("on_message")
+async def list(message):
     """
-    Handles the command to list Deme's text files.
+    This function listens for a user request to view the available text files in Deme's directory.
+    It then sends the items in the premade list.
     """
 
-    plain_text_file_list = [
-        "github.txt",
-        "requirements.txt",
-        "voodoo.txt"
-    ]
+    global can_you_phrases, names
 
-    await ctx.send(plain_text_file_list)
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if any(name in msg for name in names) \
+            and any(phrase in msg for phrase in can_you_phrases) \
+                and "list" in msg \
+                and "text files" in msg \
+                and "?" in msg:
+
+            list_of_text_files = [
+                "attribution",
+                "cccookies",
+                "err",
+                "general_terms",
+                "github",
+                "jesus",
+                "pancakes",
+                "requirements",
+                "voodoo",
+                "zsh_command_line_database",
+                "This is the end of the list."
+            ]
+
+            for i in range(10):
+                await message.channel.send(list_of_text_files[i])
+                time.sleep(.5)
+
+        else:
+            pass
+
+    else:
+        pass
 
 
 @bot.command(name="meditate", help="1-minute breathing exercise.")
@@ -1275,7 +1294,7 @@ async def messages_phrase_matching(message):
     """
     """
 
-    global how_are_you_phrases, thank_you_phrases, what_do_you_think_phrases
+    global how_are_you_phrases, names, what_do_you_think_phrases
 
     if message.author != bot.user:
 
@@ -1301,17 +1320,6 @@ async def messages_phrase_matching(message):
             for j in search(searchContent, tld="co.in", num=1, stop=1, pause=2):
 
                 await message.channel.send(j)
-
-        elif any(phrase in msg for phrase in thank_you_phrases):
-
-            you_are_welcome = [
-                f"My pleasure, {message.author}.",
-                f"No problem, {message.author}.",
-                f"You're welcome, {message.author}."
-            ]
-
-            response = random.choice(you_are_welcome)
-            await message.channel.send(response)
 
         elif any(phrase in msg for phrase in what_do_you_think_phrases):
 
@@ -1395,8 +1403,10 @@ async def messages_word_matching(message):
 
         if any(word in msg for word in unsorted_words):
 
-            await message.channel.send("Keep in mind, one or more of these words are unsorted \
-                within my programming.")
+            await message.channel.send("""
+                At least one of the words in your previous message is labelled as unsorted in my
+                programming.
+                """)
 
         # This is where the updated function ends.
 
@@ -2240,6 +2250,38 @@ async def tarot_reading(ctx):
     await ctx.send(embed=mbed)
 
 
+@bot.listen("on_message")
+async def thank_you(message):
+    """
+    This function listens for when a user thanks Deme. It then sends a response from a list at
+    random.
+    """
+
+    global names, thank_you_phrases
+
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if any(phrase in msg for phrase in thank_you_phrases) \
+                and any(name in msg for name in names):
+
+            you_are_welcome = [
+                f"My pleasure, {message.author}.",
+                f"No problem, {message.author}.",
+                f"You're welcome, {message.author}."
+            ]
+
+            response = random.choice(you_are_welcome)
+            await message.channel.send(response)
+
+        else:
+            pass
+
+    else:
+        pass
+    
+    
 @bot.command(name="until", help="Calculates the time until the date entered is reached.")
 async def time_until(ctx, year: int, month: int, day: int, hour: int):
     """
