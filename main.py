@@ -34,6 +34,15 @@ WEATHER_TOKEN = os.getenv("OPEN_WEATHER_MAP")
 help_command = commands.DefaultHelpCommand(no_category="Commands")
 bot = commands.Bot(command_prefix="!", help_command=help_command)
 
+archer_phrasing_phrases = [
+    "Begging for it",
+    "begging for it",
+    "Gaping hole",
+    "gaping hole",
+    "Just the tip",
+    "just the tip",
+]
+
 better_words = [
     "best",
     "better",
@@ -1978,6 +1987,37 @@ async def persephone(ctx):
         time.sleep(1.875)
 
 
+@bot.listen("on_message")
+async def phrasing(message):
+    """
+    This function listens for certain phrases (sexual innuendos). Inspired by the adult animation
+    Archer.
+    """
+
+    global archer_phrasing_phrases
+
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if any(phrase in msg for phrase in archer_phrasing_phrases):
+
+            phrasing_boom = [
+                "Phrasing!",
+                "Boom!"
+            ]
+
+            for i in range(2):
+                await message.channel.send(phrasing_boom[i])
+                time.sleep(.5)
+
+        else:
+            pass
+
+    else:
+        pass
+        
+        
 @bot.command(name="power",
              help="Generates the power of a base number to the power of the exponent number.")
 async def power(ctx, base, exponent):
@@ -2348,6 +2388,32 @@ async def timer(ctx, minute, second):
         time.sleep(int(timer_set))
 
 
+@bot.listen("on_message")
+async def tip_calculating(message):
+    """
+    this function listens for a user request to calculate a tip. In the future, this function will
+    slice the string and perform the necessary operations.
+    """
+
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if any(name in msg for name in names) \
+            and any(phrase in msg for phrase in can_you_phrases) \
+                and "calculate" in msg \
+                and "tip" in msg \
+                and "?" in msg:
+
+            await message.channel.send("I'm still learning. Maybe one day.")
+
+        else:
+            pass
+
+    else:
+        pass
+        
+        
 @bot.command(name="tip", help="Calculates a tip amount.")
 async def tip(ctx, meal: float, tip: int, tax: int, people: int):
     """
