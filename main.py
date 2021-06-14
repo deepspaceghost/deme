@@ -1034,6 +1034,43 @@ async def digit_sum(ctx, base_number: int):
 
 
 @bot.listen("on_message")
+async def divide(message):
+    """
+    This functions listens for a user request to divide a number by another number. The request
+    string is then sliced to "grab" the individual integers and the operation is performed.
+    """
+
+    global names, what_is_phrases
+
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if any(name in msg for name in names) \
+            and any(phrase in msg for phrase in what_is_phrases) \
+                and "divided by" in msg \
+                and "?" in msg:
+
+            first_number = int(msg[14:-15])
+            second_number = int(msg[29:-1])
+
+            response = [
+                "Uh, let me think...",
+                f"{first_number / second_number}"
+            ]
+
+            for i in range(2):
+                await message.channel.send(response[i])
+                time.sleep(1)
+
+        else:
+            pass
+
+    else:
+        pass
+    
+    
+@bot.listen("on_message")
 async def encrypt_keeper(message):
     """
     This function listens for when the user requests to encrypt something.
