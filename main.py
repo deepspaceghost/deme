@@ -1029,6 +1029,37 @@ async def datebook(ctx, year: int, month: int):
     await ctx.send(calendar.month(year, month))
 
 
+@bot.listen("on_message")
+async def datebook_generating(message):
+    """
+    This function listens for a user request for a calender of a specific month and year. In the
+    future, this function will scan a string for integers and substrings and use this information
+    to generate calendars.
+    """
+
+    global can_you_phrases, names
+
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if any(name in msg for name in names) \
+            and any(phrase in msg for phrase in can_you_phrases) \
+                and "show me" in msg \
+                and "calendar" in msg \
+                and "?":
+
+            for c in msg:
+
+                await message.channel.send(c.isdigit())
+
+        else:
+            pass
+
+    else:
+        pass
+    
+    
 @bot.command(name="digitsum", help="Adds the digits in a number base.")
 async def digit_sum(ctx, base_number: int):
     """
