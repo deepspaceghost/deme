@@ -1,7 +1,7 @@
 __title__ = "commerrors"
 __description__ = "Package to generate common errors"
 __url__ = "https://github.com/deepspaceghost/deme-app/tree/commerrors"
-__version__ = "0.0.0.296"
+__version__ = "0.0.0.643"
 __author__ = "deepspaceghost"
 __author_email__ = "ghostblac@protonmail.com"
 __license__ = "none"
