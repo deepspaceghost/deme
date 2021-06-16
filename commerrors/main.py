@@ -16,6 +16,10 @@ with open(os.path.join(dir_path, "astronomy_and_spaceflight.txt")) as f:
 with open(os.path.join(dir_path, "biology.txt")) as f:
     biology_errors = [error.rstrip('\r\n ') for error in f.readlines() if error != ""]
 
+with open(os.path.join(dir_path, "chemical_and_materials_science.txt")) as f:
+    checmical_and_materials_science_errors \
+        = [error.rstrip('\r\n ') for error in f.readlines() if error != ""]
+
 with open(os.path.join(dir_path, "computing_and_the_internet.txt")) as f:
     computing_and_the_internet_errors \
         = [error.rstrip('\r\n ') for error in f.readlines() if error != ""]
@@ -65,11 +69,12 @@ with open(os.path.join(dir_path, "sports.txt")) as f:
     sports_errors = [error.rstrip('\r\n ') for error in f.readlines() if error != ""]
 
 all_errors = ancient_errors + architecture_errors + astronomy_and_spaceflight_errors \
-    + biology_errors + computing_and_the_internet_errors + early_modern_errors \
-    + economics_errors + environmental_science_errors + film_and_television_errors \
-    + food_and_cooking_errors + human_body_and_health_errors + inventions_errors + language_errors \
-    + law_crime_and_military_errors + middle_ages_and_renaissance_errors + modern_errors \
-    + music_errors + religion_errors + sports_errors
+    + biology_errors + checmical_and_materials_science_errors + computing_and_the_internet_errors \
+    + early_modern_errors + economics_errors + environmental_science_errors \
+    + film_and_television_errors + food_and_cooking_errors + human_body_and_health_errors \
+    + inventions_errors + language_errors + law_crime_and_military_errors \
+    + middle_ages_and_renaissance_errors + modern_errors + music_errors + religion_errors \
+    + sports_errors
 
 
 def get_error():
