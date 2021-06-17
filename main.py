@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+# Import the necessary packages.
 import calendar
 import commerrors
 import datetime
@@ -23,7 +24,7 @@ from dotenv import load_dotenv
 from geopy.geocoders import Nominatim
 from googlesearch import search
 
-# Loads the DISCORD_TOKEN and DISCORD_GUILD strings from the .env file.
+# Load the secrets from an external .env file.
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 GUILD = os.getenv("DISCORD_GUILD")
@@ -44,14 +45,7 @@ archer_phrasing_phrases = [
 ]
 
 better_words = [
-    "best",
-    "better",
-    "bettered",
-    "bettering",
-    "betters",
-    "good",
-    "one's betters",
-    "well"
+    "best", "better", "bettered", "bettering", "betters", "good", "one's betters", "well"
 ]
 
 between_words = [
@@ -1194,6 +1188,39 @@ async def hexadecimal(ctx, number: int):
     await ctx.send(pocus)
 
 
+@bot.listen("on_message")
+async def how_are_you(message):
+    """
+    This function "listens" for a user asking Deme how it's doing. It then generates a
+    predetermined response at random.
+    """
+
+    global how_are_you_phrases, names
+
+    if message.author != bot.user:
+
+        msg = message.content
+
+        if any(phrase in msg for phrase in how_are_you_phrases) \
+                and any(name in msg for name in names):
+
+            response1 = [
+                "I'm fine, I suppose. How're you?",
+                "I'm well. You?",
+                "Living the dream. And you?",
+                "Meh, can't complain. How about yourself?"
+            ]
+
+            response2 = random.choice(response1)
+            await message.channel.send(response2)
+
+        else:
+            pass
+
+    else:
+        pass
+    
+    
 @bot.listen("on_message")
 async def list(message):
     """
