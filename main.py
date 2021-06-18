@@ -35,16 +35,6 @@ WEATHER_TOKEN = os.getenv("OPEN_WEATHER_MAP")
 help_command = commands.DefaultHelpCommand(no_category="Commands")
 bot = commands.Bot(command_prefix="!", help_command=help_command)
 
-# Create a list of innuendos from the adult animation Archer.
-archer_phrasing_phrases = [
-    "Begging for it",
-    "begging for it",
-    "Gaping hole",
-    "gaping hole",
-    "Just the tip",
-    "just the tip",
-]
-
 # Create a list of better adjectives
 better_adjectives = [
     "better", "good", "well"
@@ -190,10 +180,6 @@ much_phrases = [
     "make much of"
 ]
 
-names = [
-    "Deme", "deme"
-]
-
 necessary_words = [
     "compulsory",
     "demand",
@@ -283,11 +269,6 @@ sense_words = [
     "sensed",
     "senses",
     "sensing"
-]
-
-thank_you_phrases = [
-    "Thank u", "thank u", "Thank you", "thank you", "Thanks", "thanks", "Thanx", "thanx", "Thnx",
-    "thnx"
 ]
 
 time_phrases = [
@@ -2046,28 +2027,9 @@ async def phrasing(message):
     Archer.
     """
 
-    global archer_phrasing_phrases
+    langpro = languageProcessing()
 
-    if message.author != bot.user:
-
-        msg = message.content
-
-        if any(phrase in msg for phrase in archer_phrasing_phrases):
-
-            phrasing_boom = [
-                "Phrasing!",
-                "Boom!"
-            ]
-
-            for i in range(2):
-                await message.channel.send(phrasing_boom[i])
-                time.sleep(.5)
-
-        else:
-            pass
-
-    else:
-        pass
+    await message.channel.send(langpro.phrasing_boom(message))
         
         
 @bot.command(name="power",
@@ -2377,38 +2339,6 @@ async def tarot_reading(ctx):
 
     mbed = discord.Embed(title="Here is your fortune.", description=tarot.get_card())
     await ctx.send(embed=mbed)
-
-
-@bot.listen("on_message")
-async def thank_you(message):
-    """
-    This function listens for when a user thanks Deme. It then sends a response from a list at
-    random.
-    """
-
-    global names, thank_you_phrases
-
-    if message.author != bot.user:
-
-        msg = message.content
-
-        if any(phrase in msg for phrase in thank_you_phrases) \
-                and any(name in msg for name in names):
-
-            you_are_welcome = [
-                f"My pleasure, {message.author}.",
-                f"No problem, {message.author}.",
-                f"You're welcome, {message.author}."
-            ]
-
-            response = random.choice(you_are_welcome)
-            await message.channel.send(response)
-
-        else:
-            pass
-
-    else:
-        pass
     
     
 @bot.command(name="until", help="Calculates the time until the date entered is reached.")
@@ -2583,6 +2513,18 @@ async def weather(message):
 
     else:
         pass
+
+
+@bot.listen("on_message")
+async def welcome(message):
+    """
+    This function listens for when a user thanks Deme. It then sends a response from a list at
+    random.
+    """
+
+    langpro = languageProcessing()
+
+    await message.channel.send(langpro.you_are_welcome(message))
 
 
 bot.run(TOKEN)
