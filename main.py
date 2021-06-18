@@ -45,6 +45,7 @@ archer_phrasing_phrases = [
     "just the tip",
 ]
 
+# Create a list of better adjectives
 better_adjectives = [
     "better", "good", "well"
 ]
@@ -54,11 +55,7 @@ between_prepositions = [
 ]
 
 bite_words = [
-    "bit",
-    "bite",
-    "bites",
-    "bitten",
-    "biting"
+    "bit", "bite", "bites", "bitten", "biting"
 ]
 
 bread_words = [
@@ -73,10 +70,7 @@ can_you_phrases = [
 ]
 
 command_verbs = [
-    "command",
-    "commanded",
-    "commanding",
-    "commands"
+    "command", "commanded", "commanding", "commands"
 ]
 
 conscious_words = [
