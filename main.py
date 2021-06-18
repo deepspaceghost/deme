@@ -35,6 +35,7 @@ WEATHER_TOKEN = os.getenv("OPEN_WEATHER_MAP")
 help_command = commands.DefaultHelpCommand(no_category="Commands")
 bot = commands.Bot(command_prefix="!", help_command=help_command)
 
+# Create a list of innuendos from the adult animation Archer.
 archer_phrasing_phrases = [
     "Begging for it",
     "begging for it",
@@ -44,13 +45,12 @@ archer_phrasing_phrases = [
     "just the tip",
 ]
 
-better_words = [
-    "best", "better", "bettered", "bettering", "betters", "good", "one's betters", "well"
+better_adjectives = [
+    "better", "good", "well"
 ]
 
-between_words = [
+between_prepositions = [
     "between",
-    "betwixt"
 ]
 
 bite_words = [
