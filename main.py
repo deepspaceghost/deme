@@ -70,6 +70,27 @@ bot = commands.Bot(
 
 average_typing_speed = 0.833
 
+how_are_you_phrases = [
+    "Deme, how are you?",
+    "Deme, how are u?",
+    "Deme, how r you?",
+    "Deme, how r u?",
+    "Deme, how're you?",
+    "Deme, how're u?",
+    "How are you, Deme?",
+    "how are you, Deme?",
+    "How r you, Deme?",
+    "how r you, Deme",
+    "How are u, Deme?",
+    "how are u, Deme?",
+    "How r u, Deme?",
+    "how r u, Deme?",
+    "How're you, Deme?",
+    "How're u, Deme?",
+    "how're you, Deme?",
+    "how're u, Deme?"
+]
+
 names = [
     "Deme",
     "deme"
@@ -134,7 +155,12 @@ async def against_the_dark(message):
 
         if msg == "Do you prefer the day or the night?" \
             or msg == "Do you think there is such a thing as evil?" \
-                or msg == "Do you think you can protect people against the dark?":
+                or msg == "Do you think you can protect people against the dark?" \
+                or msg == "What's your favorite part of the moon?" \
+                or msg == "What kind of power do you have against the dark?" \
+                or msg == "When is the last time you saw a starry sky?" \
+                or msg == "Who did you get your darkness from?" \
+                or msg == "Why are these things happening?":
             await asyncio.sleep(average_typing_speed * 3)
             await message.channel.send("Against the dark.")
 
@@ -182,7 +208,10 @@ async def cells(message):
                 or msg == "Millions and billions of them." \
                 or msg == "They were all put together at a time." \
                 or msg == "We're going to go on." \
-                or msg == "Were you ever arrested?":
+                or msg == "Were you ever arrested?" \
+                or msg == """
+                When you're not performing your duties do they keep you in a little box?
+                """:
             await asyncio.sleep(average_typing_speed)
             await message.channel.send("Cells.")
 
@@ -316,7 +345,11 @@ async def dark_response(message):
                 or msg == "Dreadfully distinct." \
                 or msg == "Maybe it's a spot of rust or something?" \
                 or msg == "Was it dark in there?" \
-                or msg == "Were you afraid of the dark whan you were little?":
+                or msg == "Were you afraid of the dark whan you were little?" \
+                or msg == "What is it like when someone gives you the silent treatment?" \
+                or msg == "What's it like to hide under a bed?" \
+                or msg == "Who did you get your darkness from?" \
+                or msg == "Who's the darkest person you know?":
             await asyncio.sleep(average_typing_speed)
             await message.channel.send("Dark.")
 
@@ -338,10 +371,46 @@ async def distinct(message):
         msg = message.content
 
         if msg == "Do you have a particular personality?" \
-                or msg == "Do you think you could find out all the answers to all the questions?" \
-                or msg == "How good are your eyes?":
+            or msg == "Do you think you could find out all the answers to all the questions?" \
+                or msg == "How good are your eyes?" \
+                or msg == "What separates somebody from somebody else?" \
+                or msg == "What was your most shameful moment?" \
+                or msg == "Who do you admire most in the world?":
             await asyncio.sleep(average_typing_speed)
             await message.channel.send("Distinct.")
+
+        else:
+            pass
+
+    else:
+        pass
+
+
+@bot.listen("on_message")
+async def doing_good(message):
+    """
+    This function listens for phrases about the state of Deme, directed
+    toward Deme.
+    """
+
+    global average_typing_speed, how_are_you_phrases, names
+
+    if message.author != bot.user:
+        msg = message.content
+
+        if any(phrase in msg for phrase in how_are_you_phrases) \
+                and any(name in msg for name in names):
+            response = [
+                "I'm fine, I suppose. How're you?",
+                "I'm well. You?",
+                "Living the dream. And you?",
+                "Meh, can't complain. How about yourself?"
+            ]
+
+            chosen_response = random.choice(response)
+
+            await asyncio.sleep(average_typing_speed * 5)
+            await message.channel.send(chosen_response)
 
         else:
             pass
@@ -362,9 +431,32 @@ async def dreadful(message):
 
         if msg == "Did you ever want to live in the nineteenth century?" \
             or msg == "Do you think you could find out all the answers to all the questions?" \
-                or msg == "Is that an old fashioned word?":
+                or msg == "Is that an old fashioned word?" \
+                or msg == "What's it like to be filled with dread?" \
+                or msg == "Within one stem.":
             await asyncio.sleep(average_typing_speed)
             await message.channel.send("Dreadfully.")
+
+        else:
+            pass
+
+    else:
+        pass
+
+
+@bot.listen("on_message")
+async def and_dreadfully_distinct(message):
+    """
+    """
+
+    global average_typing_speed
+
+    if message.author != bot.user:
+        msg = message.content
+
+        if msg == "Within on stem.":
+            await asyncio.sleep(average_typing_speed * 3)
+            await message.channel.send("And dreadfully distinct.")
 
         else:
             pass
@@ -443,7 +535,9 @@ async def fountain(message):
 
         if msg == "Have you ever seen the fountain in Lincoln center?" \
             or msg == "Have you seen fountains out in the wild?" \
-                or msg == "Have you seen the Trevi fountain in Rome?":
+                or msg == "Have you seen the Trevi fountain in Rome?" \
+                or msg == "What's it like when you have an orgasm?" \
+                or msg == "What's your favorite part of the moon?":
             await asyncio.sleep(average_typing_speed)
             await message.channel.send("Fountain.")
 
@@ -476,8 +570,8 @@ async def rock_paper_scissors_prompt(message):
                 and "rock" in msg \
                 and "scissors" in msg \
                 and "?" in msg:
-            await asyncio.sleep(average_typing_speed * 6)
-            await message.channel.send("On go. One, two, three, go!")
+            await asyncio.sleep(average_typing_speed * 7)
+            await message.channel.send("On go, okay? One, two, three, go!")
 
         else:
             pass
@@ -562,6 +656,29 @@ async def hmm_response(message):
 
 
 @bot.listen("on_message")
+async def i_dont_know(message):
+    """
+    """
+
+    global average_typing_speed
+
+    if message.author != bot.user:
+        msg = message.content
+
+        if any(name in msg for name in names) \
+            and "am I here" in msg \
+                and "?" in msg:
+            await asyncio.sleep(average_typing_speed * 8)
+            await message.channel.send("It's inherent to the programming of the matrix.")
+
+        else:
+            pass
+
+    else:
+        pass
+
+
+@bot.listen("on_message")
 async def interlinked(message):
     """
     """
@@ -572,13 +689,19 @@ async def interlinked(message):
         msg = message.content
 
         if msg == "Do they teach you how to feel finger to finger?" \
-                or msg == "Do you dream about being interlinked?" \
+            or msg == "Do you dream about being interlinked?" \
                 or msg == "Do you feel that there's a part of you that's missing?" \
                 or msg == "Do you like to connect to things?" \
                 or msg == "Do you long to have your heart interlinked?" \
                 or msg == "Have they left a place for you where you can dream?" \
                 or msg == "Have they let you feel heartbreak?" \
-                or msg == "What happens when that linkage is broken?":
+                or msg == "What happens when that linkage is broken?" \
+                or msg == "What's it like to hold the hand of someone you love?" \
+                or msg == "What's it like to hold your child in your arms?" \
+                or msg == "What's it like to play with your dog?" \
+                or msg == """
+                When you're not performing your duties do they keep you in a little box?
+                """:
             await asyncio.sleep(average_typing_speed)
             await message.channel.send("Interlinked.")
 
@@ -610,6 +733,29 @@ async def mystery(message):
         pass
 
 
+@bot.listen("on_message")
+async def no_resoonse(message):
+    """
+    """
+
+    global average_typing_speed
+
+    if message.author != bot.user:
+        msg = message.content
+
+        if any(name in msg for name in names) \
+            and "you marry me" in msg \
+                and "?" in msg:
+            await asyncio.sleep(average_typing_speed)
+            await message.channel.send("No.")
+
+        else:
+            pass
+
+    else:
+        pass
+
+
 @bot.event
 async def on_message(message):
     """
@@ -630,7 +776,7 @@ async def on_ready():
     setting up with Discord.
     """
 
-    print(f"{bot.user} (Deme v0.0.00-11), at your service.")
+    print(f"{bot.user} (Deme v0.0.0.01-48), at your service.")
 
 
 @bot.listen("on_message")
@@ -646,7 +792,8 @@ async def a_tall_white_fountain(message):
         msg = message.content
 
         if msg == "Do you like fire, earth, air or water?" \
-                or msg == "Do you like skipping around in the water?":
+                or msg == "Do you like skipping around in the water?" \
+                or msg == "When you were little did you ever fall into a Fountain?":
             await asyncio.sleep(average_typing_speed * 4)
             await message.channel.send("A Tall White Fountain.")
 
@@ -679,7 +826,8 @@ async def stem(message):
                 or msg == "Have you planted things in the ground?" \
                 or msg == "Is it a slang word for people's legs?" \
                 or msg == "What comes from something else?" \
-                or msg == "What did she look like?":
+                or msg == "What did she look like?" \
+                or msg == "When's the first time you gave a flower to a girl?":
             await asyncio.sleep(average_typing_speed)
             await message.channel.send("Stem.")
 
@@ -765,6 +913,31 @@ async def style_guide_e128(message):
 
 
 @bot.listen("on_message")
+async def sweets(message):
+    """
+    """
+
+    global average_typing_speed
+
+    if message.author != bot.user:
+        msg = message.content
+
+        if any(name in msg for name in names) \
+            and "is the meaning of life" in msg \
+                and "?" in msg:
+            await asyncio.sleep(average_typing_speed * 13)
+            await message.channel.send("""
+                I think a beter question is: what is the meaning of ***your*** life?
+                """)
+
+        else:
+            pass
+
+    else:
+        pass
+
+
+@bot.listen("on_message")
 async def system(message):
     """
     """
@@ -830,7 +1003,10 @@ async def within(message):
         msg = message.content
 
         if msg == "Do you have a heart?" \
-                or msg == "Has anyone ever locked you out of a room?":
+                or msg == "Has anyone ever locked you out of a room?" \
+                or msg == "Where do you go to when you go within?" \
+                or msg == "Where do you go when you go within?" \
+                or msg == "Where is the place in the world you feel the safest?":
             await asyncio.sleep(average_typing_speed)
             await message.channel.send("Within.")
 
@@ -855,6 +1031,14 @@ async def within_cells_interlinked(message):
 
         if msg == "A system of cells." \
                 or msg == "Did you buy a present for the person you love?":
+            await asyncio.sleep(average_typing_speed * 3)
+            await message.channel.send("Within cells interlinked.")
+
+        elif msg == "Why don't you say that three times?":
+            await asyncio.sleep(average_typing_speed * 3)
+            await message.channel.send("Within cells interlinked.")
+            await asyncio.sleep(average_typing_speed * 3)
+            await message.channel.send("Within cells interlinked.")
             await asyncio.sleep(average_typing_speed * 3)
             await message.channel.send("Within cells interlinked.")
 
