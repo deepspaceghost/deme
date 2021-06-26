@@ -96,6 +96,19 @@ names = [
     "deme"
 ]
 
+thank_you_phrases = [
+    "Thank u",
+    "thank u",
+    "Thank you",
+    "thank you",
+    "Thanks",
+    "thanks",
+    "Thanx",
+    "thanx",
+    "Thnx",
+    "thnx"
+]
+
 
 @bot.listen("on_message")
 async def began_to_spin(message):
@@ -1049,4 +1062,35 @@ async def within_cells_interlinked(message):
         pass
 
 
+@bot.listen("on_message")
+async def you_are_welcome(message):
+    """
+    This function listens for phrases of gratitude towards Deme.
+    """
+
+    global average_typing_speed, names, thank_you_phrases
+
+    if message.author != bot.user:
+        msg = message.content
+
+        if any(phrase in msg for phrase in thank_you_phrases) \
+                and any(name in msg for name in names):
+            response = [
+                f"My pleasure, {message.author}.",
+                f"No problem, {message.author}.",
+                f"You're welcome, {message.author}."
+            ]
+
+            response2 = random.choice(response)
+
+            await asyncio.sleep(average_typing_speed * 3)
+            await message.channel.send(response2)
+
+        else:
+            pass
+
+    else:
+        pass
+    
+    
 bot.run("TOKEN")
