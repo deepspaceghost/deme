@@ -6,7 +6,7 @@ import random
 
 from discord.ext import commands
 
-# sets up discord.err.log for the handler
+# sets up discord_err.log for the handler
 handler = logging.FileHandler(
     encoding="utf-8",
     filename="discord_err.log",
