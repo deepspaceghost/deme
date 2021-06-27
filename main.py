@@ -1,3 +1,4 @@
+# import the necessary packages
 import asyncio
 import discord
 import logging
