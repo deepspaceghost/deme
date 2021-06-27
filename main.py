@@ -68,6 +68,18 @@ bot = commands.Bot(
     intents=intents
 )
 
+# Create lists of strings Deme will isten out for.
+archer_phrasing_phrases = [
+    "Begging for it",
+    "begging for it",
+    "Gaping hole",
+    "gaping hole",
+    "Just the tip",
+    "just the tip",
+    "My box",
+    "my box"
+]
+
 average_typing_speed = 0.833
 
 how_are_you_phrases = [
@@ -792,6 +804,37 @@ async def on_ready():
     print(f"{bot.user} (Deme v0.0.0.01-48), at your service.")
 
 
+@bot.listen("on_message")
+async def phrasing_boom(message):
+    """
+    This function listens for certain phrases (sexual innuendos).
+    Inspired by the adult animation Archer.
+    """
+
+    global archer_phrasing_phrases, average_typing_speed
+
+    if message.author != bot.user:
+        msg = message.content
+
+        if any(phrase in msg for phrase in archer_phrasing_phrases):
+            phrasing_response = [
+                "Phrasing!",
+                "Phrasing! Boom!",
+                "So are we just done with 'phrasing'?"
+            ]
+
+            response = random.choice(phrasing_response)
+
+            await asyncio.sleep(average_typing_speed * 3.33)
+            await message.channel.send(response)
+
+        else:
+            pass
+
+    else:
+        pass
+    
+    
 @bot.listen("on_message")
 async def a_tall_white_fountain(message):
     """
