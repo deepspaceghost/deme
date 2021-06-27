@@ -6,13 +6,14 @@ import random
 
 from discord.ext import commands
 
-# sets up discord_err.log for the handler
+# sets up discord_err.log for file handling
 handler = logging.FileHandler(
     encoding="utf-8",
     filename="discord_err.log",
     mode="w"
 )
 
+# determines how the log will be formatted
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 
 logger = logging.getLogger("discord")
