@@ -1,7 +1,7 @@
 demeter.py
 ==========
 
-.. image:: https://discord.com/api/guilds/336642139381301249/embed.png
+.. image:: https://discord.com/api/guilds/828099149727399956/embed.png
    :target: https://discord.gg/RfjrhYSpTD
    :alt: Discord server invite
 
