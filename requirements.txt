@@ -19,7 +19,7 @@ configobj==5.0.6
 constantly==15.1.0
 cookiecutter==1.7.3
 crcmod==1.7
-cryptography==3.2.2
+cryptography==3.3.2
 dbus-python==1.2.16
 decorator==4.4.2
 discord.py==1.7.1
