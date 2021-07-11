@@ -160,7 +160,7 @@ async def on_message(message):
 @bot.event
 async def on_ready():
 
-    print(f"{bot.user} (Deme v0.0.1-22), at your service.")  # First benchmark: 539.5 kb
+    print(f"{bot.user} (Deme v0.0.1-44), at your service.")  # First benchmark: 539.5 kb
 
 
 @bot.listen("on_message")
@@ -175,17 +175,17 @@ async def pseudo_random_number_generator(message):
 
         if any(name in mescon for name in names) and "random" in mescon and "?" in mescon:
 
-            minimum_number = int(mescon[40:-8])
+            try:
+                minimum_number = int(mescon[40:-8])
+                maximum_number = int(mescon[48:-1])
+                response = random.randint(minimum_number, maximum_number)
 
-            maximum_number = int(mescon[48:-1])
+                await asyncio.sleep(average_typing_speed)
+                await meschan.send(response)
 
-            response = random.randint(minimum_number, maximum_number)
-
-            await asyncio.sleep(average_typing_speed)
-            await meschan.send(response)
-
-        else:
-            pass
+            except ValueError:
+                await asyncio.sleep(average_typing_speed * 8)
+                await meschan.send("Oops! I'm just a bot. Check your syntax and try again.")
 
 
 @bot.listen("on_message")
@@ -200,6 +200,23 @@ async def who_is_there(message):
 
             await asyncio.sleep(average_typing_speed)
             await meschan.send("Annie.")
+
+
+@bot.listen("on_message")
+async def within(message):
+
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        if mescon == "Do you have a heart?" \
+            or mescon == "Has anyone ever locked you out of a room?" \
+            or mescon == "Where do you go to when you go within?" \
+            or mescon == "Where do you go when you go within?" \
+                or mescon == "Where is the place in the world you feel the safest?":
+            await asyncio.sleep(average_typing_speed)
+            await meschan.send("Within.")
 
 
 @bot.listen("on_message")
