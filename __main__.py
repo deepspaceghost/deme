@@ -109,7 +109,9 @@ async def annie_who(message):
 
         if "Annie" in mescon and "?" in mescon:
 
-            response = "Annie thing you can do I can do for eighty-seven cents on the dollar."
+            response = """
+            Annie thing you can do I can do for eighty-seven cents on the dollar. #feministknockknockjokes
+            """
 
             await asyncio.sleep(average_typing_speed * 14)
             await meschan.send(response)
@@ -217,6 +219,28 @@ async def within(message):
                 or mescon == "Where is the place in the world you feel the safest?":
             await asyncio.sleep(average_typing_speed)
             await meschan.send("Within.")
+
+
+@bot.listen("on_message")
+async def within_cells_interlinked(message):
+
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        if mescon == "A system of cells." \
+                or mescon == "Did you buy a present for the person you love?":
+            await asyncio.sleep(average_typing_speed * 3)
+            await message.channel.send("Within cells interlinked.")
+
+        elif mescon == "Why don't you say that three times?":
+            await asyncio.sleep(average_typing_speed * 3)
+            await meschan.send("Within cells interlinked.")
+            await asyncio.sleep(average_typing_speed * 3)
+            await meschan.send("Within cells interlinked.")
+            await asyncio.sleep(average_typing_speed * 3)
+            await meschan.send("Within cells interlinked.")
 
 
 @bot.listen("on_message")
