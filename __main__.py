@@ -290,7 +290,13 @@ async def you_are_welcome(message):
                 f"You're welcome, {message.author}."
             ]
 
-            emoji = "👍"
+            emojis = [
+                "🤘",
+                "👍"
+            ]
+
+            emoji = random.choice(emojis)
+
             response = random.choice(responses)
 
             await message.add_reaction(emoji)
