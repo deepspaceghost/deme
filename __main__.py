@@ -86,6 +86,19 @@ names = [
     "demeter"
 ]
 
+thank_you_variants = [
+    "Thank u",
+    "thank u",
+    "Thank you",
+    "thank you",
+    "Thanks",
+    "thanks",
+    "Thanx",
+    "thanx",
+    "Thnx",
+    "thnx"
+]
+
 tooth_nouns = [
     "teeth",
     "tooth"
@@ -180,7 +193,7 @@ async def on_message(message):
 @bot.event
 async def on_ready():
 
-    print(f"{bot.user} (Deme v0.0.1-68), at your service.")  # First benchmark: 539.5 kb
+    print(f"{bot.user} (Deme v0.0.1-85), at your service.")  # First benchmark: 539.5 kb
 
 
 @bot.listen("on_message")
@@ -259,6 +272,30 @@ async def within_cells_interlinked(message):
             await meschan.send("Within cells interlinked.")
             await asyncio.sleep(average_typing_speed * 3)
             await meschan.send("Within cells interlinked.")
+
+
+@bot.listen("on_message")
+async def you_are_welcome(message):
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        if any(name in mescon for name in names) \
+                and any(variant in mescon for variant in thank_you_variants):
+
+            responses = [
+                f"My pleasure, {message.author}.",
+                f"No problem, {message.author}.",
+                f"You're welcome, {message.author}."
+            ]
+
+            emoji = "👍"
+            response = random.choice(responses)
+
+            await message.add_reaction(emoji)
+            await asyncio.sleep(average_typing_speed * 3)
+            await meschan.send(response)
 
 
 @bot.listen("on_message")
