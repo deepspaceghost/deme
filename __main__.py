@@ -74,6 +74,11 @@ define_verbs = [
     "defining"
 ]
 
+message_nouns = [
+    "message",
+    "messages"
+]
+
 names = [
     "Deme",
     "Demeter",
@@ -100,21 +105,34 @@ yourself_pronouns = [
 
 
 @bot.listen("on_message")
-async def annie_who(message):
+async def candace_who(message):
 
     if message.author != bot.user:
 
         meschan = message.channel
         mescon = message.content
 
-        if "Annie" in mescon and "?" in mescon:
+        if "Candace" in mescon and "?" in mescon:
 
-            response = """
-            Annie thing you can do I can do for eighty-seven cents on the dollar. #feministknockknockjokes
-            """
+            response = "Candace door open, or what?"
 
-            await asyncio.sleep(average_typing_speed * 14)
+            await asyncio.sleep(average_typing_speed * 5)
             await meschan.send(response)
+
+
+@bot.listen("on_message")
+async def direct_message_request(message):
+    if message.author != bot.user:
+
+        mesau = message.author
+        mescon = message.content
+
+        if any(name in mescon for name in names) \
+            and "direct" in mescon \
+                and any(noun in mescon for noun in message_nouns):
+
+            await asyncio.sleep(average_typing_speed * 2)
+            await mesau.send("Like this?")
 
 
 @bot.listen("on_message")
@@ -162,7 +180,7 @@ async def on_message(message):
 @bot.event
 async def on_ready():
 
-    print(f"{bot.user} (Deme v0.0.1-44), at your service.")  # First benchmark: 539.5 kb
+    print(f"{bot.user} (Deme v0.0.1-68), at your service.")  # First benchmark: 539.5 kb
 
 
 @bot.listen("on_message")
@@ -201,7 +219,7 @@ async def who_is_there(message):
         if "is" in mescon and "?" in mescon or "'s" in mescon and "?" in mescon:
 
             await asyncio.sleep(average_typing_speed)
-            await meschan.send("Annie.")
+            await meschan.send("Candace.")
 
 
 @bot.listen("on_message")
