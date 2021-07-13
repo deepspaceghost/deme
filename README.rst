@@ -10,6 +10,4 @@ Deme (short for Demeter) is a simple Discord bot. This as an exercise in natural
     :target: https://discord.gg/RfjrhYSpTD
     :alt: Discord server invite
 
-
-
 Deme started as a Discord bot, and is now being developed into a Slack bot to use their many APIs. About half of development time is spent expanding Deme's capabilites.
