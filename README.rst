@@ -8,4 +8,4 @@ demeter.py
     :target: https://discord.gg/RfjrhYSpTD
     :alt: Discord server invite
 
-An exercise in a natural language user interfaces and processing.
+An exercise in natural language user interfaces and processing.
