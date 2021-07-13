@@ -6,5 +6,3 @@ demeter.py
    :alt: Discord server invite
 
 An exercise in natural language user interfaces and processing.
-
-[[Build Status][build-image]][build-url]
