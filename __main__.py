@@ -67,11 +67,26 @@ bot = commands.Bot(
 
 average_typing_speed = 0.833
 
+byte_nouns = [
+    "byte",
+    "bytes"
+]
+
+convert_verbs = [
+    "convert",
+    "converted"
+]
+
 define_verbs = [
     "define",
     "defined",
     "defines",
     "defining"
+]
+
+how_adverbs = [
+    "How",
+    "how"
 ]
 
 message_nouns = [
@@ -84,6 +99,11 @@ names = [
     "Demeter",
     "deme",
     "demeter"
+]
+
+object_nouns = [
+    "object",
+    "objects"
 ]
 
 thank_you_variants = [
@@ -116,6 +136,69 @@ yourself_pronouns = [
     "yourselves"
 ]
 
+# @bot.listen("on_message")
+# async def something(message):
+#     if message.author != bot.user:
+
+#         meschan = message.channel
+#         mescon = message.content
+
+#         # Test prompt 1: "No. Is it interesting?"
+
+#         if
+
+
+@bot.listen("on_message")
+async def activities_to_do(message):
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        # Test prompt 1: "Did you do anything fun today?"
+
+        if "anything" in mescon and "do" in mescon:
+
+            choice = [
+                f"I've been meaning to see {watching_name}. Have you seen it?",
+                f"I've been meaning to play {playing_name}. Have you played it?"
+            ]
+            response = random.choice(choice)
+
+            await asyncio.sleep(average_typing_speed * 10)
+            await meschan.send(response)
+
+
+@bot.listen("on_message")
+async def bytes_object_converter(message):
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        # "Deme, can I get 000 converted into a bytes object?"
+
+        if any(name in mescon for name in names) \
+            and any(noun in mescon for noun in byte_nouns) \
+            and any(verb in mescon for verb in convert_verbs) \
+                and any(noun in mescon for noun in object_nouns):
+
+            try:
+
+                old_object = mescon[16:-31]
+                response = bytes(old_object, encoding="utf8")
+
+                await asyncio.sleep(average_typing_speed)
+                await meschan.send(response)
+
+            except TypeError as e:
+                await asyncio.sleep(average_typing_speed)
+                await meschan.send(e)
+
+            except ValueError as e:
+                await asyncio.sleep(average_typing_speed)
+                await meschan.send(e)
+
 
 @bot.listen("on_message")
 async def candace_who(message):
@@ -146,6 +229,28 @@ async def direct_message_request(message):
 
             await asyncio.sleep(average_typing_speed * 2)
             await mesau.send("Like this?")
+
+
+@bot.listen("on_message")
+async def hmm(message):
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        if any(name in mescon for name in names) \
+            and "bar" in mescon \
+                and "?" in mescon:
+
+            choices = [
+                "Hmm?",
+                "Yes, I'm fine. Thanks."
+            ]
+
+            response = random.choice(choices)
+
+            await asyncio.sleep(average_typing_speed * 2.5)
+            await meschan.send(response)
 
 
 @bot.listen("on_message")
@@ -193,7 +298,9 @@ async def on_message(message):
 @bot.event
 async def on_ready():
 
-    print(f"{bot.user} (Deme v0.0.1-85), at your service.")  # First benchmark: 539.5 kb
+    print("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
+    print(f"{bot.user} (Deme v0.0.2-26), at your service.")  # First benchmark: 539.5 kb
+    print("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
 
 
 @bot.listen("on_message")
@@ -216,9 +323,54 @@ async def pseudo_random_number_generator(message):
                 await asyncio.sleep(average_typing_speed)
                 await meschan.send(response)
 
-            except ValueError:
-                await asyncio.sleep(average_typing_speed * 8)
-                await meschan.send("Oops! I'm just a bot. Check your syntax and try again.")
+            except TypeError as e:
+                await asyncio.sleep(average_typing_speed)
+                await meschan.send("TypeError!")
+                await meschan.send(e)
+
+            except ValueError as e:
+                await asyncio.sleep(average_typing_speed)
+                await meschan.send("ValueError!")
+                await asyncio.sleep(average_typing_speed * 9)
+                await meschan.send(e)
+
+
+@bot.listen("on_message")
+async def state(message):
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        # "How're you?"
+        # "How you doing"
+
+        if any(adverb in mescon for adverb in how_adverbs) and "you" in mescon:
+
+            choice = [
+                "I'm fine, I suppose. How're you?",
+                "I'm well. You?",
+                "Living the dream. And you?",
+                "Meh, can't complain. How about yourself?"
+            ]
+            response = random.choice(choice)
+
+            await asyncio.sleep(average_typing_speed * 5)
+            await meschan.send(response)
+
+
+@bot.listen("on_message")
+async def what_is_up(message):
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        if any(name in mescon for name in names) \
+                and "Aye" in mescon:
+
+            await asyncio.sleep(average_typing_speed * 2)
+            await meschan.send("What's up?")
 
 
 @bot.listen("on_message")
@@ -228,6 +380,8 @@ async def who_is_there(message):
 
         meschan = message.channel
         mescon = message.content
+
+        # Who's there? or Who is there?
 
         if "is" in mescon and "?" in mescon or "'s" in mescon and "?" in mescon:
 
