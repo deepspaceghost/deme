@@ -256,6 +256,18 @@ async def direct_message_request(message):
 
 
 @bot.listen("on_message")
+async def eating(message):
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        if "eat" in mescon:
+            await asyncio.sleep(average_typing_speed * 3)
+            await meschan.send("I don't eat.")
+
+
+@bot.listen("on_message")
 async def greeting(message):
     if message.author != bot.user:
 
@@ -351,7 +363,7 @@ async def on_message(message):
 async def on_ready():
 
     print("+--------------------------------------------+")
-    print(f"|{bot.user} (Deme v0.0.2-89), at your service.|")  # First benchmark: 539.5 kb
+    print(f"|{bot.user} (Deme v0.0.3-21), at your service.|")  # First benchmark: 539.5 kb
     print("+--------------------------------------------+")
 
 
