@@ -1,7 +1,9 @@
 import asyncio
 import discord
+import commis
 import logging
 import os
+import randfacts
 import random
 
 from discord.ext import commands
@@ -263,8 +265,10 @@ async def eating(message):
         mescon = message.content
 
         if "eat" in mescon:
-            await asyncio.sleep(average_typing_speed * 3)
-            await meschan.send("I don't eat.")
+            await asyncio.sleep(average_typing_speed * 6)
+            await meschan.send("I'm a program, I don't eat.")
+            await asyncio.sleep(average_typing_speed * 4)
+            await meschan.send("Are you feeling okay?")
 
 
 @bot.listen("on_message")
@@ -363,7 +367,7 @@ async def on_message(message):
 async def on_ready():
 
     print("+--------------------------------------------+")
-    print(f"|{bot.user} (Deme v0.0.3-21), at your service.|")  # First benchmark: 539.5 kb
+    print(f"|{bot.user} (Deme v0.2.1-87), at your service.|")  # First benchmark: 539.5 kb
     print("+--------------------------------------------+")
 
 
@@ -540,6 +544,28 @@ async def you_are_welcome(message):
             await message.add_reaction(emoji)
             await asyncio.sleep(average_typing_speed * 3)
             await meschan.send(response)
+
+
+@bot.listen("on_message")
+async def what_you_do_not_know(message):
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        # Test prompt 1: "Tell me something I don't know."
+
+        if "don't know" in mescon and "something" in mescon:
+
+            choices = [
+                commis.get_misconception(),
+                randfacts.get_fact()
+            ]
+
+            response = random.choice(choices)
+
+            await asyncio.sleep(average_typing_speed * 4)
+            await meschan.send(f"How bout this: {response}")
 
 
 @bot.listen("on_message")
