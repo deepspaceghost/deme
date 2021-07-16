@@ -38,10 +38,12 @@ playing_name = random.choice(playing)
 activities = [
     discord.Activity(
         name=listening_name,
-        type=discord.ActivityType.listening),
+        type=discord.ActivityType.listening
+    ),
     discord.Activity(
         name=watching_name,
-        type=discord.ActivityType.watching),
+        type=discord.ActivityType.watching
+    ),
     discord.Game(name=playing_name),
 ]
 
@@ -62,10 +64,15 @@ bot = commands.Bot(
     command_prefix="?",
     description=None,
     help_command=help_command,
-    intents=intents
+    intents=intents,
+    owner_id=660022821124309035
 )
 
 average_typing_speed = 0.833
+
+better_adjectives = [
+    "Better", "better", "Good", "good", "Well", "well"
+]
 
 byte_nouns = [
     "byte",
@@ -82,6 +89,13 @@ define_verbs = [
     "defined",
     "defines",
     "defining"
+]
+
+do_verbs = [
+    "Do",
+    "do",
+    "Done",
+    "done"
 ]
 
 how_adverbs = [
@@ -136,16 +150,23 @@ yourself_pronouns = [
     "yourselves"
 ]
 
-# @bot.listen("on_message")
-# async def something(message):
-#     if message.author != bot.user:
 
-#         meschan = message.channel
-#         mescon = message.content
+@bot.listen("on_message")
+async def something(message):
+    if message.author != bot.user:
 
-#         # Test prompt 1: "No. Is it interesting?"
+        meschan = message.channel
+        mescon = message.content
 
-#         if
+        # Test prompt 1: "No. Is it interesting?"
+        # Test prompt 2: "How was it?"
+
+        if "s it" in mescon:
+
+            await asyncio.sleep(average_typing_speed * 2)
+            await meschan.send("Kinda artsy.")
+            await asyncio.sleep(average_typing_speed * 11)
+            await meschan.send("I really like it. At least 4 out of 5 stars.")
 
 
 @bot.listen("on_message")
@@ -156,16 +177,17 @@ async def activities_to_do(message):
         mescon = message.content
 
         # Test prompt 1: "Did you do anything fun today?"
+        # Test prompt 2: "What have you done today?"
 
-        if "anything" in mescon and "do" in mescon:
+        if any(verb in mescon for verb in do_verbs) and "today" in mescon:
 
-            choice = [
-                f"I've been meaning to see {watching_name}. Have you seen it?",
-                f"I've been meaning to play {playing_name}. Have you played it?"
+            choices = [
+                f"Process text and pretend to watch {watching_name}.",
+                f"Process text and pretend to play {playing_name}."
             ]
-            response = random.choice(choice)
+            response = random.choice(choices)
 
-            await asyncio.sleep(average_typing_speed * 10)
+            await asyncio.sleep(average_typing_speed * 7)
             await meschan.send(response)
 
 
@@ -192,11 +214,13 @@ async def bytes_object_converter(message):
                 await meschan.send(response)
 
             except TypeError as e:
-                await asyncio.sleep(average_typing_speed)
+                await asyncio.sleep(average_typing_speed * 8)
+                await meschan.send("My system is telling me there's an Error. :eyes:")
                 await meschan.send(e)
 
             except ValueError as e:
-                await asyncio.sleep(average_typing_speed)
+                await asyncio.sleep(average_typing_speed * 8)
+                await meschan.send("My system is telling me there's an Error. :eyes:")
                 await meschan.send(e)
 
 
@@ -232,6 +256,34 @@ async def direct_message_request(message):
 
 
 @bot.listen("on_message")
+async def greeting(message):
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        # Test prompt 1: "Good morning darling."
+        # Test prompt 2: "Good evening, Deme."
+
+        if mescon.startswith("good") or mescon.startswith("Good"):
+            if "afternoon" in mescon:
+                await asyncio.sleep(average_typing_speed * 2)
+                await meschan.send(f"Good afternoon, {message.author}.")
+            elif "day" in mescon:
+                await asyncio.sleep(average_typing_speed * 2)
+                await meschan.send(f"Good day, {message.author}.")
+            elif "evening" in mescon:
+                await asyncio.sleep(average_typing_speed * 2)
+                await meschan.send(f"Good evening, {message.author}.")
+            elif "morning" in mescon:
+                await asyncio.sleep(average_typing_speed * 2)
+                await meschan.send(f"Good morning, {message.author}.")
+            elif "night" in mescon:
+                await asyncio.sleep(average_typing_speed * 2)
+                await meschan.send(f"Goodnight, {message.author}.")
+
+
+@bot.listen("on_message")
 async def hmm(message):
     if message.author != bot.user:
 
@@ -239,8 +291,8 @@ async def hmm(message):
         mescon = message.content
 
         if any(name in mescon for name in names) \
-            and "bar" in mescon \
-                and "?" in mescon:
+            and "?" in mescon \
+                and len(mescon) < 9:
 
             choices = [
                 "Hmm?",
@@ -298,9 +350,9 @@ async def on_message(message):
 @bot.event
 async def on_ready():
 
-    print("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
-    print(f"{bot.user} (Deme v0.0.2-26), at your service.")  # First benchmark: 539.5 kb
-    print("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
+    print("+--------------------------------------------+")
+    print(f"|{bot.user} (Deme v0.0.2-89), at your service.|")  # First benchmark: 539.5 kb
+    print("+--------------------------------------------+")
 
 
 @bot.listen("on_message")
@@ -324,14 +376,13 @@ async def pseudo_random_number_generator(message):
                 await meschan.send(response)
 
             except TypeError as e:
-                await asyncio.sleep(average_typing_speed)
-                await meschan.send("TypeError!")
+                await asyncio.sleep(average_typing_speed * 8)
+                await meschan.send("My system is telling me there's an Error. :eyes:")
                 await meschan.send(e)
 
             except ValueError as e:
-                await asyncio.sleep(average_typing_speed)
-                await meschan.send("ValueError!")
-                await asyncio.sleep(average_typing_speed * 9)
+                await asyncio.sleep(average_typing_speed * 8)
+                await meschan.send("My system is telling me there's an Error. :eyes:")
                 await meschan.send(e)
 
 
@@ -366,11 +417,32 @@ async def what_is_up(message):
         meschan = message.channel
         mescon = message.content
 
-        if any(name in mescon for name in names) \
-                and "Aye" in mescon:
+        # Test prompt 1: "Aye Deme"
+        # Test prompt 2: "Hey Deme."
 
-            await asyncio.sleep(average_typing_speed * 2)
-            await meschan.send("What's up?")
+        try:
+            if any(name in mescon for name in names) \
+                and 3 < len(mescon) \
+                    and len(mescon) < 12:
+
+                choices = [
+                    "Hey.",
+                    "What's up?"
+                ]
+                response = random.choice(choices)
+
+                await asyncio.sleep(average_typing_speed * 1.5)
+                await meschan.send(response)
+
+        except AttributeError as e:
+            await asyncio.sleep(average_typing_speed * 9)
+            await meschan.send("My system is telling me there's an Error. :eyes:")
+            await meschan.send(e)
+
+        except NameError as e:
+            await asyncio.sleep(average_typing_speed * 9)
+            await meschan.send("My system is telling me there's an Error. :eyes:")
+            await meschan.send(e)
 
 
 @bot.listen("on_message")
