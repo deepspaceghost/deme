@@ -158,7 +158,7 @@ async def something(message):
     if message.author != bot.user:
 
         meschan = message.channel
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
         # Test prompt 1: "No. Is it interesting?"
         # Test prompt 2: "How was it?"
@@ -366,9 +366,9 @@ async def on_message(message):
 @bot.event
 async def on_ready():
 
-    print("+--------------------------------------------+")
-    print(f"|{bot.user} (Deme v0.2.1-87), at your service.|")  # First benchmark: 539.5 kb
-    print("+--------------------------------------------+")
+    print("##############################################")
+    print(f"#{bot.user} (Deme v0.2.3-16), at your service.#")  # First benchmark: 539.5 kb
+    print("##############################################")
 
 
 @bot.listen("on_message")
@@ -467,14 +467,16 @@ async def who_is_there(message):
     if message.author != bot.user:
 
         meschan = message.channel
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
         # Who's there? or Who is there?
 
-        if "is" in mescon and "?" in mescon or "'s" in mescon and "?" in mescon:
+        if "?" in mescon:
 
-            await asyncio.sleep(average_typing_speed)
-            await meschan.send("Candace.")
+            if "who" in mescon and "is" in mescon or "who's" in mescon:
+
+                await asyncio.sleep(average_typing_speed)
+                await meschan.send("Candace.")
 
 
 @bot.listen("on_message")
