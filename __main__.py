@@ -176,7 +176,7 @@ async def activities_to_do(message):
     if message.author != bot.user:
 
         meschan = message.channel
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
         # Test prompt 1: "Did you do anything fun today?"
         # Test prompt 2: "What have you done today?"
