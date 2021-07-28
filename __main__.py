@@ -198,7 +198,7 @@ async def bytes_object_converter(message):
     if message.author != bot.user:
 
         meschan = message.channel
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
         # "Deme, can I get 000 converted into a bytes object?"
 
