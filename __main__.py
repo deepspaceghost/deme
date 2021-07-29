@@ -275,7 +275,7 @@ async def greeting(message):
     if message.author != bot.user:
 
         meschan = message.channel
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
         # Test prompt 1: "Good morning darling."
         # Test prompt 2: "Good evening, Deme."
