@@ -246,7 +246,7 @@ async def direct_message_request(message):
     if message.author != bot.user:
 
         mesau = message.author
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
         if any(name in mescon for name in names) \
             and "direct" in mescon \
