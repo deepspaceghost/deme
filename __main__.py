@@ -261,7 +261,7 @@ async def eating(message):
     if message.author != bot.user:
 
         meschan = message.channel
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
         if "eat" in mescon:
             await asyncio.sleep(average_typing_speed * 6)
