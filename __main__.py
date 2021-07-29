@@ -99,6 +99,14 @@ do_verbs = [
     "done"
 ]
 
+eat_verbs = [
+    "ate",
+    "eat",
+    "eaten",
+    "eating",
+    "eats"
+]
+
 how_adverbs = [
     "How",
     "how"
@@ -263,7 +271,7 @@ async def eating(message):
         meschan = message.channel
         mescon = message.content.lower().strip()
 
-        if "eat" in mescon:
+        if any(verb in mescon for verb in eat_verbs):
             await asyncio.sleep(average_typing_speed * 6)
             await meschan.send("I'm a program, I don't eat.")
             await asyncio.sleep(average_typing_speed * 4)
