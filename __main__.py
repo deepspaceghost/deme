@@ -67,7 +67,6 @@ bot = commands.Bot(
     description=None,
     help_command=help_command,
     intents=intents,
-    owner_id=660022821124309035
 )
 
 average_typing_speed = 0.833
@@ -232,9 +231,9 @@ async def candace_who(message):
     if message.author != bot.user:
 
         meschan = message.channel
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
-        if "Candace" in mescon and "?" in mescon:
+        if "candace" in mescon and "?" in mescon:
 
             response = "Candace door open, or what?"
 
