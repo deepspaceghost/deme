@@ -1,12 +1,15 @@
 import asyncio
-import discord
 import commis
+import datetime
+import discord
 import logging
 import os
 import randfacts
 import random
+import requests
 
 from discord.ext import commands
+from geopy.geocoders import Nominatim
 
 handler = logging.FileHandler(
     encoding="utf-8",
@@ -67,6 +70,7 @@ bot = commands.Bot(
     description=None,
     help_command=help_command,
     intents=intents,
+    owner_id=660022821124309035
 )
 
 average_typing_speed = 0.833
@@ -118,8 +122,6 @@ message_nouns = [
 ]
 
 names = [
-    "Deme",
-    "Demeter",
     "deme",
     "demeter"
 ]
@@ -201,6 +203,44 @@ async def activities_to_do(message):
 
 
 @bot.listen("on_message")
+async def attention(message):
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content.lower().strip()
+
+        # Test prompt 1: "Aye Deme"
+        # Test prompt 2: "Deme?"
+        # Test prompt 3: "Hey Deme."
+        # Test prompt 4: "What's up?"
+
+        try:
+            if len(mescon) < 11:
+                if any(name in mescon for name in names):
+
+                    choices = [
+                        "Hey.",
+                        "Hmm?",
+                        "What's up?",
+                        "Yes, I'm fine. Thanks."
+                    ]
+                    response = random.choice(choices)
+
+                    await asyncio.sleep(average_typing_speed * 2)
+                    await meschan.send(response)
+
+                else:
+
+                    await asyncio.sleep(average_typing_speed * 5)
+                    await meschan.send("Are you talking to me?")
+
+        except ArithmeticError as e:
+            await asyncio.sleep(average_typing_speed * 9)
+            await meschan.send("My system is telling me there's an Error. :eyes:")
+            await meschan.send(e)
+
+
+@bot.listen("on_message")
 async def bytes_object_converter(message):
     if message.author != bot.user:
 
@@ -271,61 +311,11 @@ async def eating(message):
         meschan = message.channel
         mescon = message.content.lower().strip()
 
-        if any(verb in mescon for verb in eat_verbs):
+        if any(verb in mescon for verb in eat_verbs) and "you" in mescon:
             await asyncio.sleep(average_typing_speed * 6)
             await meschan.send("I'm a program, I don't eat.")
             await asyncio.sleep(average_typing_speed * 4)
             await meschan.send("Are you feeling okay?")
-
-
-@bot.listen("on_message")
-async def greeting(message):
-    if message.author != bot.user:
-
-        meschan = message.channel
-        mescon = message.content.lower().strip()
-
-        # Test prompt 1: "Good morning darling."
-        # Test prompt 2: "Good evening, Deme."
-
-        if mescon.startswith("good") or mescon.startswith("Good"):
-            if "afternoon" in mescon:
-                await asyncio.sleep(average_typing_speed * 2)
-                await meschan.send(f"Good afternoon, {message.author}.")
-            elif "day" in mescon:
-                await asyncio.sleep(average_typing_speed * 2)
-                await meschan.send(f"Good day, {message.author}.")
-            elif "evening" in mescon:
-                await asyncio.sleep(average_typing_speed * 2)
-                await meschan.send(f"Good evening, {message.author}.")
-            elif "morning" in mescon:
-                await asyncio.sleep(average_typing_speed * 2)
-                await meschan.send(f"Good morning, {message.author}.")
-            elif "night" in mescon:
-                await asyncio.sleep(average_typing_speed * 2)
-                await meschan.send(f"Goodnight, {message.author}.")
-
-
-@bot.listen("on_message")
-async def hmm(message):
-    if message.author != bot.user:
-
-        meschan = message.channel
-        mescon = message.content
-
-        if any(name in mescon for name in names) \
-            and "?" in mescon \
-                and len(mescon) < 9:
-
-            choices = [
-                "Hmm?",
-                "Yes, I'm fine. Thanks."
-            ]
-
-            response = random.choice(choices)
-
-            await asyncio.sleep(average_typing_speed * 2.5)
-            await meschan.send(response)
 
 
 @bot.listen("on_message")
@@ -373,9 +363,7 @@ async def on_message(message):
 @bot.event
 async def on_ready():
 
-    print("##############################################")
-    print(f"#{bot.user} (Deme v0.2.3-16), at your service.#")  # First benchmark: 539.5 kb
-    print("##############################################")
+    print(f"{bot.user} (Deme v0.2.3-54), at your service.")  # First benchmark: 539.5 kb
 
 
 @bot.listen("on_message")
@@ -434,38 +422,97 @@ async def state(message):
 
 
 @bot.listen("on_message")
-async def what_is_up(message):
+async def weather(message):
+
+    ct = datetime.datetime.now().time()
+    current_formatted_time = ct.strftime("%H:%M")
+    geolocator = Nominatim(user_agent="geoapiExercises")
+    latitude = "LATITUDE"
+    longitude = "LONGITUDE"
+    location = geolocator.reverse(latitude + "," + longitude)
+    address = location.raw["address"]
+    city = address.get("city", "")
+    WEATHER_TOKEN = "TOKEN"
+    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    city_name = "CITY"
+    complete_url = base_url + "&appid=" + WEATHER_TOKEN + "&q=" + city_name + "&units=imperial"
+    response = requests.get(complete_url)
+    weather_list = response.json()
+    y = weather_list["main"]
+    current_temperature = round(y["temp"])
+    z = weather_list["weather"]
+    weather_description = z[0]["description"]
+
     if message.author != bot.user:
 
         meschan = message.channel
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
-        # Test prompt 1: "Aye Deme"
-        # Test prompt 2: "Hey Deme."
+        # Test prompt 1: "Good morning darling."
+        # Test prompt 2: "Good evening, Deme."
+        # Test prompt 3: "How's today's weather?"
 
-        try:
-            if any(name in mescon for name in names) \
-                and 3 < len(mescon) \
-                    and len(mescon) < 12:
+        if mescon.startswith("good"):
+            if "afternoon" in mescon:
 
-                choices = [
-                    "Hey.",
-                    "What's up?"
+                response = [
+                    f"Good afternoon, {message.author}.",
+                    f"It's {current_formatted_time}.",
+                    f"The weather in {city} is {current_temperature}°F, with {weather_description}."
                 ]
-                response = random.choice(choices)
 
-                await asyncio.sleep(average_typing_speed * 1.5)
-                await meschan.send(response)
+                for i in range(3):
+                    await meschan.send(response[i])
+                    await asyncio.sleep(average_typing_speed * 4.667)
 
-        except AttributeError as e:
+            elif "day" in mescon:
+
+                response = [
+                    f"Good day, {message.author}.",
+                    f"It's {current_formatted_time}.",
+                    f"The weather in {city} is {current_temperature}°F, with {weather_description}."
+                ]
+
+                for i in range(3):
+                    await meschan.send(response[i])
+                    await asyncio.sleep(average_typing_speed * 4.667)
+
+            elif "evening" in mescon:
+                response = [
+                    f"Good evening, {message.author}.",
+                    f"It's {current_formatted_time}.",
+                    f"The weather in {city} is {current_temperature}°F, with {weather_description}."
+                ]
+
+                for i in range(3):
+                    await meschan.send(response[i])
+                    await asyncio.sleep(average_typing_speed * 4.667)
+
+            elif "morning" in mescon:
+                response = [
+                    f"Good morning, {message.author}.",
+                    f"It's {current_formatted_time}.",
+                    f"The weather in {city} is {current_temperature}°F, with {weather_description}."
+                ]
+
+                for i in range(3):
+                    await meschan.send(response[i])
+                    await asyncio.sleep(average_typing_speed * 4.667)
+
+            elif "night" in mescon:
+                response = [
+                    f"Good night, {message.author}.",
+                    f"It's {current_formatted_time}.",
+                    f"The weather in {city} is {current_temperature}°F, with {weather_description}."
+                ]
+
+                for i in range(3):
+                    await meschan.send(response[i])
+                    await asyncio.sleep(average_typing_speed * 4.667)
+
+        if "weather" in mescon and "what" in mescon and "?" in mescon:
+            await meschan.send(f"The weather in {city} is {current_temperature}°F, with {weather_description}.")
             await asyncio.sleep(average_typing_speed * 9)
-            await meschan.send("My system is telling me there's an Error. :eyes:")
-            await meschan.send(e)
-
-        except NameError as e:
-            await asyncio.sleep(average_typing_speed * 9)
-            await meschan.send("My system is telling me there's an Error. :eyes:")
-            await meschan.send(e)
 
 
 @bot.listen("on_message")
@@ -526,6 +573,28 @@ async def within_cells_interlinked(message):
 
 
 @bot.listen("on_message")
+async def what_you_do_not_know(message):
+    if message.author != bot.user:
+
+        meschan = message.channel
+        mescon = message.content
+
+        # Test prompt 1: "Tell me something I don't know."
+
+        if "don't know" in mescon and "something" in mescon:
+
+            choices = [
+                commis.get_misconception(),
+                randfacts.get_fact()
+            ]
+
+            response = random.choice(choices)
+
+            await asyncio.sleep(average_typing_speed * 4)
+            await meschan.send(f"How bout this: {response}")
+
+
+@bot.listen("on_message")
 async def you_are_welcome(message):
     if message.author != bot.user:
 
@@ -553,28 +622,6 @@ async def you_are_welcome(message):
             await message.add_reaction(emoji)
             await asyncio.sleep(average_typing_speed * 3)
             await meschan.send(response)
-
-
-@bot.listen("on_message")
-async def what_you_do_not_know(message):
-    if message.author != bot.user:
-
-        meschan = message.channel
-        mescon = message.content
-
-        # Test prompt 1: "Tell me something I don't know."
-
-        if "don't know" in mescon and "something" in mescon:
-
-            choices = [
-                commis.get_misconception(),
-                randfacts.get_fact()
-            ]
-
-            response = random.choice(choices)
-
-            await asyncio.sleep(average_typing_speed * 4)
-            await meschan.send(f"How bout this: {response}")
 
 
 @bot.listen("on_message")
