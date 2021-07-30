@@ -340,7 +340,7 @@ async def humor_setting_six_zero(message):
     if message.author != bot.user:
 
         meschan = message.channel
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
         # "Let's make that sixty percent."
 
