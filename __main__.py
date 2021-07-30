@@ -324,7 +324,7 @@ async def humor_setting_seven_five(message):
     if message.author != bot.user:
 
         meschan = message.channel
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
         # "Humor, seventy-five percent."
 
