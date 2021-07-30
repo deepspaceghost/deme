@@ -599,7 +599,7 @@ async def you_are_welcome(message):
     if message.author != bot.user:
 
         meschan = message.channel
-        mescon = message.content
+        mescon = message.content.lower().strip()
 
         if any(name in mescon for name in names) \
                 and any(variant in mescon for variant in thank_you_variants):
