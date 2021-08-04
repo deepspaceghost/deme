@@ -1,7 +1,7 @@
 demeter.py
 ==========
 
-Deme (short for Demeter) is a simple Discord bot. This as an exercise in natural language processing and an experiment with natural language user interfaces. Deme code is focused on readability, ease-of-modification, and flexibility. 
+Deme (short for Demeter) is a simple Discord bot. This as an exercise in natural language processing and an experiment with natural language user interfaces. Deme's code is focused on readability, ease-of-modification, and flexibility. 
 
 .. image:: https://github.com/deepspaceghost/demeter.py/actions/workflows/simple_conin.yml/badge.svg
     :target: https://github.com/deepspaceghost/demeter.py/actions/workflows/simple_conin.yml
