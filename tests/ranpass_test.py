@@ -1,7 +1,7 @@
 import random
 
 
-def random_password():
+def ranpass():
     """
     This function generates a password at random. When a user uses the !rp
     command, followed by the desired length of the password, the function
@@ -22,7 +22,7 @@ def random_password():
 print("Initializing test! (1/1)")
 try:
     print("")
-    print(random_password())
+    print(ranpass())
     print("")
 except AttributeError:
     print("Whoops! Executing a exercise() call got an AttributeError!")
