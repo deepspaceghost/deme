@@ -1,8 +1,0 @@
-__title__ = "tarot"
-__description__ = "Package to generate tarot readings"
-__url__ = "https://github.com/deepspaceghost/deme-app/tree/tarot"
-__version__ = "0.0.0.158"
-__author__ = "deepspaceghost"
-__author_email__ = "ghostblac@protonmail.com"
-__license__ = "none"
-__copyright__ = "© 2021 demiurge"
