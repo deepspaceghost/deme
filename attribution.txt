@@ -1,7 +1,0 @@
-Common misconceptions scraped from https://en.wikipedia.org/wiki/List_of_common_misconceptions starting in May of 2021.
-Exercises scraped from freeletics.com starting in May of 2021.
-Games scrapped from gamefaqs.gamespot.com, giantbomb.com, metacritic.com, mobygames.com, tvtropes.org, and en.wikipedia.org starting in May of 2021.
-Oblique strategies scrapped from stoney.sb.org starting in May of 2021.
-Proust questions scrapped from vanityfair.com and en.wikipedia.org in May of 2021.
-Self care practices scrapped from instagram.com in May of 2021.
-Tarot data scrapped from en.wikipedia.org in May of 2021.
