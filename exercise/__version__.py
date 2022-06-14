@@ -1,8 +1,0 @@
-__title__ = "exercise"
-__description__ = "Package to generate HIIT exercises"
-__url__ = "https://github.com/deepspaceghost/deme-app/tree/exercise"
-__version__ = "0.0.0.153"
-__author__ = "deepspaceghost"
-__author_email__ = "ghostblac@protonmail.com"
-__license__ = "none"
-__copyright__ = "© 2021 demiurge"
