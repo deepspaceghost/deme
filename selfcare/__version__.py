@@ -1,8 +1,0 @@
-__title__ = "selfcare"
-__description__ = "Package to generate suggestions for self-care."
-__url__ = "https://github.com/deepspaceghost/deme-app/tree/self-care"
-__version__ = "0.0.0.150"
-__author__ = "deepspaceghost"
-__author_email__ = "ghostblac@protonmail.com"
-__license__ = "none"
-__copyright__ = "© 2021 demiurge"
