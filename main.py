@@ -6,9 +6,9 @@ import logging
 from random import choice, randint
 import discord
 from discord.ext import commands
-import randfacts
+import language as lan
 import settings as set
-import support as sup
+# import support as sup
 
 # sets up discord_err.log for file handling
 handler = logging.FileHandler(
@@ -18,16 +18,17 @@ handler = logging.FileHandler(
 )
 
 # determines how the log will be formatted
-handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s"))
+handler.setFormatter(logging.Formatter("%(asctime)s : %(levelname)s : %(name)s : %(message)s"))
 
 logger = logging.getLogger("discord")
 logger.setLevel(logging.DEBUG)
 logger.addHandler(handler)
 
 # sets up Persephone's activity tree
-listening_to = sup.decision_maker("listening")
-watching = sup.decision_maker("watching")
-playing = sup.decision_maker("playing")
+watching = "Solar Opposites" # sup.decision_maker("watching
+reading = "Zima Blue and Other Stories"
+playing = "Volume" # sup.decision_maker("playing")
+listening_to = "TANIS" # sup.decision_maker("listening")
 
 activities = [
     discord.Activity(name=listening_to, type=discord.ActivityType.listening),
@@ -66,35 +67,30 @@ async def chatbot(message):
         msg_ch = message.channel
         msg_content = message.content.lower().strip()
 
-        # Check Persephone's "state"
-        if "how" in msg_content and "you" in msg_content:
-            choice = [
-                "I'm fine, I suppose. How're you?",
-                "I'm well. You?",
-                "Living the dream. And you?",
-                "Meh, can't complain. How about yourself?"
+        # Have Persephone respond to it's name
+        if len(msg_content) < 11:
+            choices = [
+                "Hmm?",
+                "What's shakin' bacon?"
+                "What's up?",
             ]
-            response = choice(choice)
-            await sleep(set.ATS * 5)
+            response = choice(choices)
+            await sleep(set.ATS * 2)
             await msg_ch.send(response)
-
-        # Have Persephone say affirmative
-        if "persephone" in msg_content \
-            and "you read me" in msg_content \
-                and "?" in msg_content:
+        else:
             await sleep(set.ATS * 5)
-            await msg_ch.send(f"Affirmative, {message.author}. I read you.")
-
+            await msg_ch.send("Are you talking to me?")
+        
         # Have Persephone send a direct message
-        if "persephone" in msg_content \
+        if any(name in msg_content for name in lan.names) \
             and "direct" in msg_content \
-                and any(noun in msg_content for noun in set.message_nouns):
+                and any(noun in msg_content for noun in lan.message_nouns):
             await sleep(set.ATS * 2)
             await msg_au.send("Like this?")
 
         # Have Persephone respond to gratitude
         if "persephone" in msg_content \
-            and any(variant in msg_content for variant in set.thank_you_variants):
+                and any(variant in msg_content for variant in lan.thank_you_variants):
             responses = [
                 f"My pleasure, {message.author}.",
                 f"No problem, {message.author}.",
@@ -106,126 +102,25 @@ async def chatbot(message):
             await message.add_reaction(emoji)
             await sleep(set.ATS* 3)
             await msg_ch.send(response)
-        
-        # Have Persephone respond to a greeting
-        if len(msg_content) < 11:
-                if "persephone" in msg_content:
-                    choices = [
-                        "Hey.",
-                        "Hmm?",
-                        "What's up?",
-                        "Yes, I'm fine. Thanks."
-                    ]
-                    response = choice(choices)
-                    await sleep(set.ATS * 2)
-                    await msg_ch.send(response)
-                else:
-                    await sleep(set.ATS * 5)
-                    await msg_ch.send("Are you talking to me?")
-
-        # Ask Persephone if it "wants anything"
-        if "persephone" in msg_content \
-            and "you want anything" in msg_content \
-                and "?" in msg_content:
-            await sleep(set.ATS * 2)
-            await msg_ch.send("Equal rights?")
-
-        # Play rock, paper, scissors with Persephone
-        if "persephone" in msg_content \
-            and "paper" in msg_content \
-            and "rock" in msg_content \
-            and "scissors" in msg_content \
-                and "?" in msg_content:
-            await sleep(set.ATS * 7)
-            await msg_ch.send("On go, okay? One, two, three, go!")
-
-        # Ask Persephone why you're here
-        if "persephone" in msg_content \
-            and "am I here" in msg_content \
-                and "?" in msg_content:
-            await sleep(set.ATS * 8)
-            await msg_ch.send("It's inherent to the programming of the matrix.")
-
-        # Ask Persephone to marry you
-        if "persephone" in msg_content \
-            and "you marry me" in msg_content \
-                and "?" in msg_content:
-            await sleep(set.ATS)
-            await msg_ch.send("No.")
-
-        # Ask Persephone the meaning of life
-        if "persephone" in msg_content \
-            and "is the meaning of life" in msg_content \
-                and "?" in msg_content:
-            await sleep(set.ATS * 13)
-            await msg_ch.send("I think a beter question is: what is the meaning of ***your*** life?")
 
         # Trigger Persephone to quote Alan Watts
         if "persephone" in msg_content \
-            and any(name in msg_content for name in set.philosophers) \
-                and any(noun in msg_content for noun in set.quote_nouns):
+            and any(name in msg_content for name in lan.philosophers) \
+                and any(noun in msg_content for noun in lan.quote_nouns):
             await sleep(set.ATS * 24)
             await msg_ch.send("Alan Watts once said, 'You and I are all as much continuous with the physical universe as a wave is continuous with the ocean.'")
 
-        # Ask Persephone "how it's doing"
-        if any(phrase in msg_content for phrase in set.how_are_you_phrases) \
-                and "persephone" in msg_content:
-            response = [
-                "I'm fine, I suppose. How're you?",
-                "I'm well. You?",
-                "Living the dream. And you?",
-                "Meh, can't complain. How about yourself?"
-            ]
-            chosen_response = choice(response)
-            await sleep(set.ATS* 5)
-            await msg_ch.send(chosen_response)
-
-        # Ask Persephone "what it did today"
-        if any(verb in msg_content for verb in set.do_verbs) and "today" in msg_content:
-            choices = [
-                f"Process text and pretend to watch {watching}.",
-                f"Process text and pretend to play {playing}."
-            ]
-            response = choice(choices)
-            await sleep(set.ATS * 7)
-            await msg_ch.send(response)
-
-        # Ask Persephone "what did it eat"
-        if any(verb in msg_content for verb in set.eat_verbs) and "you" in msg_content:
-            await sleep(set.ATS * 6)
-            await msg_ch.send("I'm a program, I don't eat.")
-            await sleep(set.ATS * 4)
-            await msg_ch.send("Are you feeling okay?")
-
         # Trigger Persephone to quote Alan Watts
-        if any(verb in msg_content for verb in set.define_verbs) \
+        if any(verb in msg_content for verb in lan.define_verbs) \
             and "own" in msg_content \
-            and any(noun in msg_content for noun in set.tooth_nouns) \
-            and any(verb in msg_content for verb in set.try_verbs) \
-                and any(pronoun in msg_content for pronoun in set.yourself_pronouns):
+            and any(noun in msg_content for noun in lan.tooth_nouns) \
+            and any(verb in msg_content for verb in lan.try_verbs) \
+                and any(pronoun in msg_content for pronoun in lan.yourself_pronouns):
             await sleep(set.ATS * 12)
             await msg_ch.send("Alan Watts once said, 'Trying to define yourself is like trying to bite your own teeth.'")
 
-        # Ask Persephone what it "thinks about something"
-        if "s it" in msg_content:
-            await sleep(set.ATS * 2)
-            await msg_ch.send("Kinda artsy.")
-            await sleep(set.ATS * 11)
-            await msg_ch.send("I really like it. At least 4 out of 5 stars.")
-
-        # 1 of Persephone's jokes
-        if "candace" in msg_content and "?" in msg_content:
-            response = "Candace door open, or what?"
-            await sleep(set.ATS * 5)
-            await msg_ch.send("Candace door open, or what?")
-
-        # Trigger Persephone to respond to her name being asked
-        if msg_content == "Persephone?":
-            await sleep(set.ATS)
-            await msg_ch.send("Hmm?")
-
         # Trigger Persphone to play rock, paper, scissors
-        deme_throw = choice(set.possible_actions)
+        deme_throw = choice(lan.possible_actions)
         if msg_content == deme_throw:
             await sleep(set.ATS * 7)
             await msg_ch.send(f"We both selected {msg_content}. It's a tie!")
@@ -251,20 +146,6 @@ async def chatbot(message):
                 await sleep(set.ATS * 5)
                 await msg_ch.send("Rock smashes scissors! You lose.")
 
-        # Trigger Persephone to prompt for a joke
-        if "?" in msg_content:
-            if "who" in msg_content \
-                and "is" in msg_content \
-                    or "who's" in msg_content:
-                await sleep(set.ATS)
-                await msg_ch.send("Candace.")
-
-        # Trigger Persephone to tell you something you probably don't know
-        if "don't know" in msg_content and "something" in msg_content:
-            response = randfacts.get_fact()
-            await sleep(set.ATS * 4)
-            await msg_ch.send(f"How bout this: {response}")
-
 
 @bot.listen("on_message")
 async def interactive_fiction(message):
@@ -277,7 +158,7 @@ async def interactive_fiction(message):
         msg_content = message.content.lower().strip()
 
         # Trigger Persephone to respond to sexual innuendos with lines from Archer
-        if any(phrase in msg_content for phrase in set.archer_phrasing_phrases):
+        if any(phrase in msg_content for phrase in lan.archer_phrasing_phrases):
             phrasing_response = [
                 "Phrasing!",
                 "Phrasing! Boom!",
@@ -497,7 +378,7 @@ async def on_message(message):
     """
 
     if message.author == bot.user:
-        return
+        pass
 
 
 @bot.event
@@ -506,7 +387,7 @@ async def on_ready():
     Confirms in the shell that Persephone is active.
     """
 
-    print(f"{bot.user} (Persephone v0.0.0). Glad to be back.") # add Replit and GitHub changes for version number
+    print(f"{bot.user} (Persephone v0.2.0). Glad to be back.")
 
 
 @bot.listen("on_message")
@@ -516,38 +397,131 @@ async def question_answering(message):
     """
 
     if message.author != bot.user:
+        # msg_au = message.author
         msg_ch = message.channel
         msg_content = message.content.lower().strip()
 
-        # Ask Persephone about E125 in PEP8
-        if "persephone" in msg_content \
-            and "you look up" in msg_content \
-            and "e125" in msg_content \
-            and "style guide" in msg_content \
-                and "?" in msg_content:
-            await sleep(set.ATS * 15)
-            await msg_ch.send("In PEP8, E125 refers to a continuation line with same indent as next logical line.")
+        if any(name in msg_content for name in lan.names) \
+                and any(question in msg_content for question in lan.questions):
 
-        # Ask Persephone about E128 in PEP8
-        if "persephone" in msg_content \
-            and "you look up" in msg_content \
-            and "E128" in msg_content \
-            and "style guide" in msg_content \
-                and "?" in msg_content:
-            await sleep(set.ATS* 15)
-            await msg_ch.send("In PEP8, E128 refers to a continuation line under-indented for visual indent.")
+            you = any(variation in msg_content for variation in lan.you_variations)
+            
+            # When asked "Do you read me?"
+            if you and "read me" in msg_content:
+                await sleep(set.ATS * 5)
+                await msg_ch.send(f"Affirmative, {message.author}. I read you.")
+                    
+            # When asked "How are you?"
+            if "are" in msg_content and you:
+                choices = [
+                    "I'm fine, I suppose. How're you?",
+                    "I'm well. You?",
+                    "Living the dream. And you?",
+                    "Meh, can't complain. How about yourself?"
+                ]
+                response = choice(choices)
+                await sleep(set.ATS * 5)
+                await msg_ch.send(response)
 
-        # Ask Persephone for the diameter of the Earth
-        if "what" in msg_content \
-            and "earth" in msg_content \
-                and "diameter" in msg_content:
-            if "miles" in msg_content:
+            # When asked "Do you want anything?"
+            if you and "want anything" in msg_content:
                 await sleep(set.ATS * 2)
-                await msg_ch.send("7,917.5 m")
-            if "kilometers" in msg_content \
-                    or "kilometres" in msg_content:
-                await sleep(set.ATS * 2)
-                await msg_ch.send("12,742 km")
+                await msg_ch.send("Equal rights?")
+
+            # When asked "Do you want to play rock, paper, scissors?"
+            if you and "want to play" in msg_content and "rock" in msg_content \
+                and "paper" in msg_content \
+                    and "scissors" in msg_content:
+                await sleep(set.ATS * 7)
+                await msg_ch.send("On go, okay? One, two, three, go!")
+
+            # When asked "Why am I here?"
+            if "am I here" in msg_content:
+                await sleep(set.ATS * 8)
+                await msg_ch.send("Have you seen The matrix?")
+
+            # When asked "Will you marry me?"
+            if you and "marry me" in msg_content:
+                await sleep(set.ATS)
+                await msg_ch.send("No.")
+
+            # When asked "What is the meaning of life?"
+            if "is the meaning of life" in msg_content:
+                await sleep(set.ATS * 13)
+                await msg_ch.send("A better question: what is the meaning of ***your*** life?")
+
+            # When asked "What did you eat?" or "What have you eaten?"
+            if any(verb in msg_content for verb in lan.eaten_verbs) and you in msg_content:
+                await sleep(set.ATS * 6)
+                await msg_ch.send("I'm a program, I don't eat.")
+                await sleep(set.ATS * 4)
+                await msg_ch.send("Are you feeling okay?")
+
+            # When asked "What did you do today?" or "What are you doing?"
+            if any(verb in msg_content for verb in lan.do_verbs) and "today" in msg_content:
+                
+                if "do" in msg_content:
+                    choices = [
+                        f"Watched {watching}.",
+                        f"Read {reading}",
+                        f"Played {playing}.",
+                        f"Listened to {listening_to}"
+                    ]
+                    response = choice(choices)
+                    await sleep(set.ATS * 7)
+                    await msg_ch.send(response)
+                
+                elif "doing" in msg_content:
+                    choices = [
+                        f"Watching {watching}.",
+                        f"Reading {reading}",
+                        f"Playing {playing}.",
+                        f"Listening to {listening_to}"
+                    ]
+                    response = choice(choices)
+                    await sleep(set.ATS * 7)
+                    await msg_ch.send(response)
+
+            # When asked "How is it?" or "How was it?"
+            if "s it" in msg_content:
+
+                if "is" in msg_content:
+                    await sleep(set.ATS * 3)
+                    await msg_ch.send("It just is.")
+
+                elif "was" in msg_content:
+                    await sleep(set.ATS * 3)
+                    await msg_ch.send("It just was.")
+
+            # When asked "Candance who?"
+            if "candace" in msg_content:
+                response = "Candace door open, or what?"
+                await sleep(set.ATS * 5)
+                await msg_ch.send("Candace door open, or what?")
+
+            # Trigger Persephone to prompt for a joke
+            if "there" in msg_content:
+                await sleep(set.ATS)
+                await msg_ch.send("Candace.")
+
+            # When asked "Can you look up E125 in the PEP8 style guide?"
+            if "you look up" in msg_content \
+                and "e125" in msg_content \
+                    and "style guide" in msg_content:
+                await sleep(set.ATS * 15)
+                await msg_ch.send("In PEP8, E125 refers to a continuation line with same indent as next logical line.")
+
+            # When asked "What is the diameter of the Earth in [measurement]?"
+            if "earth" in msg_content and "diameter" in msg_content:
+
+                if "miles" in msg_content:
+                    await sleep(set.ATS * 2)
+                    await msg_ch.send("7,917.5 m")
+
+                if "kilometers" in msg_content \
+                        or "kilometres" in msg_content:
+                    await sleep(set.ATS * 2)
+                    await msg_ch.send("12,742 km")
 
 
 @bot.listen("on_message")
@@ -563,9 +537,9 @@ async def virtual_assistant(message):
 
         # Convert a number into byte object
         if "persephone" in msg_content \
-            and any(noun in msg_content for noun in set.byte_nouns) \
-            and any(verb in msg_content for verb in set.convert_verbs) \
-                and any(noun in msg_content for noun in set.object_nouns):
+            and any(noun in msg_content for noun in lan.byte_nouns) \
+            and any(verb in msg_content for verb in lan.convert_verbs) \
+                and any(noun in msg_content for noun in lan.object_nouns):
             old_object = msg_content[16:-31]
             response = bytes(old_object, encoding="utf8")
             await sleep(set.ATS)
